@@ -1120,6 +1120,68 @@ class Request : public Extensible<Request>
     bool isCacheInvalidate() const { return _flags.isSet(INVALIDATE); }
     bool isCacheMaintenance() const { return _flags.isSet(CLEAN|INVALIDATE); }
     /** @} */
+
+    // Security fields
+    std::vector<Packet*> child_requests;
+    RequestPtr parent = nullptr;
+    RequestPtr other_parent = nullptr;
+    RequestPtr hash_parent = nullptr;
+    bool deleted = false;
+
+    enum RequestType
+    {
+        MetadataRead,
+        MetadataWrite,
+        MetadataWriteThrough,
+        DataRead,
+        DataWrite,
+        NumRequestTypes
+    };
+
+    bool is_data_returned = false;
+    bool is_counter_fetched = false;
+    bool is_counter_verified = false;
+    bool is_hash_fetched = false;
+    bool is_hash_verified = false;
+    uint64_t arrived = 0;
+    bool sent_to_mem = false;
+    bool metadata_cache_miss = false;
+    bool flexibilitree_hit = false;
+    bool needs_writethrough = false;
+    bool hmac_hit = false;
+
+    int tree_level = -1;
+    uint64_t hash_addr = 0;
+    uint64_t parent_addr = 0;
+
+    RequestType req_type = NumRequestTypes;
+    bool is_metadata() const
+        { return (req_type == MetadataRead ||
+                    req_type == MetadataWrite ||
+                    req_type == MetadataWriteThrough); }
+    uint64_t metadata_addr = 0;
+
+    // Pointer
+    std::vector<uint64_t> ancestor_path;
+
+    // BMF
+    bool is_merge = false;
+
+    // ANUBIS
+    bool is_prefill = false;
+    bool is_shad = false;
+    Packet *replacing = nullptr;
+
+    // BAOBAB
+    uint64_t baobab_ctr = -1;
+    uint64_t baobab_idx[8];
+    bool different_idx = true;
+
+    // HUFFMAN
+    bool is_increment = false;
+    bool is_clear = false;
+    bool is_sort = false;
+    bool is_huffman = false;
 };
 
 } // namespace gem5
