@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 void main(int argc, char** argv) {
-  int size, iter, buf, i, *arr;
+  int size, iter, buf, i, count, *arr;
 
   if (argc != 2) { printf("Format:\n./arrtest <SIZE>\n"); exit(1); }
   
@@ -14,15 +14,21 @@ void main(int argc, char** argv) {
 
   iter = size / 10000;
 
-  arr = (int *) malloc(sizeof(int) * size);
+  arr = (int *) malloc(sizeof(int) * size); // create an array of ints the size of the input
   if (arr == NULL) { fprintf(stderr, "malloc(%d) failed.\n", size); exit(1); }
 
+  count = 0;
   for (i = 0; i < iter; i++) {
-    buf = i * rand() % size;
-    if (arr[buf]) arr[buf] = 0;
+    buf = (i * rand()) % (size - 1); // generate a random index
+    if (buf < 0) buf = buf * -1; // check that it is positive
+    if (arr[buf]) arr[buf] = 0; // flip the bit at the index
     else arr[buf] = 1;
+
+    count++; // count iterations
   }
 
-  arr = NULL;
+  printf("%d array accesses\n", count);
+
   free(arr);
+  arr = NULL;
 }

@@ -1,5 +1,11 @@
 import m5
 from m5.objects import *
+m5.util.addToPath("../")
+from common import SimpleOpts
+
+# Command line arguments
+SimpleOpts.add_option("--argv", default="", type=str)
+args = SimpleOpts.parse_args()
 
 # following tutorial
 system = System()
@@ -32,13 +38,21 @@ system.mem_ctrl.dram = DDR3_1600_8x8()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
+#binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
+binary='./home/wbuziak/repos/SecureTEEsGem5/progs/binaries/arrflip'
 
 # for gem5 V21+
+thispath = os.path.dirname(os.path.realpath(__file__))
+#binary = os.path.join(
+#  thispath,
+#  "../../",
+##  "progs/binaries/arrflip",
+#)
+
 system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
-process.cmd = [binary]
+process.cmd = [binary, args.argv]
 system.cpu.workload = process
 system.cpu.createThreads()
 
