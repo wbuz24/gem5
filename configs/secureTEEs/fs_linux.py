@@ -325,6 +325,7 @@ if not args.bare_metal:
     # Linux boot command flags
     if args.command_line:
         system.workload.command_line = args.command_line
+        print(args.command_line)
     else:
         kernel_cmd = ["console=ttyS0", "root=/dev/vda", "ro"]
         system.workload.command_line = " ".join(kernel_cmd)

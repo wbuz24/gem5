@@ -39,7 +39,7 @@ system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
 #binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
-binary='./home/wbuziak/repos/SecureTEEsGem5/progs/binaries/arrflip'
+binary='/home/wbuziak/repos/SecureTEEsGem5/progs/binaries/arrflip'
 
 # for gem5 V21+
 thispath = os.path.dirname(os.path.realpath(__file__))
