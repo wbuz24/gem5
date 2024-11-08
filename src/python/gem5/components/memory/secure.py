@@ -35,26 +35,37 @@
 # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 # Tutorial author: Samuel Thomas, Brown University
 
 
 """ secure memory for tutorial """
 
-from typing import List, Optional, Sequence, Tuple
-from m5.objects import AddrRange, MemCtrl, Port, SimpleMemory, SecureMemory
+from typing import (
+    List,
+    Optional,
+    Sequence,
+    Tuple,
+)
+
+from m5.objects import (
+    AddrRange,
+    MemCtrl,
+    Port,
+    SecureMemory,
+    SimpleMemory,
+)
 from m5.util.convert import toMemorySize
 
 from ...utils.override import overrides
 from ..boards.abstract_board import AbstractBoard
 from .abstract_memory_system import AbstractMemorySystem
 
-class SecureMemorySystem(AbstractMemorySystem):
-    """ A class that implements secure memory using SimpleMemory """
 
-    def __init__(
-        self, latency: str, bandwidth: str, size: str
-    ):
+class SecureMemorySystem(AbstractMemorySystem):
+    """A class that implements secure memory using SimpleMemory"""
+
+    def __init__(self, latency: str, bandwidth: str, size: str):
         """
         :param latency: the average request to response latency
         :param bandwidth: combined read and write bandwidth
@@ -63,9 +74,7 @@ class SecureMemorySystem(AbstractMemorySystem):
 
         super().__init__()
 
-        self.module = SimpleMemory(
-            latency=latency, bandwidth=bandwidth
-        )
+        self.module = SimpleMemory(latency=latency, bandwidth=bandwidth)
         self._size = toMemorySize(size)
 
         self.secure_memory = SecureMemory()
@@ -95,6 +104,7 @@ class SecureMemorySystem(AbstractMemorySystem):
                 "range which matches the memory's size. Too naughty for words!"
             )
         self.module.range = ranges[0]
+
 
 def SecureSimpleMemory(size: Optional[str] = "32MB") -> AbstractMemorySystem:
     return SecureMemorySystem(size=size, bandwidth="1GiB/s", latency="150ns")
