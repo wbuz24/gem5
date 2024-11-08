@@ -1,5 +1,6 @@
 import m5
 from m5.objects import *
+
 m5.util.addToPath("../")
 from common import SimpleOpts
 
@@ -10,12 +11,12 @@ args = SimpleOpts.parse_args()
 # following tutorial
 system = System()
 system.clk_domain = SrcClockDomain()
-system.clk_domain.clock = '16GHz'
+system.clk_domain.clock = "16GHz"
 # system power
-system.clk_domain.voltage_domain = VoltageDomain() # default options
+system.clk_domain.voltage_domain = VoltageDomain()  # default options
 
-system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('512MB')]
+system.mem_mode = "timing"
+system.mem_ranges = [AddrRange("512MB")]
 
 system.cpu = RiscvTimingSimpleCPU()
 
@@ -38,16 +39,16 @@ system.mem_ctrl.dram = DDR3_1600_8x8()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-#binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
-binary='/home/wbuziak/repos/SecureTEEsGem5/progs/binaries/arrflip'
+# binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
+binary = "/home/wbuziak/repos/gem5/progs/binaries/arrflip"
 
 # for gem5 V21+
 thispath = os.path.dirname(os.path.realpath(__file__))
-#binary = os.path.join(
+# binary = os.path.join(
 #  thispath,
 #  "../../",
 ##  "progs/binaries/arrflip",
-#)
+# )
 
 system.workload = SEWorkload.init_compatible(binary)
 
@@ -56,10 +57,12 @@ process.cmd = [binary, args.argv]
 system.cpu.workload = process
 system.cpu.createThreads()
 
-root = Root(full_system = False, system=system)
+root = Root(full_system=False, system=system)
 m5.instantiate()
 
 print("Beginning simulation!")
 exit_event = m5.simulate()
 
-print('Exiting at tick {} because {}' .format(m5.curTick(), exit_event.getCause()))
+print(
+    "Exiting at tick {m5.curTick()} because {exit_event.getCause()}"
+)

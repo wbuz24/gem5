@@ -371,6 +371,7 @@ PySource('m5.ext.pystats', 'm5/ext/pystats/storagetype.py')
 PySource('m5.ext.pystats', 'm5/ext/pystats/timeconversion.py')
 PySource('m5.ext.pystats', 'm5/ext/pystats/jsonloader.py')
 PySource('m5.stats', 'm5/stats/gem5stats.py')
+PySource('gem5.components.memory', 'gem5/components/memory/secure.py') # secure memory portion
 
 Source('embedded.cc', add_tags=['python', 'm5_module'])
 Source('importer.cc', add_tags=['python', 'm5_module'])
