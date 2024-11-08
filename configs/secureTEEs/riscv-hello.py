@@ -41,16 +41,22 @@ scons build/RISCV/gem5.opt
 ```
 """
 
+import m5
+from m5.objects import *
+
 from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
 from gem5.components.memory import SingleChannelDDR3_1600
+from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.isas import ISA
-from gem5.resources.resource import obtain_resource
+from gem5.resources.resource import *
 from gem5.simulate.simulator import Simulator
 from gem5.utils.requires import requires
-from gem5.components.memory.secure import SecureSimpleMemory
+
+m5.util.addToPath("../")
+from common import SimpleOpts
 
 # This check ensures the gem5 binary is compiled to the RISC-V ISA target. If not,
 # an exception will be thrown.
@@ -60,10 +66,12 @@ requires(isa_required=ISA.RISCV)
 cache_hierarchy = NoCache()
 
 # We use a single channel DDR3_1600 memory system
-memory = SecureSimpleMemory(size="32MB")
+memory = SecureSimpleMemory(size="1GB")
 
 # We use a simple Timing processor with one core.
-processor = SimpleProcessor(cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1)
+processor = SimpleProcessor(
+    cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
+)
 
 # The gem5 library simble board which can be used to run simple SE-mode
 # simulations.
@@ -74,19 +82,12 @@ board = SimpleBoard(
     cache_hierarchy=cache_hierarchy,
 )
 
-# Here we set the workload. In this case we want to run a simple "Hello World!"
-# program compiled to the ARM ISA. The `Resource` class will automatically
-# download the binary from the gem5 Resources cloud bucket if it's not already
-# present.
+# board.set_se_binary_workload(obtain_resource("arrflip", resource_directory="/home/wbuziak/repos/gem5/progs/binaries", gem5_version="24.0.0.1", clients=None))
 board.set_se_binary_workload(
-    # The `Resource` class reads the `resources.json` file from the gem5
-    # resources repository:
-    # https://github.com/gem5/gem5-resources.
-    # Any resource specified in this file will be automatically retrieved.
-    # At the time of writing, this file is a WIP and does not contain all
-    # resources. Jira ticket: https://gem5.atlassian.net/browse/GEM5-1096
-
-    obtain_resource("/home/wbuziak/repos/gem5/progs/binaries/arrflip", resource_version="1.0.0")
+    BinaryResource(
+        local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
+    ),
+    arguments=["100000001"],
 )
 
 # Lastly we run the simulation.

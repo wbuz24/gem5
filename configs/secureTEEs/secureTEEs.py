@@ -50,12 +50,8 @@ from m5.util import (
     fatal,
     warn,
 )
+
 addToPath("../")
-from m5.util.fdthelper import *
-
-from gem5.utils.requires import requires
-
-
 from common import (
     CacheConfig,
     CpuConfig,
@@ -69,6 +65,10 @@ from common.Caches import *
 from common.FSConfig import *
 from common.SysPaths import *
 from ruby import Ruby
+
+from m5.util.fdthelper import *
+
+from gem5.utils.requires import requires
 
 # Run a check to ensure the RISC-V ISA is complied into gem5.
 requires(isa_required=ISA.RISCV)
