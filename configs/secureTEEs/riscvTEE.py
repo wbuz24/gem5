@@ -62,15 +62,16 @@ cache_hierarchy = NoCache()
 memory = SecureSimpleMemory(size="1GB")
 
 # We use a simple Timing processor with one core.
-processor = SimpleProcessor(
+processor1 = SimpleProcessor(
     cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
 )
+
 
 # The gem5 library simble board which can be used to run simple SE-mode
 # simulations.
 board = SimpleBoard(
     clk_freq="3GHz",
-    processor=processor,
+    processor=processor1,
     memory=memory,
     cache_hierarchy=cache_hierarchy,
 )
