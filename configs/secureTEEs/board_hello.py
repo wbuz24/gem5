@@ -85,9 +85,10 @@ board = SimpleBoard(
 # board.set_se_binary_workload(obtain_resource("arrflip", resource_directory="/home/wbuziak/repos/gem5/progs/binaries", gem5_version="24.0.0.1", clients=None))
 board.set_se_binary_workload(
     BinaryResource(
-        local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
+ #       local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
+         "tests/test-progs/hello/bin/riscv/linux/hello"
     ),
-    arguments=["100000001"],
+#    arguments=["100000001"],
 )
 
 # Lastly we run the simulation.

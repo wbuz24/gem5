@@ -38,11 +38,13 @@ import m5
 from m5.objects import *
 
 from gem5.components.boards.simple_board import SimpleBoard
-from gem5.components.cachehierarchies.classic.no_cache import NoCache
 from gem5.components.memory import SingleChannelDDR3_1600
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
+from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.mysimplecache_hierarchy import MyL1CacheHierarchy
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
 from gem5.resources.resource import *
 from gem5.simulate.simulator import Simulator
@@ -56,7 +58,7 @@ from common import SimpleOpts
 requires(isa_required=ISA.RISCV)
 
 # In this setup we don't have a cache. `NoCache` can be used for such setups.
-cache_hierarchy = NoCache()
+cache_hierarchy = NoCache()#PrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
 
 # Secure memory implementation
 memory = SecureSimpleMemory(size="1GB")
@@ -65,7 +67,6 @@ memory = SecureSimpleMemory(size="1GB")
 processor1 = SimpleProcessor(
     cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
 )
-
 
 # The gem5 library simble board which can be used to run simple SE-mode
 # simulations.
