@@ -1,0 +1,949 @@
+Global frequency set at 1000000000000 ticks per second
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 24.0.0.1
+gem5 compiled Nov 21 2024 18:39:41
+gem5 started Nov 21 2024 19:27:57
+gem5 executing on iris-arm-server-1, pid 61276
+command line: ./build/RISCV/gem5.debug --debug-flags=Exec configs/secureTEEs/board_hello.py
+
+ 158508: board.processor.cores.core: T0 : 0x102a4 @_start    : jal ra, 44                 : IntAlu :  D=0x00000000000102a8
+ 317016: board.processor.cores.core: T0 : 0x102d0 @_start+44    : auipc gp, 108              : IntAlu :  D=0x000000000007c2d0
+ 318015: board.processor.cores.core: T0 : 0x102d4 @_start+48    : addi gp, gp, -480          : IntAlu :  D=0x000000000007c0f0
+ 318348: board.processor.cores.core: T0 : 0x102d8 @_start+52    : c_jr ra                    : IntAlu : 
+ 318681: board.processor.cores.core: T0 : 0x102a8 @_start+4    : c_mv a5, a0                : IntAlu :  D=0x0000000000000000
+ 319347: board.processor.cores.core: T0 : 0x102aa @_start+6    : auipc a0, 0                : IntAlu :  D=0x00000000000102aa
+ 320013: board.processor.cores.core: T0 : 0x102ae @_start+10    : addi a0, a0, 232           : IntAlu :  D=0x0000000000010392
+ 320346: board.processor.cores.core: T0 : 0x102b2 @_start+14    : c_ldsp a1, 0(sp)           : MemRead :  D=0x0000000000000001 A=0x7fffffffffffff20
+ 479187: board.processor.cores.core: T0 : 0x102b4 @_start+16    : c_addi4spn a2, sp, 8       : IntAlu :  D=0x7fffffffffffff28
+ 479853: board.processor.cores.core: T0 : 0x102b6 @_start+18    : andi sp, sp, 18446744073709551600 : IntAlu :  D=0x7fffffffffffff20
+ 480519: board.processor.cores.core: T0 : 0x102ba @_start+22    : auipc a3, 0                : IntAlu :  D=0x00000000000102ba
+ 481185: board.processor.cores.core: T0 : 0x102be @_start+26    : addi a3, a3, 1504          : IntAlu :  D=0x000000000001089a
+ 481851: board.processor.cores.core: T0 : 0x102c2 @_start+30    : auipc a4, 0                : IntAlu :  D=0x00000000000102c2
+ 482517: board.processor.cores.core: T0 : 0x102c6 @_start+34    : addi a4, a4, 1640          : IntAlu :  D=0x000000000001092a
+ 482850: board.processor.cores.core: T0 : 0x102ca @_start+38    : c_mv a6, sp                : IntAlu :  D=0x7fffffffffffff20
+ 483183: board.processor.cores.core: T0 : 0x102cc @_start+40    : jal zero, 230              : IntAlu :  D=0x00000000000102d0
+ 641691: board.processor.cores.core: T0 : 0x103b2 @__libc_start_main    : c_addi16sp sp, -320        : IntAlu :  D=0x7ffffffffffffde0
+ 642690: board.processor.cores.core: T0 : 0x103b4 @__libc_start_main+2    : lui a7, 0                  : IntAlu :  D=0x0000000000000000
+ 643023: board.processor.cores.core: T0 : 0x103b8 @__libc_start_main+6    : c_sdsp s0, 304(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffff10
+ 643689: board.processor.cores.core: T0 : 0x103ba @__libc_start_main+8    : c_sdsp s1, 296(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffff08
+ 644355: board.processor.cores.core: T0 : 0x103bc @__libc_start_main+10    : c_sdsp s2, 288(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffff00
+ 645021: board.processor.cores.core: T0 : 0x103be @__libc_start_main+12    : c_sdsp ra, 312(sp)         : MemWrite :  D=0x00000000000102a8 A=0x7fffffffffffff18
+ 803862: board.processor.cores.core: T0 : 0x103c0 @__libc_start_main+14    : addi t1, a7, 0             : IntAlu :  D=0x0000000000000000
+ 804861: board.processor.cores.core: T0 : 0x103c4 @__libc_start_main+18    : c_sdsp a0, 24(sp)          : MemWrite :  D=0x0000000000010392 A=0x7ffffffffffffdf8
+ 963702: board.processor.cores.core: T0 : 0x103c6 @__libc_start_main+20    : c_sdsp a1, 8(sp)           : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffde8
+ 964368: board.processor.cores.core: T0 : 0x103c8 @__libc_start_main+22    : c_sdsp a2, 16(sp)          : MemWrite :  D=0x7fffffffffffff28 A=0x7ffffffffffffdf0
+ 965034: board.processor.cores.core: T0 : 0x103ca @__libc_start_main+24    : c_mv s2, a5                : IntAlu :  D=0x0000000000000000
+ 965367: board.processor.cores.core: T0 : 0x103cc @__libc_start_main+26    : c_mv s0, a3                : IntAlu :  D=0x000000000001089a
+ 965700: board.processor.cores.core: T0 : 0x103ce @__libc_start_main+28    : c_mv s1, a4                : IntAlu :  D=0x000000000001092a
+ 966033: board.processor.cores.core: T0 : 0x103d0 @__libc_start_main+30    : c_li a5, 0                 : IntAlu :  D=0x0000000000000000
+ 966699: board.processor.cores.core: T0 : 0x103d2 @__libc_start_main+32    : beq t1, zero, 12           : IntAlu : 
+ 967032: board.processor.cores.core: T0 : 0x103de @__libc_start_main+44    : c_ldsp a4, 8(sp)           : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffde8
+ 967698: board.processor.cores.core: T0 : 0x103e0 @__libc_start_main+46    : addi a0, a4, 1             : IntAlu :  D=0x0000000000000002
+ 968031: board.processor.cores.core: T0 : 0x103e4 @__libc_start_main+50    : c_ldsp a4, 16(sp)          : MemRead :  D=0x7fffffffffffff28 A=0x7ffffffffffffdf0
+ 968697: board.processor.cores.core: T0 : 0x103e6 @__libc_start_main+52    : c_slli a0, 3               : IntAlu :  D=0x0000000000000010
+ 969030: board.processor.cores.core: T0 : 0x103e8 @__libc_start_main+54    : c_add a0, a4               : IntAlu :  D=0x7fffffffffffff38
+ 969696: board.processor.cores.core: T0 : 0x103ea @__libc_start_main+56    : sw a5, -1576(gp)           : MemWrite :  D=0x0000000000000000 A=0x7bac8
+1128870: board.processor.cores.core: T0 : 0x103ee @__libc_start_main+60    : sd a0, -1192(gp)           : MemWrite :  D=0x7fffffffffffff38 A=0x7bc48
+1288044: board.processor.cores.core: T0 : 0x103f2 @__libc_start_main+64    : lui a5, 122                : IntAlu :  D=0x000000000007a000
+1288710: board.processor.cores.core: T0 : 0x103f6 @__libc_start_main+68    : sd a6, -80(a5)             : MemWrite :  D=0x7fffffffffffff20 A=0x79fb0
+1447551: board.processor.cores.core: T0 : 0x103fa @__libc_start_main+72    : c_addi a0, 8               : IntAlu :  D=0x7fffffffffffff40
+1447884: board.processor.cores.core: T0 : 0x103fc @__libc_start_main+74    : ld a5, -8(a0)              : MemRead :  D=0x0000000000000000 A=0x7fffffffffffff38
+1606725: board.processor.cores.core: T0 : 0x10400 @__libc_start_main+78    : c_bnez a5, -6              : IntAlu : 
+1608057: board.processor.cores.core: T0 : 0x10402 @__libc_start_main+80    : jal ra, 71926              : IntAlu :  D=0x0000000000010406
+1766565: board.processor.cores.core: T0 : 0x21cf8 @_dl_aux_init    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000009 A=0x7fffffffffffff40
+1925739: board.processor.cores.core: T0 : 0x21cfa @_dl_aux_init+2    : lui a4, 125                : IntAlu :  D=0x000000000007d000
+2084580: board.processor.cores.core: T0 : 0x21cfe @_dl_aux_init+6    : sd a0, 168(a4)             : MemWrite :  D=0x7fffffffffffff40 A=0x7d0a8
+2243754: board.processor.cores.core: T0 : 0x21d02 @_dl_aux_init+10    : beq a5, zero, 594          : IntAlu : 
+2244420: board.processor.cores.core: T0 : 0x21d06 @_dl_aux_init+14    : lui t5, 125                : IntAlu :  D=0x000000000007d000
+2245086: board.processor.cores.core: T0 : 0x21d0a @_dl_aux_init+18    : ld a4, 240(t5)             : MemRead :  D=0x0000000000000000 A=0x7d0f0
+2403927: board.processor.cores.core: T0 : 0x21d0e @_dl_aux_init+22    : c_addi16sp sp, -224        : IntAlu :  D=0x7ffffffffffffd00
+2404260: board.processor.cores.core: T0 : 0x21d10 @_dl_aux_init+24    : c_sdsp a4, 56(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd38
+2563434: board.processor.cores.core: T0 : 0x21d12 @_dl_aux_init+26    : ld a4, -1160(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc68
+2564433: board.processor.cores.core: T0 : 0x21d16 @_dl_aux_init+30    : lui a1, 122                : IntAlu :  D=0x000000000007a000
+2565099: board.processor.cores.core: T0 : 0x21d1a @_dl_aux_init+34    : addi a1, a1, -96           : IntAlu :  D=0x0000000000079fa0
+2565432: board.processor.cores.core: T0 : 0x21d1e @_dl_aux_init+38    : c_sdsp a4, 24(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd18
+2566098: board.processor.cores.core: T0 : 0x21d20 @_dl_aux_init+40    : c_ld a4, 0(a1)             : MemRead :  D=0x0000000000000000 A=0x79fa0
+2567097: board.processor.cores.core: T0 : 0x21d22 @_dl_aux_init+42    : lui t3, 122                : IntAlu :  D=0x000000000007a000
+2567763: board.processor.cores.core: T0 : 0x21d26 @_dl_aux_init+46    : lui t1, 125                : IntAlu :  D=0x000000000007d000
+2568096: board.processor.cores.core: T0 : 0x21d2a @_dl_aux_init+50    : c_sdsp a4, 104(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd68
+2726937: board.processor.cores.core: T0 : 0x21d2c @_dl_aux_init+52    : lw a4, -72(t3)             : MemRead :  D=0x0000000000000001 A=0x79fb8
+2727603: board.processor.cores.core: T0 : 0x21d30 @_dl_aux_init+56    : c_sdsp a4, 72(sp)          : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd48
+2728602: board.processor.cores.core: T0 : 0x21d32 @_dl_aux_init+58    : lw a4, 312(t1)             : MemRead :  D=0x0000000000000000 A=0x7d138
+2887443: board.processor.cores.core: T0 : 0x21d36 @_dl_aux_init+62    : c_sdsp s0, 216(sp)         : MemWrite :  D=0x000000000001089a A=0x7ffffffffffffdd8
+2888109: board.processor.cores.core: T0 : 0x21d38 @_dl_aux_init+64    : lui s0, 125                : IntAlu :  D=0x000000000007d000
+2888442: board.processor.cores.core: T0 : 0x21d3c @_dl_aux_init+68    : c_sdsp a4, 88(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd58
+3047616: board.processor.cores.core: T0 : 0x21d3e @_dl_aux_init+70    : lw a4, -1168(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc60
+3048282: board.processor.cores.core: T0 : 0x21d42 @_dl_aux_init+74    : c_sdsp s4, 184(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdb8
+3207123: board.processor.cores.core: T0 : 0x21d44 @_dl_aux_init+76    : c_sdsp a4, 40(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd28
+3208122: board.processor.cores.core: T0 : 0x21d46 @_dl_aux_init+78    : ld a4, -1152(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc70
+3208788: board.processor.cores.core: T0 : 0x21d4a @_dl_aux_init+82    : c_sdsp s1, 208(sp)         : MemWrite :  D=0x000000000001092a A=0x7ffffffffffffdd0
+3209454: board.processor.cores.core: T0 : 0x21d4c @_dl_aux_init+84    : c_sdsp s2, 200(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdc8
+3210120: board.processor.cores.core: T0 : 0x21d4e @_dl_aux_init+86    : c_sdsp a4, 8(sp)           : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd08
+3210786: board.processor.cores.core: T0 : 0x21d50 @_dl_aux_init+88    : ld a4, 176(s0)             : MemRead :  D=0x0000000000000000 A=0x7d0b0
+3211452: board.processor.cores.core: T0 : 0x21d54 @_dl_aux_init+92    : c_sdsp s3, 192(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdc0
+3212451: board.processor.cores.core: T0 : 0x21d56 @_dl_aux_init+94    : lui s1, 125                : IntAlu :  D=0x000000000007d000
+3212784: board.processor.cores.core: T0 : 0x21d5a @_dl_aux_init+98    : c_sdsp a4, 0(sp)           : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd00
+3213450: board.processor.cores.core: T0 : 0x21d5c @_dl_aux_init+100    : ld a4, -1632(gp)           : MemRead :  D=0x0000000000001000 A=0x7ba90
+3372291: board.processor.cores.core: T0 : 0x21d60 @_dl_aux_init+104    : lui s3, 125                : IntAlu :  D=0x000000000007d000
+3372624: board.processor.cores.core: T0 : 0x21d64 @_dl_aux_init+108    : lui s2, 125                : IntAlu :  D=0x000000000007d000
+3372957: board.processor.cores.core: T0 : 0x21d68 @_dl_aux_init+112    : c_sdsp a4, 120(sp)         : MemWrite :  D=0x0000000000001000 A=0x7ffffffffffffd78
+3373956: board.processor.cores.core: T0 : 0x21d6a @_dl_aux_init+114    : lui a4, 92                 : IntAlu :  D=0x000000000005c000
+3374289: board.processor.cores.core: T0 : 0x21d6e @_dl_aux_init+118    : c_sdsp s5, 176(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdb0
+3374955: board.processor.cores.core: T0 : 0x21d70 @_dl_aux_init+120    : c_sdsp s6, 168(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffda8
+3375621: board.processor.cores.core: T0 : 0x21d72 @_dl_aux_init+122    : c_sdsp s7, 160(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffda0
+3376287: board.processor.cores.core: T0 : 0x21d74 @_dl_aux_init+124    : c_sdsp s9, 144(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd90
+3376953: board.processor.cores.core: T0 : 0x21d76 @_dl_aux_init+126    : c_sdsp s10, 136(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd88
+3377619: board.processor.cores.core: T0 : 0x21d78 @_dl_aux_init+128    : c_sdsp s11, 128(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd80
+3378285: board.processor.cores.core: T0 : 0x21d7a @_dl_aux_init+130    : c_sdsp s8, 152(sp)         : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd98
+3378951: board.processor.cores.core: T0 : 0x21d7c @_dl_aux_init+132    : lw s10, 232(s3)            : MemRead :  D=0x0000000000000000 A=0x7d0e8
+3537792: board.processor.cores.core: T0 : 0x21d80 @_dl_aux_init+136    : ld s6, 264(s1)             : MemRead :  D=0x0000000000000000 A=0x7d108
+3538458: board.processor.cores.core: T0 : 0x21d84 @_dl_aux_init+140    : c_li s5, 0                 : IntAlu :  D=0x0000000000000000
+3539124: board.processor.cores.core: T0 : 0x21d86 @_dl_aux_init+142    : ld s8, 208(s2)             : MemRead :  D=0x0000000000000000 A=0x7d0d0
+3539790: board.processor.cores.core: T0 : 0x21d8a @_dl_aux_init+146    : c_li s7, 0                 : IntAlu :  D=0x0000000000000000
+3540123: board.processor.cores.core: T0 : 0x21d8c @_dl_aux_init+148    : c_sdsp zero, 112(sp)       : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd70
+3540789: board.processor.cores.core: T0 : 0x21d8e @_dl_aux_init+150    : c_sdsp zero, 96(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd60
+3541455: board.processor.cores.core: T0 : 0x21d90 @_dl_aux_init+152    : c_sdsp zero, 80(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd50
+3542121: board.processor.cores.core: T0 : 0x21d92 @_dl_aux_init+154    : c_sdsp zero, 64(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd40
+3542787: board.processor.cores.core: T0 : 0x21d94 @_dl_aux_init+156    : c_sdsp zero, 48(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd30
+3543453: board.processor.cores.core: T0 : 0x21d96 @_dl_aux_init+158    : c_sdsp zero, 32(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd20
+3544119: board.processor.cores.core: T0 : 0x21d98 @_dl_aux_init+160    : c_sdsp zero, 16(sp)        : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd10
+3544785: board.processor.cores.core: T0 : 0x21d9a @_dl_aux_init+162    : c_li s9, 0                 : IntAlu :  D=0x0000000000000000
+3545118: board.processor.cores.core: T0 : 0x21d9c @_dl_aux_init+164    : c_li s11, 0                : IntAlu :  D=0x0000000000000000
+3545451: board.processor.cores.core: T0 : 0x21d9e @_dl_aux_init+166    : c_li t4, 0                 : IntAlu :  D=0x0000000000000000
+3545784: board.processor.cores.core: T0 : 0x21da0 @_dl_aux_init+168    : c_li a7, 0                 : IntAlu :  D=0x0000000000000000
+3546117: board.processor.cores.core: T0 : 0x21da2 @_dl_aux_init+170    : c_li a6, 0                 : IntAlu :  D=0x0000000000000000
+3546450: board.processor.cores.core: T0 : 0x21da4 @_dl_aux_init+172    : c_li a2, 0                 : IntAlu :  D=0x0000000000000000
+3546783: board.processor.cores.core: T0 : 0x21da6 @_dl_aux_init+174    : c_li a3, 30                : IntAlu :  D=0x000000000000001e
+3547116: board.processor.cores.core: T0 : 0x21da8 @_dl_aux_init+176    : addi a4, a4, 912           : IntAlu :  D=0x000000000005c390
+3547449: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000006
+3548115: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+3548448: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000018
+3548781: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c3a8
+3549114: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021dc2 A=0x5c3a8
+3707955: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+3866463: board.processor.cores.core: T0 : 0x21dc2 @_dl_aux_init+202    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffff50
+3867462: board.processor.cores.core: T0 : 0x21dc4 @_dl_aux_init+204    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000005 A=0x7fffffffffffff50
+3868128: board.processor.cores.core: T0 : 0x21dc6 @_dl_aux_init+206    : c_bnez a5, -26             : IntAlu : 
+3868461: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000002
+3869127: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+3869460: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000008
+3869793: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c398
+3870126: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021f34 A=0x5c398
+3870792: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4029300: board.processor.cores.core: T0 : 0x21f34 @_dl_aux_init+572    : ld s6, 8(a0)               : MemRead :  D=0x0000000000000005 A=0x7fffffffffffff58
+4029966: board.processor.cores.core: T0 : 0x21f38 @_dl_aux_init+576    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffff60
+4030299: board.processor.cores.core: T0 : 0x21f3a @_dl_aux_init+578    : c_li s7, 1                 : IntAlu :  D=0x0000000000000001
+4030632: board.processor.cores.core: T0 : 0x21f3c @_dl_aux_init+580    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000004 A=0x7fffffffffffff60
+4189806: board.processor.cores.core: T0 : 0x21f3e @_dl_aux_init+582    : bne a5, zero, -402         : IntAlu : 
+4190139: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000001
+4190805: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+4191138: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000004
+4191471: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c394
+4191804: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021dc2 A=0x5c394
+4192470: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4192803: board.processor.cores.core: T0 : 0x21dc2 @_dl_aux_init+202    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffff70
+4193136: board.processor.cores.core: T0 : 0x21dc4 @_dl_aux_init+204    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000003 A=0x7fffffffffffff70
+4193802: board.processor.cores.core: T0 : 0x21dc6 @_dl_aux_init+206    : c_bnez a5, -26             : IntAlu : 
+4194135: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000000
+4194801: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+4195134: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000000
+4195467: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c390
+4195800: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021f44 A=0x5c390
+4196466: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4196799: board.processor.cores.core: T0 : 0x21f44 @_dl_aux_init+588    : ld s8, 8(a0)               : MemRead :  D=0x0000000000010040 A=0x7fffffffffffff78
+4197465: board.processor.cores.core: T0 : 0x21f48 @_dl_aux_init+592    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffff80
+4197798: board.processor.cores.core: T0 : 0x21f4a @_dl_aux_init+594    : c_li s9, 1                 : IntAlu :  D=0x0000000000000001
+4198131: board.processor.cores.core: T0 : 0x21f4c @_dl_aux_init+596    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000006 A=0x7fffffffffffff80
+4357305: board.processor.cores.core: T0 : 0x21f4e @_dl_aux_init+598    : bne a5, zero, -418         : IntAlu : 
+4357638: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000003
+4358304: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+4358637: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x000000000000000c
+4358970: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c39c
+4359303: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021dba A=0x5c39c
+4359969: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4360302: board.processor.cores.core: T0 : 0x21dba @_dl_aux_init+194    : c_ld a5, 8(a0)             : MemRead :  D=0x0000000000001000 A=0x7fffffffffffff88
+4360968: board.processor.cores.core: T0 : 0x21dbc @_dl_aux_init+196    : c_beqz a5, 6               : IntAlu : 
+4361301: board.processor.cores.core: T0 : 0x21dbe @_dl_aux_init+198    : c_sdsp a5, 120(sp)         : MemWrite :  D=0x0000000000001000 A=0x7ffffffffffffd78
+4361967: board.processor.cores.core: T0 : 0x21dc0 @_dl_aux_init+200    : c_li t4, 1                 : IntAlu :  D=0x0000000000000001
+4362300: board.processor.cores.core: T0 : 0x21dc2 @_dl_aux_init+202    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffff90
+4362633: board.processor.cores.core: T0 : 0x21dc4 @_dl_aux_init+204    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000017 A=0x7fffffffffffff90
+4363299: board.processor.cores.core: T0 : 0x21dc6 @_dl_aux_init+206    : c_bnez a5, -26             : IntAlu : 
+4363632: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000014
+4364298: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+4364631: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000050
+4364964: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c3e0
+4365297: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021e84 A=0x5c3e0
+4524138: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4682646: board.processor.cores.core: T0 : 0x21e84 @_dl_aux_init+396    : c_lw a5, 8(a0)             : MemRead :  D=0x0000000000000000 A=0x7fffffffffffff98
+4683312: board.processor.cores.core: T0 : 0x21e86 @_dl_aux_init+398    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffffa0
+4683645: board.processor.cores.core: T0 : 0x21e88 @_dl_aux_init+400    : c_li a2, -1                : IntAlu :  D=0xffffffffffffffff
+4683978: board.processor.cores.core: T0 : 0x21e8a @_dl_aux_init+402    : c_sdsp a5, 72(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd48
+4684644: board.processor.cores.core: T0 : 0x21e8c @_dl_aux_init+404    : c_li a5, 1                 : IntAlu :  D=0x0000000000000001
+4684977: board.processor.cores.core: T0 : 0x21e8e @_dl_aux_init+406    : c_sdsp a5, 96(sp)          : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd60
+4685643: board.processor.cores.core: T0 : 0x21e90 @_dl_aux_init+408    : c_sdsp a5, 88(sp)          : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd58
+4686309: board.processor.cores.core: T0 : 0x21e92 @_dl_aux_init+410    : c_sdsp a5, 80(sp)          : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd50
+4686975: board.processor.cores.core: T0 : 0x21e94 @_dl_aux_init+412    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000019 A=0x7fffffffffffffa0
+4687641: board.processor.cores.core: T0 : 0x21e96 @_dl_aux_init+414    : c_bnez a5, -234            : IntAlu : 
+4687974: board.processor.cores.core: T0 : 0x21dac @_dl_aux_init+180    : c_addi a5, -3              : IntAlu :  D=0x0000000000000016
+4688640: board.processor.cores.core: T0 : 0x21dae @_dl_aux_init+182    : bltu a3, a5, 20            : IntAlu : 
+4688973: board.processor.cores.core: T0 : 0x21db2 @_dl_aux_init+186    : c_slli a5, 2               : IntAlu :  D=0x0000000000000058
+4689306: board.processor.cores.core: T0 : 0x21db4 @_dl_aux_init+188    : c_add a5, a4               : IntAlu :  D=0x000000000005c3e8
+4689639: board.processor.cores.core: T0 : 0x21db6 @_dl_aux_init+190    : c_lw a5, 0(a5)             : MemRead :  D=0x0000000000021e74 A=0x5c3e8
+4690305: board.processor.cores.core: T0 : 0x21db8 @_dl_aux_init+192    : c_jr a5                    : IntAlu : 
+4848813: board.processor.cores.core: T0 : 0x21e74 @_dl_aux_init+380    : c_ld a5, 8(a0)             : MemRead :  D=0x7fffffffffffffc0 A=0x7fffffffffffffa8
+4849479: board.processor.cores.core: T0 : 0x21e76 @_dl_aux_init+382    : c_addi a0, 16              : IntAlu :  D=0x7fffffffffffffb0
+4849812: board.processor.cores.core: T0 : 0x21e78 @_dl_aux_init+384    : c_sdsp a5, 104(sp)         : MemWrite :  D=0x7fffffffffffffc0 A=0x7ffffffffffffd68
+4850478: board.processor.cores.core: T0 : 0x21e7a @_dl_aux_init+386    : c_li a5, 1                 : IntAlu :  D=0x0000000000000001
+4850811: board.processor.cores.core: T0 : 0x21e7c @_dl_aux_init+388    : c_sdsp a5, 112(sp)         : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd70
+4851477: board.processor.cores.core: T0 : 0x21e7e @_dl_aux_init+390    : c_ld a5, 0(a0)             : MemRead :  D=0x0000000000000000 A=0x7fffffffffffffb0
+4852143: board.processor.cores.core: T0 : 0x21e80 @_dl_aux_init+392    : c_bnez a5, -212            : IntAlu : 
+4852476: board.processor.cores.core: T0 : 0x21e82 @_dl_aux_init+394    : c_j -186                   : IntAlu : 
+4852809: board.processor.cores.core: T0 : 0x21dc8 @_dl_aux_init+208    : bne t4, zero, 420          : IntAlu : 
+4853142: board.processor.cores.core: T0 : 0x21f6c @_dl_aux_init+628    : c_ldsp a5, 120(sp)         : MemRead :  D=0x0000000000001000 A=0x7ffffffffffffd78
+4854141: board.processor.cores.core: T0 : 0x21f6e @_dl_aux_init+630    : sd a5, -1632(gp)           : MemWrite :  D=0x0000000000001000 A=0x7ba90
+4854807: board.processor.cores.core: T0 : 0x21f72 @_dl_aux_init+634    : c_j -422                   : IntAlu : 
+4855140: board.processor.cores.core: T0 : 0x21dcc @_dl_aux_init+212    : beq s11, zero, 8           : IntAlu : 
+4855473: board.processor.cores.core: T0 : 0x21dd4 @_dl_aux_init+220    : beq s9, zero, 8            : IntAlu : 
+4855806: board.processor.cores.core: T0 : 0x21dd8 @_dl_aux_init+224    : sd s8, 208(s2)             : MemWrite :  D=0x0000000000010040 A=0x7d0d0
+4856472: board.processor.cores.core: T0 : 0x21ddc @_dl_aux_init+228    : beq s7, zero, 8            : IntAlu : 
+4856805: board.processor.cores.core: T0 : 0x21de0 @_dl_aux_init+232    : sd s6, 264(s1)             : MemWrite :  D=0x0000000000000005 A=0x7d108
+4857471: board.processor.cores.core: T0 : 0x21de4 @_dl_aux_init+236    : beq s5, zero, 10           : IntAlu : 
+4857804: board.processor.cores.core: T0 : 0x21dee @_dl_aux_init+246    : c_ldsp a5, 16(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd10
+4858470: board.processor.cores.core: T0 : 0x21df0 @_dl_aux_init+248    : c_beqz a5, 8               : IntAlu : 
+4858803: board.processor.cores.core: T0 : 0x21df8 @_dl_aux_init+256    : c_ldsp a5, 32(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd20
+4859469: board.processor.cores.core: T0 : 0x21dfa @_dl_aux_init+258    : c_beqz a5, 8               : IntAlu : 
+5017977: board.processor.cores.core: T0 : 0x21e02 @_dl_aux_init+266    : c_ldsp a5, 48(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd30
+5018643: board.processor.cores.core: T0 : 0x21e04 @_dl_aux_init+268    : c_beqz a5, 8               : IntAlu : 
+5018976: board.processor.cores.core: T0 : 0x21e0c @_dl_aux_init+276    : c_ldsp a5, 64(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd40
+5019642: board.processor.cores.core: T0 : 0x21e0e @_dl_aux_init+278    : c_beqz a5, 8               : IntAlu : 
+5019975: board.processor.cores.core: T0 : 0x21e16 @_dl_aux_init+286    : c_ldsp a5, 80(sp)          : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffd50
+5020641: board.processor.cores.core: T0 : 0x21e18 @_dl_aux_init+288    : c_beqz a5, 8               : IntAlu : 
+5020974: board.processor.cores.core: T0 : 0x21e1a @_dl_aux_init+290    : c_lwsp a5, 72(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd48
+5021640: board.processor.cores.core: T0 : 0x21e1c @_dl_aux_init+292    : sw a5, -72(t3)             : MemWrite :  D=0x0000000000000000 A=0x79fb8
+5022306: board.processor.cores.core: T0 : 0x21e20 @_dl_aux_init+296    : c_ldsp a5, 96(sp)          : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffd60
+5022972: board.processor.cores.core: T0 : 0x21e22 @_dl_aux_init+298    : c_beqz a5, 8               : IntAlu : 
+5023305: board.processor.cores.core: T0 : 0x21e24 @_dl_aux_init+300    : c_lwsp a5, 88(sp)          : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffd58
+5024304: board.processor.cores.core: T0 : 0x21e26 @_dl_aux_init+302    : sw a5, 312(t1)             : MemWrite :  D=0x0000000000000001 A=0x7d138
+5024970: board.processor.cores.core: T0 : 0x21e2a @_dl_aux_init+306    : c_ldsp a5, 112(sp)         : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffd70
+5025636: board.processor.cores.core: T0 : 0x21e2c @_dl_aux_init+308    : c_beqz a5, 6               : IntAlu : 
+5025969: board.processor.cores.core: T0 : 0x21e2e @_dl_aux_init+310    : c_ldsp a5, 104(sp)         : MemRead :  D=0x7fffffffffffffc0 A=0x7ffffffffffffd68
+5026635: board.processor.cores.core: T0 : 0x21e30 @_dl_aux_init+312    : c_sd a5, 0(a1)             : MemWrite :  D=0x7fffffffffffffc0 A=0x79fa0
+5027301: board.processor.cores.core: T0 : 0x21e32 @_dl_aux_init+314    : c_li a5, 15                : IntAlu :  D=0x000000000000000f
+5027634: board.processor.cores.core: T0 : 0x21e34 @_dl_aux_init+316    : beq a2, a5, 290            : IntAlu : 
+5027967: board.processor.cores.core: T0 : 0x21e38 @_dl_aux_init+320    : c_ldsp s0, 216(sp)         : MemRead :  D=0x000000000001089a A=0x7ffffffffffffdd8
+5028633: board.processor.cores.core: T0 : 0x21e3a @_dl_aux_init+322    : c_ldsp s1, 208(sp)         : MemRead :  D=0x000000000001092a A=0x7ffffffffffffdd0
+5029299: board.processor.cores.core: T0 : 0x21e3c @_dl_aux_init+324    : c_ldsp s2, 200(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdc8
+5029965: board.processor.cores.core: T0 : 0x21e3e @_dl_aux_init+326    : c_ldsp s3, 192(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdc0
+5030631: board.processor.cores.core: T0 : 0x21e40 @_dl_aux_init+328    : c_ldsp s4, 184(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdb8
+5031297: board.processor.cores.core: T0 : 0x21e42 @_dl_aux_init+330    : c_ldsp s5, 176(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdb0
+5031963: board.processor.cores.core: T0 : 0x21e44 @_dl_aux_init+332    : c_ldsp s6, 168(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffda8
+5032629: board.processor.cores.core: T0 : 0x21e46 @_dl_aux_init+334    : c_ldsp s7, 160(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffda0
+5033295: board.processor.cores.core: T0 : 0x21e48 @_dl_aux_init+336    : c_ldsp s8, 152(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd98
+5033961: board.processor.cores.core: T0 : 0x21e4a @_dl_aux_init+338    : c_ldsp s9, 144(sp)         : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd90
+5034627: board.processor.cores.core: T0 : 0x21e4c @_dl_aux_init+340    : c_ldsp s10, 136(sp)        : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd88
+5035293: board.processor.cores.core: T0 : 0x21e4e @_dl_aux_init+342    : c_ldsp s11, 128(sp)        : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd80
+5035959: board.processor.cores.core: T0 : 0x21e50 @_dl_aux_init+344    : c_addi16sp sp, 224         : IntAlu :  D=0x7ffffffffffffde0
+5036292: board.processor.cores.core: T0 : 0x21e52 @_dl_aux_init+346    : c_jr ra                    : IntAlu : 
+5036958: board.processor.cores.core: T0 : 0x10406 @__libc_start_main+84    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+5037624: board.processor.cores.core: T0 : 0x1040a @__libc_start_main+88    : ld a4, 208(a5)             : MemRead :  D=0x0000000000010040 A=0x7d0d0
+5038623: board.processor.cores.core: T0 : 0x1040e @__libc_start_main+92    : beq a4, zero, 352          : IntAlu : 
+5039289: board.processor.cores.core: T0 : 0x10412 @__libc_start_main+96    : lw a5, -1576(gp)           : MemRead :  D=0x0000000000000000 A=0x7bac8
+5040288: board.processor.cores.core: T0 : 0x10416 @__libc_start_main+100    : beq a5, zero, 294          : IntAlu : 
+5198796: board.processor.cores.core: T0 : 0x1053c @__libc_start_main+394    : jal ra, 74258              : IntAlu :  D=0x0000000000010540
+5357304: board.processor.cores.core: T0 : 0x2274e @_dl_discover_osversion    : c_addi16sp sp, -496        : IntAlu :  D=0x7ffffffffffffbf0
+5358303: board.processor.cores.core: T0 : 0x22750 @_dl_discover_osversion+2    : c_addi4spn a0, sp, 72      : IntAlu :  D=0x7ffffffffffffc38
+5358636: board.processor.cores.core: T0 : 0x22752 @_dl_discover_osversion+4    : c_sdsp ra, 488(sp)         : MemWrite :  D=0x0000000000010540 A=0x7ffffffffffffdd8
+5359302: board.processor.cores.core: T0 : 0x22754 @_dl_discover_osversion+6    : c_sdsp s0, 480(sp)         : MemWrite :  D=0x000000000001089a A=0x7ffffffffffffdd0
+5359968: board.processor.cores.core: T0 : 0x22756 @_dl_discover_osversion+8    : c_sdsp s1, 472(sp)         : MemWrite :  D=0x000000000001092a A=0x7ffffffffffffdc8
+5360634: board.processor.cores.core: T0 : 0x22758 @_dl_discover_osversion+10    : jal ra, 107256             : IntAlu :  D=0x000000000002275c
+5519142: board.processor.cores.core: T0 : 0x3ca50 @__uname    : addi a7, zero, 160         : IntAlu :  D=0x00000000000000a0
+5520141: board.processor.cores.core: T0 : 0x3ca54 @__uname+4    : ecall                      : No_OpClass : 
+5520474: board.processor.cores.core: T0 : 0x3ca58 @__uname+8    : blt a0, zero, -12          : IntAlu : 
+5520807: board.processor.cores.core: T0 : 0x3ca5c @__uname+12    : c_jr ra                    : IntAlu : 
+5521140: board.processor.cores.core: T0 : 0x2275c @_dl_discover_osversion+14    : addi a3, sp, 202           : IntAlu :  D=0x7ffffffffffffcba
+5521473: board.processor.cores.core: T0 : 0x22760 @_dl_discover_osversion+18    : c_bnez a0, 140             : IntAlu : 
+5521806: board.processor.cores.core: T0 : 0x22762 @_dl_discover_osversion+20    : c_li t1, 0                 : IntAlu :  D=0x0000000000000000
+5522139: board.processor.cores.core: T0 : 0x22764 @_dl_discover_osversion+22    : c_li a0, 0                 : IntAlu :  D=0x0000000000000000
+5522472: board.processor.cores.core: T0 : 0x22766 @_dl_discover_osversion+24    : c_li a7, 9                 : IntAlu :  D=0x0000000000000009
+5522805: board.processor.cores.core: T0 : 0x22768 @_dl_discover_osversion+26    : addi t3, zero, 46          : IntAlu :  D=0x000000000000002e
+5523138: board.processor.cores.core: T0 : 0x2276c @_dl_discover_osversion+30    : c_li t4, 3                 : IntAlu :  D=0x0000000000000003
+5523804: board.processor.cores.core: T0 : 0x2276e @_dl_discover_osversion+32    : lbu a5, 0(a3)              : MemRead :  D=0x0000000000000035 A=0x7ffffffffffffcba
+5682978: board.processor.cores.core: T0 : 0x22772 @_dl_discover_osversion+36    : addiw a5, a5, -48          : IntAlu :  D=0x0000000000000005
+5683644: board.processor.cores.core: T0 : 0x22776 @_dl_discover_osversion+40    : andi a4, a5, 255           : IntAlu :  D=0x0000000000000005
+5684310: board.processor.cores.core: T0 : 0x2277a @_dl_discover_osversion+44    : bltu a7, a4, 98            : IntAlu : 
+5843151: board.processor.cores.core: T0 : 0x2277e @_dl_discover_osversion+48    : lbu a1, 1(a3)              : MemRead :  D=0x000000000000002e A=0x7ffffffffffffcbb
+5844150: board.processor.cores.core: T0 : 0x22782 @_dl_discover_osversion+52    : addiw a4, a5, 0            : IntAlu :  D=0x0000000000000005
+5844483: board.processor.cores.core: T0 : 0x22786 @_dl_discover_osversion+56    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcbb
+5844816: board.processor.cores.core: T0 : 0x22788 @_dl_discover_osversion+58    : addiw a2, a1, -48          : IntAlu :  D=0xfffffffffffffffe
+5845149: board.processor.cores.core: T0 : 0x2278c @_dl_discover_osversion+62    : andi a5, a2, 255           : IntAlu :  D=0x00000000000000fe
+5845482: board.processor.cores.core: T0 : 0x22790 @_dl_discover_osversion+66    : bltu a7, a5, 36            : IntAlu : 
+5845815: board.processor.cores.core: T0 : 0x227b4 @_dl_discover_osversion+102    : slliw a5, a0, 8            : IntAlu :  D=0x0000000000000000
+5846148: board.processor.cores.core: T0 : 0x227b8 @_dl_discover_osversion+106    : c_or a5, a4                : IntAlu :  D=0x0000000000000005
+5846481: board.processor.cores.core: T0 : 0x227ba @_dl_discover_osversion+108    : c_addiw t1, 1              : IntAlu :  D=0x0000000000000001
+5846814: board.processor.cores.core: T0 : 0x227bc @_dl_discover_osversion+110    : addiw a0, a5, 0            : IntAlu :  D=0x0000000000000005
+6005322: board.processor.cores.core: T0 : 0x227c0 @_dl_discover_osversion+114    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcbc
+6006654: board.processor.cores.core: T0 : 0x227c2 @_dl_discover_osversion+116    : bne a1, t3, 20             : IntAlu : 
+6007320: board.processor.cores.core: T0 : 0x227c6 @_dl_discover_osversion+120    : bne t1, t4, -88            : IntAlu : 
+6007986: board.processor.cores.core: T0 : 0x2276e @_dl_discover_osversion+32    : lbu a5, 0(a3)              : MemRead :  D=0x0000000000000031 A=0x7ffffffffffffcbc
+6008985: board.processor.cores.core: T0 : 0x22772 @_dl_discover_osversion+36    : addiw a5, a5, -48          : IntAlu :  D=0x0000000000000001
+6009651: board.processor.cores.core: T0 : 0x22776 @_dl_discover_osversion+40    : andi a4, a5, 255           : IntAlu :  D=0x0000000000000001
+6010317: board.processor.cores.core: T0 : 0x2277a @_dl_discover_osversion+44    : bltu a7, a4, 98            : IntAlu : 
+6010983: board.processor.cores.core: T0 : 0x2277e @_dl_discover_osversion+48    : lbu a1, 1(a3)              : MemRead :  D=0x000000000000002e A=0x7ffffffffffffcbd
+6011982: board.processor.cores.core: T0 : 0x22782 @_dl_discover_osversion+52    : addiw a4, a5, 0            : IntAlu :  D=0x0000000000000001
+6012315: board.processor.cores.core: T0 : 0x22786 @_dl_discover_osversion+56    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcbd
+6012648: board.processor.cores.core: T0 : 0x22788 @_dl_discover_osversion+58    : addiw a2, a1, -48          : IntAlu :  D=0xfffffffffffffffe
+6012981: board.processor.cores.core: T0 : 0x2278c @_dl_discover_osversion+62    : andi a5, a2, 255           : IntAlu :  D=0x00000000000000fe
+6013314: board.processor.cores.core: T0 : 0x22790 @_dl_discover_osversion+66    : bltu a7, a5, 36            : IntAlu : 
+6013647: board.processor.cores.core: T0 : 0x227b4 @_dl_discover_osversion+102    : slliw a5, a0, 8            : IntAlu :  D=0x0000000000000500
+6013980: board.processor.cores.core: T0 : 0x227b8 @_dl_discover_osversion+106    : c_or a5, a4                : IntAlu :  D=0x0000000000000501
+6014313: board.processor.cores.core: T0 : 0x227ba @_dl_discover_osversion+108    : c_addiw t1, 1              : IntAlu :  D=0x0000000000000002
+6014646: board.processor.cores.core: T0 : 0x227bc @_dl_discover_osversion+110    : addiw a0, a5, 0            : IntAlu :  D=0x0000000000000501
+6014979: board.processor.cores.core: T0 : 0x227c0 @_dl_discover_osversion+114    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcbe
+6015645: board.processor.cores.core: T0 : 0x227c2 @_dl_discover_osversion+116    : bne a1, t3, 20             : IntAlu : 
+6016311: board.processor.cores.core: T0 : 0x227c6 @_dl_discover_osversion+120    : bne t1, t4, -88            : IntAlu : 
+6016977: board.processor.cores.core: T0 : 0x2276e @_dl_discover_osversion+32    : lbu a5, 0(a3)              : MemRead :  D=0x0000000000000030 A=0x7ffffffffffffcbe
+6017976: board.processor.cores.core: T0 : 0x22772 @_dl_discover_osversion+36    : addiw a5, a5, -48          : IntAlu :  D=0x0000000000000000
+6018642: board.processor.cores.core: T0 : 0x22776 @_dl_discover_osversion+40    : andi a4, a5, 255           : IntAlu :  D=0x0000000000000000
+6019308: board.processor.cores.core: T0 : 0x2277a @_dl_discover_osversion+44    : bltu a7, a4, 98            : IntAlu : 
+6019974: board.processor.cores.core: T0 : 0x2277e @_dl_discover_osversion+48    : lbu a1, 1(a3)              : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffcbf
+6020973: board.processor.cores.core: T0 : 0x22782 @_dl_discover_osversion+52    : addiw a4, a5, 0            : IntAlu :  D=0x0000000000000000
+6021306: board.processor.cores.core: T0 : 0x22786 @_dl_discover_osversion+56    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcbf
+6021639: board.processor.cores.core: T0 : 0x22788 @_dl_discover_osversion+58    : addiw a2, a1, -48          : IntAlu :  D=0xffffffffffffffd0
+6021972: board.processor.cores.core: T0 : 0x2278c @_dl_discover_osversion+62    : andi a5, a2, 255           : IntAlu :  D=0x00000000000000d0
+6022305: board.processor.cores.core: T0 : 0x22790 @_dl_discover_osversion+66    : bltu a7, a5, 36            : IntAlu : 
+6022638: board.processor.cores.core: T0 : 0x227b4 @_dl_discover_osversion+102    : slliw a5, a0, 8            : IntAlu :  D=0x0000000000050100
+6022971: board.processor.cores.core: T0 : 0x227b8 @_dl_discover_osversion+106    : c_or a5, a4                : IntAlu :  D=0x0000000000050100
+6023304: board.processor.cores.core: T0 : 0x227ba @_dl_discover_osversion+108    : c_addiw t1, 1              : IntAlu :  D=0x0000000000000003
+6023637: board.processor.cores.core: T0 : 0x227bc @_dl_discover_osversion+110    : addiw a0, a5, 0            : IntAlu :  D=0x0000000000050100
+6023970: board.processor.cores.core: T0 : 0x227c0 @_dl_discover_osversion+114    : c_addi a3, 1               : IntAlu :  D=0x7ffffffffffffcc0
+6024636: board.processor.cores.core: T0 : 0x227c2 @_dl_discover_osversion+116    : bne a1, t3, 20             : IntAlu : 
+6024969: board.processor.cores.core: T0 : 0x227d6 @_dl_discover_osversion+136    : c_li a5, 3                 : IntAlu :  D=0x0000000000000003
+6025302: board.processor.cores.core: T0 : 0x227d8 @_dl_discover_osversion+138    : beq t1, a5, -14            : IntAlu : 
+6025635: board.processor.cores.core: T0 : 0x227ca @_dl_discover_osversion+124    : c_addiw a0, 0              : IntAlu :  D=0x0000000000050100
+6025968: board.processor.cores.core: T0 : 0x227cc @_dl_discover_osversion+126    : c_ldsp ra, 488(sp)         : MemRead :  D=0x0000000000010540 A=0x7ffffffffffffdd8
+6026634: board.processor.cores.core: T0 : 0x227ce @_dl_discover_osversion+128    : c_ldsp s0, 480(sp)         : MemRead :  D=0x000000000001089a A=0x7ffffffffffffdd0
+6027300: board.processor.cores.core: T0 : 0x227d0 @_dl_discover_osversion+130    : c_ldsp s1, 472(sp)         : MemRead :  D=0x000000000001092a A=0x7ffffffffffffdc8
+6027966: board.processor.cores.core: T0 : 0x227d2 @_dl_discover_osversion+132    : c_addi16sp sp, 496         : IntAlu :  D=0x7ffffffffffffde0
+6028299: board.processor.cores.core: T0 : 0x227d4 @_dl_discover_osversion+134    : c_jr ra                    : IntAlu : 
+6186807: board.processor.cores.core: T0 : 0x10540 @__libc_start_main+398    : blt a0, zero, 172          : IntAlu : 
+6187806: board.processor.cores.core: T0 : 0x10544 @__libc_start_main+402    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+6188139: board.processor.cores.core: T0 : 0x10548 @__libc_start_main+406    : lw a4, 296(a5)             : MemRead :  D=0x0000000000000000 A=0x7d128
+6188805: board.processor.cores.core: T0 : 0x1054c @__libc_start_main+410    : addiw a5, a0, 0            : IntAlu :  D=0x0000000000050100
+6189138: board.processor.cores.core: T0 : 0x10550 @__libc_start_main+414    : c_bnez a4, 108             : IntAlu : 
+6189804: board.processor.cores.core: T0 : 0x10552 @__libc_start_main+416    : lui a4, 125                : IntAlu :  D=0x000000000007d000
+6190470: board.processor.cores.core: T0 : 0x10556 @__libc_start_main+420    : sw a5, 296(a4)             : MemWrite :  D=0x0000000000050100 A=0x7d128
+6191469: board.processor.cores.core: T0 : 0x1055a @__libc_start_main+424    : lui a5, 48                 : IntAlu :  D=0x0000000000030000
+6192135: board.processor.cores.core: T0 : 0x1055e @__libc_start_main+428    : bge a0, a5, -324           : IntAlu : 
+6192801: board.processor.cores.core: T0 : 0x1041a @__libc_start_main+104    : jal ra, 1124               : IntAlu :  D=0x000000000001041e
+6351309: board.processor.cores.core: T0 : 0x1087e @__pthread_initialize_minimal    : c_li a1, 16                : IntAlu :  D=0x0000000000000010
+6509817: board.processor.cores.core: T0 : 0x10880 @__pthread_initialize_minimal+2    : c_li a0, 0                 : IntAlu :  D=0x0000000000000000
+6511149: board.processor.cores.core: T0 : 0x10882 @__pthread_initialize_minimal+4    : jal zero, -452             : IntAlu :  D=0x0000000000010886
+6828165: board.processor.cores.core: T0 : 0x106be @__libc_setup_tls    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+6829497: board.processor.cores.core: T0 : 0x106c2 @__libc_setup_tls+4    : ld a5, 208(a5)             : MemRead :  D=0x0000000000010040 A=0x7d0d0
+6830163: board.processor.cores.core: T0 : 0x106c6 @__libc_setup_tls+8    : c_addi16sp sp, -96         : IntAlu :  D=0x7ffffffffffffd80
+6830496: board.processor.cores.core: T0 : 0x106c8 @__libc_setup_tls+10    : c_sdsp s6, 32(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffda0
+6831162: board.processor.cores.core: T0 : 0x106ca @__libc_setup_tls+12    : c_sdsp ra, 88(sp)          : MemWrite :  D=0x000000000001041e A=0x7ffffffffffffdd8
+6831828: board.processor.cores.core: T0 : 0x106cc @__libc_setup_tls+14    : c_sdsp s0, 80(sp)          : MemWrite :  D=0x000000000001089a A=0x7ffffffffffffdd0
+6832494: board.processor.cores.core: T0 : 0x106ce @__libc_setup_tls+16    : c_sdsp s1, 72(sp)          : MemWrite :  D=0x000000000001092a A=0x7ffffffffffffdc8
+6833160: board.processor.cores.core: T0 : 0x106d0 @__libc_setup_tls+18    : c_sdsp s2, 64(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdc0
+6833826: board.processor.cores.core: T0 : 0x106d2 @__libc_setup_tls+20    : c_sdsp s3, 56(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdb8
+6834492: board.processor.cores.core: T0 : 0x106d4 @__libc_setup_tls+22    : c_sdsp s4, 48(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdb0
+6835158: board.processor.cores.core: T0 : 0x106d6 @__libc_setup_tls+24    : c_sdsp s5, 40(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffda8
+6835824: board.processor.cores.core: T0 : 0x106d8 @__libc_setup_tls+26    : c_sdsp s7, 24(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd98
+6836490: board.processor.cores.core: T0 : 0x106da @__libc_setup_tls+28    : c_sdsp s8, 16(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd90
+6837156: board.processor.cores.core: T0 : 0x106dc @__libc_setup_tls+30    : c_sdsp s9, 8(sp)           : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd88
+6837822: board.processor.cores.core: T0 : 0x106de @__libc_setup_tls+32    : c_sdsp s10, 0(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd80
+6838488: board.processor.cores.core: T0 : 0x106e0 @__libc_setup_tls+34    : c_mv s6, a1                : IntAlu :  D=0x0000000000000010
+6838821: board.processor.cores.core: T0 : 0x106e2 @__libc_setup_tls+36    : c_beqz a5, 50              : IntAlu : 
+6839154: board.processor.cores.core: T0 : 0x106e4 @__libc_setup_tls+38    : lui a4, 125                : IntAlu :  D=0x000000000007d000
+6839487: board.processor.cores.core: T0 : 0x106e8 @__libc_setup_tls+42    : ld a3, 264(a4)             : MemRead :  D=0x0000000000000005 A=0x7d108
+6840153: board.processor.cores.core: T0 : 0x106ec @__libc_setup_tls+46    : slli a4, a3, 3             : IntAlu :  D=0x0000000000000028
+6840486: board.processor.cores.core: T0 : 0x106f0 @__libc_setup_tls+50    : c_sub a4, a3               : IntAlu :  D=0x0000000000000023
+6840819: board.processor.cores.core: T0 : 0x106f2 @__libc_setup_tls+52    : c_slli a4, 3               : IntAlu :  D=0x0000000000000118
+6841152: board.processor.cores.core: T0 : 0x106f4 @__libc_setup_tls+54    : c_add a4, a5               : IntAlu :  D=0x0000000000010158
+6841818: board.processor.cores.core: T0 : 0x106f6 @__libc_setup_tls+56    : bgeu a5, a4, 30            : IntAlu : 
+6842151: board.processor.cores.core: T0 : 0x106fa @__libc_setup_tls+60    : c_lw a2, 0(a5)             : MemRead :  D=0x0000000000000001 A=0x10040
+7000992: board.processor.cores.core: T0 : 0x106fc @__libc_setup_tls+62    : c_li a3, 7                 : IntAlu :  D=0x0000000000000007
+7159833: board.processor.cores.core: T0 : 0x106fe @__libc_setup_tls+64    : beq a2, a3, 274            : IntAlu : 
+7160832: board.processor.cores.core: T0 : 0x10702 @__libc_setup_tls+68    : c_li a2, 7                 : IntAlu :  D=0x0000000000000007
+7161165: board.processor.cores.core: T0 : 0x10704 @__libc_setup_tls+70    : c_j 8                      : IntAlu : 
+7161498: board.processor.cores.core: T0 : 0x1070c @__libc_setup_tls+78    : addi a5, a5, 56            : IntAlu :  D=0x0000000000010078
+7161831: board.processor.cores.core: T0 : 0x10710 @__libc_setup_tls+82    : bltu a5, a4, -10           : IntAlu : 
+7162164: board.processor.cores.core: T0 : 0x10706 @__libc_setup_tls+72    : c_lw a3, 0(a5)             : MemRead :  D=0x0000000000000001 A=0x10078
+7162830: board.processor.cores.core: T0 : 0x10708 @__libc_setup_tls+74    : beq a3, a2, 264            : IntAlu : 
+7163163: board.processor.cores.core: T0 : 0x1070c @__libc_setup_tls+78    : addi a5, a5, 56            : IntAlu :  D=0x00000000000100b0
+7163496: board.processor.cores.core: T0 : 0x10710 @__libc_setup_tls+82    : bltu a5, a4, -10           : IntAlu : 
+7163829: board.processor.cores.core: T0 : 0x10706 @__libc_setup_tls+72    : c_lw a3, 0(a5)             : MemRead :  D=0x0000000000000004 A=0x100b0
+7322670: board.processor.cores.core: T0 : 0x10708 @__libc_setup_tls+74    : beq a3, a2, 264            : IntAlu : 
+7323003: board.processor.cores.core: T0 : 0x1070c @__libc_setup_tls+78    : addi a5, a5, 56            : IntAlu :  D=0x00000000000100e8
+7323336: board.processor.cores.core: T0 : 0x10710 @__libc_setup_tls+82    : bltu a5, a4, -10           : IntAlu : 
+7323669: board.processor.cores.core: T0 : 0x10706 @__libc_setup_tls+72    : c_lw a3, 0(a5)             : MemRead :  D=0x0000000000000007 A=0x100e8
+7482510: board.processor.cores.core: T0 : 0x10708 @__libc_setup_tls+74    : beq a3, a2, 264            : IntAlu : 
+7641018: board.processor.cores.core: T0 : 0x10810 @__libc_setup_tls+338    : ld s7, 48(a5)              : MemRead :  D=0x0000000000000008 A=0x10118
+7799859: board.processor.cores.core: T0 : 0x10814 @__libc_setup_tls+342    : ld s9, 40(a5)              : MemRead :  D=0x0000000000000050 A=0x10110
+7800525: board.processor.cores.core: T0 : 0x10818 @__libc_setup_tls+346    : ld s2, 32(a5)              : MemRead :  D=0x0000000000000020 A=0x10108
+7801191: board.processor.cores.core: T0 : 0x1081c @__libc_setup_tls+350    : ld s3, 16(a5)              : MemRead :  D=0x0000000000079f50 A=0x100f8
+7801857: board.processor.cores.core: T0 : 0x10820 @__libc_setup_tls+354    : bltu s6, s7, 20            : IntAlu : 
+7802190: board.processor.cores.core: T0 : 0x10824 @__libc_setup_tls+358    : beq s7, zero, -266         : IntAlu : 
+7802523: board.processor.cores.core: T0 : 0x10828 @__libc_setup_tls+362    : addi s5, s7, -1            : IntAlu :  D=0x0000000000000007
+7802856: board.processor.cores.core: T0 : 0x1082c @__libc_setup_tls+366    : c_add a0, s5               : IntAlu :  D=0x0000000000000007
+7803189: board.processor.cores.core: T0 : 0x1082e @__libc_setup_tls+368    : c_mv s4, s7                : IntAlu :  D=0x0000000000000008
+7803522: board.processor.cores.core: T0 : 0x10830 @__libc_setup_tls+370    : c_add s5, s9               : IntAlu :  D=0x0000000000000057
+7803855: board.processor.cores.core: T0 : 0x10832 @__libc_setup_tls+372    : c_j -274                   : IntAlu : 
+7804188: board.processor.cores.core: T0 : 0x10720 @__libc_setup_tls+98    : divu s0, a0, s7            : IntDiv :  D=0x0000000000000000
+7804521: board.processor.cores.core: T0 : 0x10724 @__libc_setup_tls+102    : ld a0, -1824(gp)           : MemRead :  D=0x0000000000000800 A=0x7b9d0
+7963362: board.processor.cores.core: T0 : 0x10728 @__libc_setup_tls+106    : addi a0, a0, 1792          : IntAlu :  D=0x0000000000000f00
+7963695: board.processor.cores.core: T0 : 0x1072c @__libc_setup_tls+110    : c_add a0, s9               : IntAlu :  D=0x0000000000000f50
+7964028: board.processor.cores.core: T0 : 0x1072e @__libc_setup_tls+112    : c_add a0, s6               : IntAlu :  D=0x0000000000000f60
+7964361: board.processor.cores.core: T0 : 0x10730 @__libc_setup_tls+114    : mul s0, s0, s7             : IntMult :  D=0x0000000000000000
+7964694: board.processor.cores.core: T0 : 0x10734 @__libc_setup_tls+118    : c_add a0, s0               : IntAlu :  D=0x0000000000000f60
+7965360: board.processor.cores.core: T0 : 0x10736 @__libc_setup_tls+120    : jal ra, 66714              : IntAlu :  D=0x000000000001073a
+8123868: board.processor.cores.core: T0 : 0x20bd0 @__sbrk    : c_addi sp, -32             : IntAlu :  D=0x7ffffffffffffd60
+8124867: board.processor.cores.core: T0 : 0x20bd2 @__sbrk+2    : c_sdsp s2, 0(sp)           : MemWrite :  D=0x0000000000000020 A=0x7ffffffffffffd60
+8125533: board.processor.cores.core: T0 : 0x20bd4 @__sbrk+4    : c_sdsp s0, 16(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd70
+8126532: board.processor.cores.core: T0 : 0x20bd6 @__sbrk+6    : ld s0, -832(gp)            : MemRead :  D=0x0000000000000000 A=0x7bdb0
+8285373: board.processor.cores.core: T0 : 0x20bda @__sbrk+10    : c_sdsp s1, 8(sp)           : MemWrite :  D=0x000000000001092a A=0x7ffffffffffffd68
+8286039: board.processor.cores.core: T0 : 0x20bdc @__sbrk+12    : c_sdsp ra, 24(sp)          : MemWrite :  D=0x000000000001073a A=0x7ffffffffffffd78
+8286705: board.processor.cores.core: T0 : 0x20bde @__sbrk+14    : c_mv s1, a0                : IntAlu :  D=0x0000000000000f60
+8287038: board.processor.cores.core: T0 : 0x20be0 @__sbrk+16    : c_beqz s0, 8               : IntAlu : 
+8287371: board.processor.cores.core: T0 : 0x20be8 @__sbrk+24    : c_li a0, 0                 : IntAlu :  D=0x0000000000000000
+8288037: board.processor.cores.core: T0 : 0x20bea @__sbrk+26    : jal ra, 114790             : IntAlu :  D=0x0000000000020bee
+8446545: board.processor.cores.core: T0 : 0x3cc50 @brk    : c_mv a5, a0                : IntAlu :  D=0x0000000000000000
+8447877: board.processor.cores.core: T0 : 0x3cc52 @brk+2    : addi a7, zero, 214         : IntAlu :  D=0x00000000000000d6
+8448543: board.processor.cores.core: T0 : 0x3cc56 @brk+6    : ecall                      : No_OpClass : 
+8449209: board.processor.cores.core: T0 : 0x3cc5a @brk+10    : sd a0, -832(gp)            : MemWrite :  D=0x000000000007e000 A=0x7bdb0
+8450208: board.processor.cores.core: T0 : 0x3cc5e @brk+14    : bltu a0, a5, 8             : IntAlu : 
+8450541: board.processor.cores.core: T0 : 0x3cc62 @brk+18    : c_li a0, 0                 : IntAlu :  D=0x0000000000000000
+8450874: board.processor.cores.core: T0 : 0x3cc64 @brk+20    : c_jr ra                    : IntAlu : 
+8451540: board.processor.cores.core: T0 : 0x20bee @__sbrk+30    : blt a0, zero, 30           : IntAlu : 
+8452206: board.processor.cores.core: T0 : 0x20bf2 @__sbrk+34    : ld s0, -832(gp)            : MemRead :  D=0x000000000007e000 A=0x7bdb0
+8452872: board.processor.cores.core: T0 : 0x20bf6 @__sbrk+38    : c_beqz s1, 24              : IntAlu : 
+8453205: board.processor.cores.core: T0 : 0x20bf8 @__sbrk+40    : bge zero, s1, 62           : IntAlu : 
+8453538: board.processor.cores.core: T0 : 0x20bfc @__sbrk+44    : add a5, s1, s0             : IntAlu :  D=0x000000000007ef60
+8612046: board.processor.cores.core: T0 : 0x20c00 @__sbrk+48    : sltu a5, a5, s0            : IntAlu :  D=0x0000000000000000
+8613045: board.processor.cores.core: T0 : 0x20c04 @__sbrk+52    : c_beqz a5, 24              : IntAlu : 
+8613378: board.processor.cores.core: T0 : 0x20c1c @__sbrk+76    : add a0, s0, s1             : IntAlu :  D=0x000000000007ef60
+8613711: board.processor.cores.core: T0 : 0x20c20 @__sbrk+80    : jal ra, 114736             : IntAlu :  D=0x0000000000020c24
+8614044: board.processor.cores.core: T0 : 0x3cc50 @brk    : c_mv a5, a0                : IntAlu :  D=0x000000000007ef60
+8614710: board.processor.cores.core: T0 : 0x3cc52 @brk+2    : addi a7, zero, 214         : IntAlu :  D=0x00000000000000d6
+8615376: board.processor.cores.core: T0 : 0x3cc56 @brk+6    : ecall                      : No_OpClass : 
+8616042: board.processor.cores.core: T0 : 0x3cc5a @brk+10    : sd a0, -832(gp)            : MemWrite :  D=0x000000000007ef60 A=0x7bdb0
+8617041: board.processor.cores.core: T0 : 0x3cc5e @brk+14    : bltu a0, a5, 8             : IntAlu : 
+8617374: board.processor.cores.core: T0 : 0x3cc62 @brk+18    : c_li a0, 0                 : IntAlu :  D=0x0000000000000000
+8617707: board.processor.cores.core: T0 : 0x3cc64 @brk+20    : c_jr ra                    : IntAlu : 
+8618040: board.processor.cores.core: T0 : 0x20c24 @__sbrk+84    : blt a0, zero, -24          : IntAlu : 
+8618373: board.processor.cores.core: T0 : 0x20c28 @__sbrk+88    : c_mv a0, s0                : IntAlu :  D=0x000000000007e000
+8618706: board.processor.cores.core: T0 : 0x20c2a @__sbrk+90    : c_ldsp ra, 24(sp)          : MemRead :  D=0x000000000001073a A=0x7ffffffffffffd78
+8619372: board.processor.cores.core: T0 : 0x20c2c @__sbrk+92    : c_ldsp s0, 16(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd70
+8620038: board.processor.cores.core: T0 : 0x20c2e @__sbrk+94    : c_ldsp s1, 8(sp)           : MemRead :  D=0x000000000001092a A=0x7ffffffffffffd68
+8620704: board.processor.cores.core: T0 : 0x20c30 @__sbrk+96    : c_ldsp s2, 0(sp)           : MemRead :  D=0x0000000000000020 A=0x7ffffffffffffd60
+8621370: board.processor.cores.core: T0 : 0x20c32 @__sbrk+98    : c_addi16sp sp, 32          : IntAlu :  D=0x7ffffffffffffd80
+8621703: board.processor.cores.core: T0 : 0x20c34 @__sbrk+100    : c_jr ra                    : IntAlu : 
+8622369: board.processor.cores.core: T0 : 0x1073a @__libc_setup_tls+124    : divu s5, s5, s7            : IntDiv :  D=0x000000000000000a
+8781210: board.processor.cores.core: T0 : 0x1073e @__libc_setup_tls+128    : add s1, a0, s6             : IntAlu :  D=0x000000000007e010
+8782542: board.processor.cores.core: T0 : 0x10742 @__libc_setup_tls+132    : lui a5, 123                : IntAlu :  D=0x000000000007b000
+8783208: board.processor.cores.core: T0 : 0x10746 @__libc_setup_tls+136    : ld s10, 1000(a5)           : MemRead :  D=0x000000000007af28 A=0x7b3e8
+8942382: board.processor.cores.core: T0 : 0x1074a @__libc_setup_tls+140    : sub a0, zero, s6           : IntAlu :  D=0xfffffffffffffff0
+8943048: board.processor.cores.core: T0 : 0x1074e @__libc_setup_tls+144    : addi s1, s1, 1791          : IntAlu :  D=0x000000000007e70f
+8943381: board.processor.cores.core: T0 : 0x10752 @__libc_setup_tls+148    : c_and s1, a0               : IntAlu :  D=0x000000000007e700
+8943714: board.processor.cores.core: T0 : 0x10754 @__libc_setup_tls+150    : lui a3, 125                : IntAlu :  D=0x000000000007d000
+8944047: board.processor.cores.core: T0 : 0x10758 @__libc_setup_tls+154    : add a4, s1, s0             : IntAlu :  D=0x000000000007e700
+8944380: board.processor.cores.core: T0 : 0x1075c @__libc_setup_tls+158    : addi a5, a3, -1000         : IntAlu :  D=0x000000000007cc18
+8944713: board.processor.cores.core: T0 : 0x10760 @__libc_setup_tls+162    : c_sd a4, 32(a5)            : MemWrite :  D=0x000000000007e700 A=0x7cc38
+9103887: board.processor.cores.core: T0 : 0x10762 @__libc_setup_tls+164    : sd s0, 1072(s10)           : MemWrite :  D=0x0000000000000000 A=0x7b358
+9262728: board.processor.cores.core: T0 : 0x10766 @__libc_setup_tls+168    : c_mv a2, s2                : IntAlu :  D=0x0000000000000020
+9263061: board.processor.cores.core: T0 : 0x10768 @__libc_setup_tls+170    : c_mv a0, a4                : IntAlu :  D=0x000000000007e700
+9263727: board.processor.cores.core: T0 : 0x1076a @__libc_setup_tls+172    : addi a6, zero, 62          : IntAlu :  D=0x000000000000003e
+9264393: board.processor.cores.core: T0 : 0x1076e @__libc_setup_tls+176    : sd zero, 40(a5)            : MemWrite :  D=0x0000000000000000 A=0x7cc40
+9423234: board.processor.cores.core: T0 : 0x10772 @__libc_setup_tls+180    : c_mv a1, s3                : IntAlu :  D=0x0000000000079f50
+9423567: board.processor.cores.core: T0 : 0x10774 @__libc_setup_tls+182    : sd a6, -1000(a3)           : MemWrite :  D=0x000000000000003e A=0x7cc18
+9424233: board.processor.cores.core: T0 : 0x10778 @__libc_setup_tls+186    : jal ra, 61970              : IntAlu :  D=0x000000000001077c
+9583740: board.processor.cores.core: T0 : 0x1f98a @__memcpy    : xor a5, a1, a0             : IntAlu :  D=0x0000000000007850
+9584073: board.processor.cores.core: T0 : 0x1f98e @__memcpy+4    : c_andi a5, 7               : IntAlu :  D=0x0000000000000000
+9584406: board.processor.cores.core: T0 : 0x1f990 @__memcpy+6    : add a7, a0, a2             : IntAlu :  D=0x000000000007e720
+9584739: board.processor.cores.core: T0 : 0x1f994 @__memcpy+10    : c_bnez a5, 72              : IntAlu : 
+9585072: board.processor.cores.core: T0 : 0x1f996 @__memcpy+12    : c_li a5, 7                 : IntAlu :  D=0x0000000000000007
+9585405: board.processor.cores.core: T0 : 0x1f998 @__memcpy+14    : bgeu a5, a2, 68            : IntAlu : 
+9585738: board.processor.cores.core: T0 : 0x1f99c @__memcpy+18    : andi a4, a0, 7             : IntAlu :  D=0x0000000000000000
+9586071: board.processor.cores.core: T0 : 0x1f9a0 @__memcpy+22    : c_mv a5, a0                : IntAlu :  D=0x000000000007e700
+9586404: board.processor.cores.core: T0 : 0x1f9a2 @__memcpy+24    : c_bnez a4, 82              : IntAlu : 
+9586737: board.processor.cores.core: T0 : 0x1f9a4 @__memcpy+26    : andi a6, a7, 18446744073709551608 : IntAlu :  D=0x000000000007e720
+9587070: board.processor.cores.core: T0 : 0x1f9a8 @__memcpy+30    : addi a4, a6, -64           : IntAlu :  D=0x000000000007e6e0
+9587403: board.processor.cores.core: T0 : 0x1f9ac @__memcpy+34    : bltu a5, a4, 110           : IntAlu : 
+9587736: board.processor.cores.core: T0 : 0x1f9b0 @__memcpy+38    : c_mv a3, a1                : IntAlu :  D=0x0000000000079f50
+9588069: board.processor.cores.core: T0 : 0x1f9b2 @__memcpy+40    : c_mv a4, a5                : IntAlu :  D=0x000000000007e700
+9588402: board.processor.cores.core: T0 : 0x1f9b4 @__memcpy+42    : bgeu a5, a6, 34            : IntAlu : 
+9588735: board.processor.cores.core: T0 : 0x1f9b8 @__memcpy+46    : c_ld a2, 0(a3)             : MemRead :  D=0x000000000007b730 A=0x79f50
+9747576: board.processor.cores.core: T0 : 0x1f9ba @__memcpy+48    : c_addi a4, 8               : IntAlu :  D=0x000000000007e708
+9747909: board.processor.cores.core: T0 : 0x1f9bc @__memcpy+50    : c_addi a3, 8               : IntAlu :  D=0x0000000000079f58
+9906750: board.processor.cores.core: T0 : 0x1f9be @__memcpy+52    : sd a2, -8(a4)              : MemWrite :  D=0x000000000007b730 A=0x7e700
+9907416: board.processor.cores.core: T0 : 0x1f9be @__memcpy+52    : sd a2, -8(a4)              : MemWrite :  D=0x000000000007b730 A=0x7e700
+10066590: board.processor.cores.core: T0 : 0x1f9c2 @__memcpy+56    : bltu a4, a6, -10           : IntAlu : 
+10066923: board.processor.cores.core: T0 : 0x1f9b8 @__memcpy+46    : c_ld a2, 0(a3)             : MemRead :  D=0x000000000007b730 A=0x79f58
+10067589: board.processor.cores.core: T0 : 0x1f9ba @__memcpy+48    : c_addi a4, 8               : IntAlu :  D=0x000000000007e710
+10067922: board.processor.cores.core: T0 : 0x1f9bc @__memcpy+50    : c_addi a3, 8               : IntAlu :  D=0x0000000000079f60
+10068588: board.processor.cores.core: T0 : 0x1f9be @__memcpy+52    : sd a2, -8(a4)              : MemWrite :  D=0x000000000007b730 A=0x7e708
+10069587: board.processor.cores.core: T0 : 0x1f9c2 @__memcpy+56    : bltu a4, a6, -10           : IntAlu : 
+10069920: board.processor.cores.core: T0 : 0x1f9b8 @__memcpy+46    : c_ld a2, 0(a3)             : MemRead :  D=0x000000000007b750 A=0x79f60
+10070586: board.processor.cores.core: T0 : 0x1f9ba @__memcpy+48    : c_addi a4, 8               : IntAlu :  D=0x000000000007e718
+10070919: board.processor.cores.core: T0 : 0x1f9bc @__memcpy+50    : c_addi a3, 8               : IntAlu :  D=0x0000000000079f68
+10071585: board.processor.cores.core: T0 : 0x1f9be @__memcpy+52    : sd a2, -8(a4)              : MemWrite :  D=0x000000000007b750 A=0x7e710
+10072584: board.processor.cores.core: T0 : 0x1f9c2 @__memcpy+56    : bltu a4, a6, -10           : IntAlu : 
+10072917: board.processor.cores.core: T0 : 0x1f9b8 @__memcpy+46    : c_ld a2, 0(a3)             : MemRead :  D=0x000000000007b738 A=0x79f68
+10073583: board.processor.cores.core: T0 : 0x1f9ba @__memcpy+48    : c_addi a4, 8               : IntAlu :  D=0x000000000007e720
+10073916: board.processor.cores.core: T0 : 0x1f9bc @__memcpy+50    : c_addi a3, 8               : IntAlu :  D=0x0000000000079f70
+10074582: board.processor.cores.core: T0 : 0x1f9be @__memcpy+52    : sd a2, -8(a4)              : MemWrite :  D=0x000000000007b738 A=0x7e718
+10075581: board.processor.cores.core: T0 : 0x1f9c2 @__memcpy+56    : bltu a4, a6, -10           : IntAlu : 
+10076247: board.processor.cores.core: T0 : 0x1f9c6 @__memcpy+60    : xori a4, a5, 18446744073709551615 : IntAlu :  D=0xfffffffffff818ff
+10076580: board.processor.cores.core: T0 : 0x1f9ca @__memcpy+64    : c_add a6, a4               : IntAlu :  D=0x000000000000001f
+10076913: board.processor.cores.core: T0 : 0x1f9cc @__memcpy+66    : andi a6, a6, 18446744073709551608 : IntAlu :  D=0x0000000000000018
+10077246: board.processor.cores.core: T0 : 0x1f9d0 @__memcpy+70    : c_addi a6, 8               : IntAlu :  D=0x0000000000000020
+10077579: board.processor.cores.core: T0 : 0x1f9d2 @__memcpy+72    : c_add a5, a6               : IntAlu :  D=0x000000000007e720
+10077912: board.processor.cores.core: T0 : 0x1f9d4 @__memcpy+74    : c_add a1, a6               : IntAlu :  D=0x0000000000079f70
+10078578: board.processor.cores.core: T0 : 0x1f9d6 @__memcpy+76    : bltu a5, a7, 12            : IntAlu : 
+10078911: board.processor.cores.core: T0 : 0x1f9da @__memcpy+80    : c_jr ra                    : IntAlu : 
+10079244: board.processor.cores.core: T0 : 0x1077c @__libc_setup_tls+190    : ld a5, -1824(gp)           : MemRead :  D=0x0000000000000800 A=0x7b9d0
+10238085: board.processor.cores.core: T0 : 0x10780 @__libc_setup_tls+194    : lui a4, 125                : IntAlu :  D=0x000000000007d000
+10239084: board.processor.cores.core: T0 : 0x10784 @__libc_setup_tls+198    : addi a4, a4, -984          : IntAlu :  D=0x000000000007cc28
+10239417: board.processor.cores.core: T0 : 0x10788 @__libc_setup_tls+202    : sd a4, -16(s1)             : MemWrite :  D=0x000000000007cc28 A=0x7e6f0
+10398258: board.processor.cores.core: T0 : 0x1078c @__libc_setup_tls+206    : c_addi a5, 15              : IntAlu :  D=0x000000000000080f
+10398924: board.processor.cores.core: T0 : 0x1078e @__libc_setup_tls+208    : addi a4, gp, -584          : IntAlu :  D=0x000000000007bea8
+10399590: board.processor.cores.core: T0 : 0x10792 @__libc_setup_tls+212    : addi a2, zero, 64          : IntAlu :  D=0x0000000000000040
+10399923: board.processor.cores.core: T0 : 0x10796 @__libc_setup_tls+216    : c_li a3, 1                 : IntAlu :  D=0x0000000000000001
+10400256: board.processor.cores.core: T0 : 0x10798 @__libc_setup_tls+218    : c_sd a2, 0(a4)             : MemWrite :  D=0x0000000000000040 A=0x7bea8
+10559430: board.processor.cores.core: T0 : 0x1079a @__libc_setup_tls+220    : lui a2, 125                : IntAlu :  D=0x000000000007d000
+10560096: board.processor.cores.core: T0 : 0x1079e @__libc_setup_tls+224    : sd a3, 1080(s10)           : MemWrite :  D=0x0000000000000001 A=0x7b360
+10561095: board.processor.cores.core: T0 : 0x107a2 @__libc_setup_tls+228    : sd a3, -1008(a2)           : MemWrite :  D=0x0000000000000001 A=0x7cc10
+10562094: board.processor.cores.core: T0 : 0x107a6 @__libc_setup_tls+232    : lui a3, 125                : IntAlu :  D=0x000000000007d000
+10562760: board.processor.cores.core: T0 : 0x107aa @__libc_setup_tls+236    : sd a4, 24(a3)              : MemWrite :  D=0x000000000007bea8 A=0x7d018
+10721934: board.processor.cores.core: T0 : 0x107ae @__libc_setup_tls+240    : sd s10, 40(a4)             : MemWrite :  D=0x000000000007af28 A=0x7bed0
+10881108: board.processor.cores.core: T0 : 0x107b2 @__libc_setup_tls+244    : sd s4, 1056(s10)           : MemWrite :  D=0x0000000000000008 A=0x7b348
+10882107: board.processor.cores.core: T0 : 0x107b6 @__libc_setup_tls+248    : sd s9, 1048(s10)           : MemWrite :  D=0x0000000000000050 A=0x7b340
+10883106: board.processor.cores.core: T0 : 0x107ba @__libc_setup_tls+252    : sd s3, 1032(s10)           : MemWrite :  D=0x0000000000079f50 A=0x7b330
+11200455: board.processor.cores.core: T0 : 0x107be @__libc_setup_tls+256    : sd s2, 1040(s10)           : MemWrite :  D=0x0000000000000020 A=0x7b338
+11201121: board.processor.cores.core: T0 : 0x107c2 @__libc_setup_tls+260    : c_li a4, 16                : IntAlu :  D=0x0000000000000010
+11201454: board.processor.cores.core: T0 : 0x107c4 @__libc_setup_tls+262    : c_mv tp, s1                : IntAlu :  D=0x000000000007e700
+11202120: board.processor.cores.core: T0 : 0x107c6 @__libc_setup_tls+264    : mul s7, s5, s7             : IntMult :  D=0x0000000000000050
+11202453: board.processor.cores.core: T0 : 0x107ca @__libc_setup_tls+268    : c_add s0, s7               : IntAlu :  D=0x0000000000000050
+11202786: board.processor.cores.core: T0 : 0x107cc @__libc_setup_tls+270    : c_add a5, s0               : IntAlu :  D=0x000000000000085f
+11203119: board.processor.cores.core: T0 : 0x107ce @__libc_setup_tls+272    : c_andi a5, 18446744073709551600 : IntAlu :  D=0x0000000000000850
+11203452: board.processor.cores.core: T0 : 0x107d0 @__libc_setup_tls+274    : sd a5, -1824(gp)           : MemWrite :  D=0x0000000000000850 A=0x7b9d0
+11204118: board.processor.cores.core: T0 : 0x107d4 @__libc_setup_tls+278    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+11204451: board.processor.cores.core: T0 : 0x107d8 @__libc_setup_tls+282    : sd s0, -1024(a5)           : MemWrite :  D=0x0000000000000050 A=0x7cc00
+11205117: board.processor.cores.core: T0 : 0x107dc @__libc_setup_tls+286    : bgeu s6, a4, 6             : IntAlu : 
+11205783: board.processor.cores.core: T0 : 0x107e2 @__libc_setup_tls+292    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+11206116: board.processor.cores.core: T0 : 0x107e6 @__libc_setup_tls+296    : c_ldsp ra, 88(sp)          : MemRead :  D=0x000000000001041e A=0x7ffffffffffffdd8
+11206782: board.processor.cores.core: T0 : 0x107e8 @__libc_setup_tls+298    : c_ldsp s0, 80(sp)          : MemRead :  D=0x000000000001089a A=0x7ffffffffffffdd0
+11207781: board.processor.cores.core: T0 : 0x107ea @__libc_setup_tls+300    : sd s6, -1016(a5)           : MemWrite :  D=0x0000000000000010 A=0x7cc08
+11208447: board.processor.cores.core: T0 : 0x107ee @__libc_setup_tls+304    : c_li a4, 1                 : IntAlu :  D=0x0000000000000001
+11208780: board.processor.cores.core: T0 : 0x107f0 @__libc_setup_tls+306    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+11209113: board.processor.cores.core: T0 : 0x107f4 @__libc_setup_tls+310    : sd a4, 48(a5)              : MemWrite :  D=0x0000000000000001 A=0x7d030
+11209779: board.processor.cores.core: T0 : 0x107f8 @__libc_setup_tls+314    : c_ldsp s1, 72(sp)          : MemRead :  D=0x000000000001092a A=0x7ffffffffffffdc8
+11210445: board.processor.cores.core: T0 : 0x107fa @__libc_setup_tls+316    : c_ldsp s2, 64(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdc0
+11211111: board.processor.cores.core: T0 : 0x107fc @__libc_setup_tls+318    : c_ldsp s3, 56(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdb8
+11211777: board.processor.cores.core: T0 : 0x107fe @__libc_setup_tls+320    : c_ldsp s4, 48(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffdb0
+11212443: board.processor.cores.core: T0 : 0x10800 @__libc_setup_tls+322    : c_ldsp s5, 40(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffda8
+11213109: board.processor.cores.core: T0 : 0x10802 @__libc_setup_tls+324    : c_ldsp s6, 32(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffda0
+11213775: board.processor.cores.core: T0 : 0x10804 @__libc_setup_tls+326    : c_ldsp s7, 24(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd98
+11214441: board.processor.cores.core: T0 : 0x10806 @__libc_setup_tls+328    : c_ldsp s8, 16(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd90
+11215107: board.processor.cores.core: T0 : 0x10808 @__libc_setup_tls+330    : c_ldsp s9, 8(sp)           : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd88
+11215773: board.processor.cores.core: T0 : 0x1080a @__libc_setup_tls+332    : c_ldsp s10, 0(sp)          : MemRead :  D=0x0000000000000000 A=0x7ffffffffffffd80
+11216439: board.processor.cores.core: T0 : 0x1080c @__libc_setup_tls+334    : c_addi16sp sp, 96          : IntAlu :  D=0x7ffffffffffffde0
+11216772: board.processor.cores.core: T0 : 0x1080e @__libc_setup_tls+336    : c_jr ra                    : IntAlu : 
+11217438: board.processor.cores.core: T0 : 0x1041e @__libc_start_main+108    : lui a5, 122                : IntAlu :  D=0x000000000007a000
+11218104: board.processor.cores.core: T0 : 0x10422 @__libc_start_main+112    : ld a5, -96(a5)             : MemRead :  D=0x7fffffffffffffc0 A=0x79fa0
+11219103: board.processor.cores.core: T0 : 0x10426 @__libc_start_main+116    : lui t3, 122                : IntAlu :  D=0x000000000007a000
+11219769: board.processor.cores.core: T0 : 0x1042a @__libc_start_main+120    : addi t3, t3, -112          : IntAlu :  D=0x0000000000079f90
+11220435: board.processor.cores.core: T0 : 0x1042e @__libc_start_main+124    : lbu a4, 1(a5)              : MemRead :  D=0x0000000000000000 A=0x7fffffffffffffc1
+11379609: board.processor.cores.core: T0 : 0x10432 @__libc_start_main+128    : lbu a0, 0(a5)              : MemRead :  D=0x0000000000000000 A=0x7fffffffffffffc0
+11380608: board.processor.cores.core: T0 : 0x10436 @__libc_start_main+132    : lbu t6, 2(a5)              : MemRead :  D=0x0000000000000074 A=0x7fffffffffffffc2
+11381607: board.processor.cores.core: T0 : 0x1043a @__libc_start_main+136    : lbu a2, 9(a5)              : MemRead :  D=0x0000000000000065 A=0x7fffffffffffffc9
+11540781: board.processor.cores.core: T0 : 0x1043e @__libc_start_main+140    : lbu t5, 3(a5)              : MemRead :  D=0x0000000000000065 A=0x7fffffffffffffc3
+11541780: board.processor.cores.core: T0 : 0x10442 @__libc_start_main+144    : lbu a1, 8(a5)              : MemRead :  D=0x0000000000000074 A=0x7fffffffffffffc8
+11542779: board.processor.cores.core: T0 : 0x10446 @__libc_start_main+148    : lbu a3, 10(a5)             : MemRead :  D=0x0000000000000073 A=0x7fffffffffffffca
+11543778: board.processor.cores.core: T0 : 0x1044a @__libc_start_main+152    : lbu t4, 4(a5)              : MemRead :  D=0x0000000000000073 A=0x7fffffffffffffc4
+11544777: board.processor.cores.core: T0 : 0x1044e @__libc_start_main+156    : lbu t1, 11(a5)             : MemRead :  D=0x0000000000000074 A=0x7fffffffffffffcb
+11545443: board.processor.cores.core: T0 : 0x10452 @__libc_start_main+160    : c_slli a4, 8               : IntAlu :  D=0x0000000000000000
+11545776: board.processor.cores.core: T0 : 0x10454 @__libc_start_main+162    : lbu a7, 5(a5)              : MemRead :  D=0x0000000000000074 A=0x7fffffffffffffc5
+11546442: board.processor.cores.core: T0 : 0x10458 @__libc_start_main+166    : c_or a4, a0                : IntAlu :  D=0x0000000000000000
+11547108: board.processor.cores.core: T0 : 0x1045a @__libc_start_main+168    : lbu a6, 12(a5)             : MemRead :  D=0x000000000000002d A=0x7fffffffffffffcc
+11547774: board.processor.cores.core: T0 : 0x1045e @__libc_start_main+172    : c_slli t6, 16              : IntAlu :  D=0x0000000000740000
+11548107: board.processor.cores.core: T0 : 0x10460 @__libc_start_main+174    : c_slli a2, 8               : IntAlu :  D=0x0000000000006500
+11548773: board.processor.cores.core: T0 : 0x10462 @__libc_start_main+176    : lbu a0, 6(a5)              : MemRead :  D=0x0000000000000073 A=0x7fffffffffffffc6
+11549439: board.processor.cores.core: T0 : 0x10466 @__libc_start_main+180    : c_or a2, a1                : IntAlu :  D=0x0000000000006574
+11549772: board.processor.cores.core: T0 : 0x10468 @__libc_start_main+182    : or t6, t6, a4              : IntAlu :  D=0x0000000000740000
+11550105: board.processor.cores.core: T0 : 0x1046c @__libc_start_main+186    : lbu a1, 13(a5)             : MemRead :  D=0x0000000000000070 A=0x7fffffffffffffcd
+11550771: board.processor.cores.core: T0 : 0x10470 @__libc_start_main+190    : c_slli t5, 24              : IntAlu :  D=0x0000000065000000
+11551104: board.processor.cores.core: T0 : 0x10472 @__libc_start_main+192    : c_slli a3, 16              : IntAlu :  D=0x0000000000730000
+11551437: board.processor.cores.core: T0 : 0x10474 @__libc_start_main+194    : lbu a4, 7(a5)              : MemRead :  D=0x000000000000002f A=0x7fffffffffffffc7
+11552103: board.processor.cores.core: T0 : 0x10478 @__libc_start_main+198    : c_or a3, a2                : IntAlu :  D=0x0000000000736574
+11552769: board.processor.cores.core: T0 : 0x1047a @__libc_start_main+200    : or t5, t5, t6              : IntAlu :  D=0x0000000065740000
+11711610: board.processor.cores.core: T0 : 0x1047e @__libc_start_main+204    : lbu a2, 14(a5)             : MemRead :  D=0x0000000000000072 A=0x7fffffffffffffce
+11712276: board.processor.cores.core: T0 : 0x10482 @__libc_start_main+208    : c_slli t4, 32              : IntAlu :  D=0x0000007300000000
+11712609: board.processor.cores.core: T0 : 0x10484 @__libc_start_main+210    : c_slli t1, 24              : IntAlu :  D=0x0000000074000000
+11713275: board.processor.cores.core: T0 : 0x10486 @__libc_start_main+212    : or t1, t1, a3              : IntAlu :  D=0x0000000074736574
+11713941: board.processor.cores.core: T0 : 0x1048a @__libc_start_main+216    : or t4, t4, t5              : IntAlu :  D=0x0000007365740000
+11714607: board.processor.cores.core: T0 : 0x1048e @__libc_start_main+220    : lbu a3, 15(a5)             : MemRead :  D=0x000000000000006f A=0x7fffffffffffffcf
+11715273: board.processor.cores.core: T0 : 0x10492 @__libc_start_main+224    : c_slli a7, 40              : IntAlu :  D=0x0000740000000000
+11715606: board.processor.cores.core: T0 : 0x10494 @__libc_start_main+226    : c_slli a6, 32              : IntAlu :  D=0x0000002d00000000
+11716272: board.processor.cores.core: T0 : 0x10496 @__libc_start_main+228    : slli a5, a0, 48            : IntAlu :  D=0x0073000000000000
+11716938: board.processor.cores.core: T0 : 0x1049a @__libc_start_main+232    : or a7, a7, t4              : IntAlu :  D=0x0000747365740000
+11717604: board.processor.cores.core: T0 : 0x1049e @__libc_start_main+236    : or a6, a6, t1              : IntAlu :  D=0x0000002d74736574
+11717937: board.processor.cores.core: T0 : 0x104a2 @__libc_start_main+240    : c_slli a1, 40              : IntAlu :  D=0x0000700000000000
+11718270: board.processor.cores.core: T0 : 0x104a4 @__libc_start_main+242    : or a0, a5, a7              : IntAlu :  D=0x0073747365740000
+11718603: board.processor.cores.core: T0 : 0x104a8 @__libc_start_main+246    : or a1, a1, a6              : IntAlu :  D=0x0000702d74736574
+11718936: board.processor.cores.core: T0 : 0x104ac @__libc_start_main+250    : slli a5, a4, 56            : IntAlu :  D=0x2f00000000000000
+11719269: board.processor.cores.core: T0 : 0x104b0 @__libc_start_main+254    : slli a4, a2, 48            : IntAlu :  D=0x0072000000000000
+11719602: board.processor.cores.core: T0 : 0x104b4 @__libc_start_main+258    : or a2, a4, a1              : IntAlu :  D=0x0072702d74736574
+11719935: board.processor.cores.core: T0 : 0x104b8 @__libc_start_main+262    : c_or a5, a0                : IntAlu :  D=0x2f73747365740000
+11720601: board.processor.cores.core: T0 : 0x104ba @__libc_start_main+264    : slli a4, a3, 56            : IntAlu :  D=0x6f00000000000000
+11879442: board.processor.cores.core: T0 : 0x104be @__libc_start_main+268    : andi a5, a5, 18446744073709551360 : IntAlu :  D=0x2f73747365740000
+11880441: board.processor.cores.core: T0 : 0x104c2 @__libc_start_main+272    : c_or a4, a2                : IntAlu :  D=0x6f72702d74736574
+11880774: board.processor.cores.core: T0 : 0x104c4 @__libc_start_main+274    : sd a5, 0(t3)               : MemWrite :  D=0x2f73747365740000 A=0x79f90
+11881440: board.processor.cores.core: T0 : 0x104c8 @__libc_start_main+278    : sd a4, 8(t3)               : MemWrite :  D=0x6f72702d74736574 A=0x79f98
+11882106: board.processor.cores.core: T0 : 0x104cc @__libc_start_main+282    : beq s2, zero, 14           : IntAlu : 
+11882772: board.processor.cores.core: T0 : 0x104da @__libc_start_main+296    : ld a2, -1192(gp)           : MemRead :  D=0x7fffffffffffff38 A=0x7bc48
+11883438: board.processor.cores.core: T0 : 0x104de @__libc_start_main+300    : c_ldsp a1, 16(sp)          : MemRead :  D=0x7fffffffffffff28 A=0x7ffffffffffffdf0
+11884104: board.processor.cores.core: T0 : 0x104e0 @__libc_start_main+302    : c_ldsp a0, 8(sp)           : MemRead :  D=0x0000000000000001 A=0x7ffffffffffffde8
+11885103: board.processor.cores.core: T0 : 0x104e2 @__libc_start_main+304    : jal ra, 74588              : IntAlu :  D=0x00000000000104e6
+12043611: board.processor.cores.core: T0 : 0x2283e @__libc_init_first    : c_addi sp, -32             : IntAlu :  D=0x7ffffffffffffdc0
+12202119: board.processor.cores.core: T0 : 0x22840 @__libc_init_first+2    : lui a5, 0                  : IntAlu :  D=0x0000000000000000
+12203118: board.processor.cores.core: T0 : 0x22844 @__libc_init_first+6    : c_sdsp s0, 16(sp)          : MemWrite :  D=0x000000000001089a A=0x7ffffffffffffdd0
+12203784: board.processor.cores.core: T0 : 0x22846 @__libc_init_first+8    : c_sdsp s1, 8(sp)           : MemWrite :  D=0x000000000001092a A=0x7ffffffffffffdc8
+12204450: board.processor.cores.core: T0 : 0x22848 @__libc_init_first+10    : c_sdsp s2, 0(sp)           : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffdc0
+12205116: board.processor.cores.core: T0 : 0x2284a @__libc_init_first+12    : c_sdsp ra, 24(sp)          : MemWrite :  D=0x00000000000104e6 A=0x7ffffffffffffdd8
+12205782: board.processor.cores.core: T0 : 0x2284c @__libc_init_first+14    : addi a4, a5, 0             : IntAlu :  D=0x0000000000000000
+12206115: board.processor.cores.core: T0 : 0x22850 @__libc_init_first+18    : c_mv s0, a0                : IntAlu :  D=0x0000000000000001
+12206448: board.processor.cores.core: T0 : 0x22852 @__libc_init_first+20    : c_mv s1, a1                : IntAlu :  D=0x7fffffffffffff28
+12206781: board.processor.cores.core: T0 : 0x22854 @__libc_init_first+22    : c_mv s2, a2                : IntAlu :  D=0x7fffffffffffff38
+12207114: board.processor.cores.core: T0 : 0x22856 @__libc_init_first+24    : c_beqz a4, 66              : IntAlu : 
+12365622: board.processor.cores.core: T0 : 0x22898 @__libc_init_first+90    : lw a0, -1056(gp)           : MemRead :  D=0x0000000000000000 A=0x7bcd0
+12524463: board.processor.cores.core: T0 : 0x2289c @__libc_init_first+94    : lw a5, -1168(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc60
+12525129: board.processor.cores.core: T0 : 0x228a0 @__libc_init_first+98    : sw zero, -1576(gp)         : MemWrite :  D=0x0000000000000000 A=0x7bac8
+12525795: board.processor.cores.core: T0 : 0x228a4 @__libc_init_first+102    : beq a5, a0, -64            : IntAlu : 
+12526128: board.processor.cores.core: T0 : 0x22864 @__libc_init_first+38    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+12526461: board.processor.cores.core: T0 : 0x22868 @__libc_init_first+42    : sw s0, 320(a5)             : MemWrite :  D=0x0000000000000001 A=0x7d140
+12685302: board.processor.cores.core: T0 : 0x2286c @__libc_init_first+46    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+12685635: board.processor.cores.core: T0 : 0x22870 @__libc_init_first+50    : sd s1, 328(a5)             : MemWrite :  D=0x7fffffffffffff28 A=0x7d148
+12686301: board.processor.cores.core: T0 : 0x22874 @__libc_init_first+54    : sd s2, -1192(gp)           : MemWrite :  D=0x7fffffffffffff38 A=0x7bc48
+12686967: board.processor.cores.core: T0 : 0x22878 @__libc_init_first+58    : jal ra, -378               : IntAlu :  D=0x000000000002287c
+13003983: board.processor.cores.core: T0 : 0x226fe @__libc_init_secure    : lui a5, 125                : IntAlu :  D=0x000000000007d000
+13005315: board.processor.cores.core: T0 : 0x22702 @__libc_init_secure+4    : lw a5, 312(a5)             : MemRead :  D=0x0000000000000001 A=0x7d138
+13005981: board.processor.cores.core: T0 : 0x22706 @__libc_init_secure+8    : c_beqz a5, 4               : IntAlu : 
+13006314: board.processor.cores.core: T0 : 0x22708 @__libc_init_secure+10    : c_jr ra                    : IntAlu : 
+13006647: board.processor.cores.core: T0 : 0x2287c @__libc_init_first+62    : jal ra, -2312              : IntAlu :  D=0x0000000000022880
+13006980: board.processor.cores.core: T0 : 0x21f74 @_dl_non_dynamic_init    : c_addi16sp sp, -96         : IntAlu :  D=0x7ffffffffffffd60
+13007313: board.processor.cores.core: T0 : 0x21f76 @_dl_non_dynamic_init+2    : c_sdsp s1, 72(sp)          : MemWrite :  D=0x7fffffffffffff28 A=0x7ffffffffffffda8
+13007979: board.processor.cores.core: T0 : 0x21f78 @_dl_non_dynamic_init+4    : c_sdsp s2, 64(sp)          : MemWrite :  D=0x7fffffffffffff38 A=0x7ffffffffffffda0
+13008645: board.processor.cores.core: T0 : 0x21f7a @_dl_non_dynamic_init+6    : c_sdsp ra, 88(sp)          : MemWrite :  D=0x0000000000022880 A=0x7ffffffffffffdb8
+13009311: board.processor.cores.core: T0 : 0x21f7c @_dl_non_dynamic_init+8    : c_sdsp s0, 80(sp)          : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffdb0
+13009977: board.processor.cores.core: T0 : 0x21f7e @_dl_non_dynamic_init+10    : c_sdsp s3, 56(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd98
+13168818: board.processor.cores.core: T0 : 0x21f80 @_dl_non_dynamic_init+12    : c_sdsp s4, 48(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd90
+13169484: board.processor.cores.core: T0 : 0x21f82 @_dl_non_dynamic_init+14    : c_sdsp s5, 40(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd88
+13170150: board.processor.cores.core: T0 : 0x21f84 @_dl_non_dynamic_init+16    : c_sdsp s6, 32(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd80
+13170816: board.processor.cores.core: T0 : 0x21f86 @_dl_non_dynamic_init+18    : c_sdsp s7, 24(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd78
+13171482: board.processor.cores.core: T0 : 0x21f88 @_dl_non_dynamic_init+20    : c_sdsp s8, 16(sp)          : MemWrite :  D=0x0000000000000000 A=0x7ffffffffffffd70
+13172481: board.processor.cores.core: T0 : 0x21f8a @_dl_non_dynamic_init+22    : jal ra, 132300             : IntAlu :  D=0x0000000000021f8e
+13330989: board.processor.cores.core: T0 : 0x42456 @_dl_get_origin    : c_lui t1, 1048575          : IntAlu :  D=0xfffffffffffff000
+13331988: board.processor.cores.core: T0 : 0x42458 @_dl_get_origin+2    : addi sp, sp, -2032         : IntAlu :  D=0x7ffffffffffff570
+13332321: board.processor.cores.core: T0 : 0x4245c @_dl_get_origin+6    : addi t1, t1, 2000          : IntAlu :  D=0xfffffffffffff7d0
+13332654: board.processor.cores.core: T0 : 0x42460 @_dl_get_origin+10    : sd ra, 2024(sp)            : MemWrite :  D=0x0000000000021f8e A=0x7ffffffffffffd58
+13333320: board.processor.cores.core: T0 : 0x42464 @_dl_get_origin+14    : sd s0, 2016(sp)            : MemWrite :  D=0x0000000000000001 A=0x7ffffffffffffd50
+13333986: board.processor.cores.core: T0 : 0x42468 @_dl_get_origin+18    : sd s1, 2008(sp)            : MemWrite :  D=0x7fffffffffffff28 A=0x7ffffffffffffd48
+13334652: board.processor.cores.core: T0 : 0x4246c @_dl_get_origin+22    : sd s2, 2000(sp)            : MemWrite :  D=0x7fffffffffffff38 A=0x7ffffffffffffd40
+13335318: board.processor.cores.core: T0 : 0x42470 @_dl_get_origin+26    : c_lui a4, 1                : IntAlu :  D=0x0000000000001000
+13335651: board.processor.cores.core: T0 : 0x42472 @_dl_get_origin+28    : c_add sp, t1               : IntAlu :  D=0x7fffffffffffed40
+13335984: board.processor.cores.core: T0 : 0x42474 @_dl_get_origin+30    : c_lui a5, 1048575          : IntAlu :  D=0xfffffffffffff000
+13336317: board.processor.cores.core: T0 : 0x42476 @_dl_get_origin+32    : c_add a4, sp               : IntAlu :  D=0x7ffffffffffffd40
+13336650: board.processor.cores.core: T0 : 0x42478 @_dl_get_origin+34    : lui a1, 108                : IntAlu :  D=0x000000000006c000
+13336983: board.processor.cores.core: T0 : 0x4247c @_dl_get_origin+38    : addi a7, zero, 78          : IntAlu :  D=0x000000000000004e
+13495491: board.processor.cores.core: T0 : 0x42480 @_dl_get_origin+42    : addi a0, zero, -100        : IntAlu :  D=0xffffffffffffff9c
+13496490: board.processor.cores.core: T0 : 0x42484 @_dl_get_origin+46    : addi a1, a1, 1584          : IntAlu :  D=0x000000000006c630
+13496823: board.processor.cores.core: T0 : 0x42488 @_dl_get_origin+50    : add a2, a4, a5             : IntAlu :  D=0x7fffffffffffed40
+13497156: board.processor.cores.core: T0 : 0x4248c @_dl_get_origin+54    : c_lui a3, 1                : IntAlu :  D=0x0000000000001000
+13497822: board.processor.cores.core: T0 : 0x4248e @_dl_get_origin+56    : ecall                      : No_OpClass : 
+13498155: board.processor.cores.core: T0 : 0x42492 @_dl_get_origin+60    : c_addiw a0, 0              : IntAlu :  D=0x0000000000000045
+13498488: board.processor.cores.core: T0 : 0x42494 @_dl_get_origin+62    : bltu a5, a0, 82            : IntAlu : 
+13498821: board.processor.cores.core: T0 : 0x42498 @_dl_get_origin+66    : bge zero, a0, 78           : IntAlu : 
+13499154: board.processor.cores.core: T0 : 0x4249c @_dl_get_origin+70    : lbu a5, 0(a2)              : MemRead :  D=0x000000000000002f A=0x7fffffffffffed40
+13657995: board.processor.cores.core: T0 : 0x424a0 @_dl_get_origin+74    : addi a4, zero, 91          : IntAlu :  D=0x000000000000005b
+13658328: board.processor.cores.core: T0 : 0x424a4 @_dl_get_origin+78    : beq a5, a4, 66             : IntAlu : 
+13658661: board.processor.cores.core: T0 : 0x424a8 @_dl_get_origin+82    : addi a4, zero, 47          : IntAlu :  D=0x000000000000002f
+13658994: board.processor.cores.core: T0 : 0x424ac @_dl_get_origin+86    : bne a5, a4, 236            : IntAlu : 
+13659327: board.processor.cores.core: T0 : 0x424b0 @_dl_get_origin+90    : c_li a4, 1                 : IntAlu :  D=0x0000000000000001
+13659993: board.processor.cores.core: T0 : 0x424b2 @_dl_get_origin+92    : beq a0, a4, 172            : IntAlu : 
+13660659: board.processor.cores.core: T0 : 0x424b6 @_dl_get_origin+96    : addiw s0, a0, -1           : IntAlu :  D=0x0000000000000044
+13661325: board.processor.cores.core: T0 : 0x424ba @_dl_get_origin+100    : add a4, a2, s0             : IntAlu :  D=0x7fffffffffffed84
+13820166: board.processor.cores.core: T0 : 0x424be @_dl_get_origin+104    : lbu a4, 0(a4)              : MemRead :  D=0x000000000000006f A=0x7fffffffffffed84
+13979340: board.processor.cores.core: T0 : 0x424c2 @_dl_get_origin+108    : beq a4, a5, 176            : IntAlu : 
+13979673: board.processor.cores.core: T0 : 0x424c6 @_dl_get_origin+112    : c_addiw a0, -2             : IntAlu :  D=0x0000000000000043
+13980006: board.processor.cores.core: T0 : 0x424c8 @_dl_get_origin+114    : c_add a2, a0               : IntAlu :  D=0x7fffffffffffed83
+13980339: board.processor.cores.core: T0 : 0x424ca @_dl_get_origin+116    : c_li a3, 1                 : IntAlu :  D=0x0000000000000001
+13980672: board.processor.cores.core: T0 : 0x424cc @_dl_get_origin+118    : addi a1, zero, 47          : IntAlu :  D=0x000000000000002f
+13981005: board.processor.cores.core: T0 : 0x424d0 @_dl_get_origin+122    : beq s0, a3, 142            : IntAlu : 
+13981338: board.processor.cores.core: T0 : 0x424d4 @_dl_get_origin+126    : c_addi a2, -1              : IntAlu :  D=0x7fffffffffffed82
+13982004: board.processor.cores.core: T0 : 0x424d6 @_dl_get_origin+128    : lbu a5, 1(a2)              : MemRead :  D=0x000000000000006c A=0x7fffffffffffed83
+13983003: board.processor.cores.core: T0 : 0x424da @_dl_get_origin+132    : addiw a4, s0, -1           : IntAlu :  D=0x0000000000000043
+13983669: board.processor.cores.core: T0 : 0x424de @_dl_get_origin+136    : beq a5, a1, 150            : IntAlu : 
+13984002: board.processor.cores.core: T0 : 0x424e2 @_dl_get_origin+140    : c_mv s0, a4                : IntAlu :  D=0x0000000000000043
+13984335: board.processor.cores.core: T0 : 0x424e4 @_dl_get_origin+142    : c_j -20                    : IntAlu : 
+13984668: board.processor.cores.core: T0 : 0x424d0 @_dl_get_origin+122    : beq s0, a3, 142            : IntAlu : 
+13985001: board.processor.cores.core: T0 : 0x424d4 @_dl_get_origin+126    : c_addi a2, -1              : IntAlu :  D=0x7fffffffffffed81
+13985667: board.processor.cores.core: T0 : 0x424d6 @_dl_get_origin+128    : lbu a5, 1(a2)              : MemRead :  D=0x000000000000006c A=0x7fffffffffffed82
+13986666: board.processor.cores.core: T0 : 0x424da @_dl_get_origin+132    : addiw a4, s0, -1           : IntAlu :  D=0x0000000000000042
+13987332: board.processor.cores.core: T0 : 0x424de @_dl_get_origin+136    : beq a5, a1, 150            : IntAlu : 
+13987665: board.processor.cores.core: T0 : 0x424e2 @_dl_get_origin+140    : c_mv s0, a4                : IntAlu :  D=0x0000000000000042
+13987998: board.processor.cores.core: T0 : 0x424e4 @_dl_get_origin+142    : c_j -20                    : IntAlu : 
+13988331: board.processor.cores.core: T0 : 0x424d0 @_dl_get_origin+122    : beq s0, a3, 142            : IntAlu : 
+13988664: board.processor.cores.core: T0 : 0x424d4 @_dl_get_origin+126    : c_addi a2, -1              : IntAlu :  D=0x7fffffffffffed80
+13989330: board.processor.cores.core: T0 : 0x424d6 @_dl_get_origin+128    : lbu a5, 1(a2)              : MemRead :  D=0x0000000000000065 A=0x7fffffffffffed81
+13990329: board.processor.cores.core: T0 : 0x424da @_dl_get_origin+132    : addiw a4, s0, -1           : IntAlu :  D=0x0000000000000041
+13990995: board.processor.cores.core: T0 : 0x424de @_dl_get_origin+136    : beq a5, a1, 150            : IntAlu : 
+13991328: board.processor.cores.core: T0 : 0x424e2 @_dl_get_origin+140    : c_mv s0, a4                : IntAlu :  D=0x0000000000000041
+13991661: board.processor.cores.core: T0 : 0x424e4 @_dl_get_origin+142    : c_j -20                    : IntAlu : 
+13991994: board.processor.cores.core: T0 : 0x424d0 @_dl_get_origin+122    : beq s0, a3, 142            : IntAlu : 
+13992327: board.processor.cores.core: T0 : 0x424d4 @_dl_get_origin+126    : c_addi a2, -1              : IntAlu :  D=0x7fffffffffffed7f
+13992993: board.processor.cores.core: T0 : 0x424d6 @_dl_get_origin+128    : lbu a5, 1(a2)              : MemRead :  D=0x0000000000000068 A=0x7fffffffffffed80
+13993992: board.processor.cores.core: T0 : 0x424da @_dl_get_origin+132    : addiw a4, s0, -1           : IntAlu :  D=0x0000000000000040
+13994658: board.processor.cores.core: T0 : 0x424de @_dl_get_origin+136    : beq a5, a1, 150            : IntAlu : 
+13994991: board.processor.cores.core: T0 : 0x424e2 @_dl_get_origin+140    : c_mv s0, a4                : IntAlu :  D=0x0000000000000040
+13995324: board.processor.cores.core: T0 : 0x424e4 @_dl_get_origin+142    : c_j -20                    : IntAlu : 
+13995657: board.processor.cores.core: T0 : 0x424d0 @_dl_get_origin+122    : beq s0, a3, 142            : IntAlu : 
+13995990: board.processor.cores.core: T0 : 0x424d4 @_dl_get_origin+126    : c_addi a2, -1              : IntAlu :  D=0x7fffffffffffed7e
+13996656: board.processor.cores.core: T0 : 0x424d6 @_dl_get_origin+128    : lbu a5, 1(a2)              : MemRead :  D=0x000000000000002f A=0x7fffffffffffed7f
+13997655: board.processor.cores.core: T0 : 0x424da @_dl_get_origin+132    : addiw a4, s0, -1           : IntAlu :  D=0x000000000000003f
+13998321: board.processor.cores.core: T0 : 0x424de @_dl_get_origin+136    : beq a5, a1, 150            : IntAlu : 
+14156829: board.processor.cores.core: T0 : 0x42574 @_dl_get_origin+286    : addiw a0, s0, 1            : IntAlu :  D=0x0000000000000041
+14157828: board.processor.cores.core: T0 : 0x42578 @_dl_get_origin+290    : jal ra, -151518            : IntAlu :  D=0x000000000004257c
+14317335: board.processor.cores.core: T0 : 0x1d59a @__libc_malloc    : ld t1, -1696(gp)           : MemRead :  D=0x000000000001e1d8 A=0x7ba50
+14476509: board.processor.cores.core: T0 : 0x1d59e @__libc_malloc+4    : bne t1, zero, 218          : IntAlu : 
+14635017: board.processor.cores.core: T0 : 0x1d678 @__libc_malloc+222    : c_mv a1, ra                : IntAlu :  D=0x000000000004257c
+14636016: board.processor.cores.core: T0 : 0x1d67a @__libc_malloc+224    : c_jr t1                    : IntAlu : 
+14794524: board.processor.cores.core: T0 : 0x1e1d8 @malloc_hook_ini    : lw a5, -1732(gp)           : MemRead :  D=0xffffffffffffffff A=0x7ba2c
+14953365: board.processor.cores.core: T0 : 0x1e1dc @malloc_hook_ini+4    : sd zero, -1696(gp)         : MemWrite :  D=0x0000000000000000 A=0x7ba50
+14954031: board.processor.cores.core: T0 : 0x1e1e0 @malloc_hook_ini+8    : blt a5, zero, 8            : IntAlu : 
+14954364: board.processor.cores.core: T0 : 0x1e1e8 @malloc_hook_ini+16    : c_addi sp, -32             : IntAlu :  D=0x7fffffffffffed20
+14954697: board.processor.cores.core: T0 : 0x1e1ea @malloc_hook_ini+18    : c_sdsp ra, 24(sp)          : MemWrite :  D=0x000000000004257c A=0x7fffffffffffed38
+15113538: board.processor.cores.core: T0 : 0x1e1ec @malloc_hook_ini+20    : c_sdsp a0, 8(sp)           : MemWrite :  D=0x0000000000000041 A=0x7fffffffffffed28
+15114537: board.processor.cores.core: T0 : 0x1e1ee @malloc_hook_ini+22    : jal ra, -730               : IntAlu :  D=0x000000000001e1f2
+15273045: board.processor.cores.core: T0 : 0x1df14 @ptmalloc_init.part.11    : c_addi16sp sp, -112        : IntAlu :  D=0x7fffffffffffecb0
+15274044: board.processor.cores.core: T0 : 0x1df16 @ptmalloc_init.part.11+2    : c_sdsp s1, 88(sp)          : MemWrite :  D=0x7fffffffffffff28 A=0x7fffffffffffed08
+15274710: board.processor.cores.core: T0 : 0x1df18 @ptmalloc_init.part.11+4    : lui a4, 122                : IntAlu :  D=0x000000000007a000
+15275043: board.processor.cores.core: T0 : 0x1df1c @ptmalloc_init.part.11+8    : ld s1, -1192(gp)           : MemRead :  D=0x7fffffffffffff38 A=0x7bc48
+15275709: board.processor.cores.core: T0 : 0x1df20 @ptmalloc_init.part.11+12    : c_sdsp s2, 80(sp)          : MemWrite :  D=0x7fffffffffffff38 A=0x7fffffffffffed00
+15276375: board.processor.cores.core: T0 : 0x1df22 @ptmalloc_init.part.11+14    : c_sdsp ra, 104(sp)         : MemWrite :  D=0x000000000001e1f2 A=0x7fffffffffffed18
+15277041: board.processor.cores.core: T0 : 0x1df24 @ptmalloc_init.part.11+16    : c_sdsp s0, 96(sp)          : MemWrite :  D=0x0000000000000040 A=0x7fffffffffffed10
+15277707: board.processor.cores.core: T0 : 0x1df26 @ptmalloc_init.part.11+18    : c_sdsp s3, 72(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecf8
+15436548: board.processor.cores.core: T0 : 0x1df28 @ptmalloc_init.part.11+20    : c_sdsp s4, 64(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecf0
+15437214: board.processor.cores.core: T0 : 0x1df2a @ptmalloc_init.part.11+22    : c_sdsp s5, 56(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffece8
+15437880: board.processor.cores.core: T0 : 0x1df2c @ptmalloc_init.part.11+24    : c_sdsp s6, 48(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffece0
+15438546: board.processor.cores.core: T0 : 0x1df2e @ptmalloc_init.part.11+26    : c_sdsp s7, 40(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecd8
+15439212: board.processor.cores.core: T0 : 0x1df30 @ptmalloc_init.part.11+28    : c_sdsp s8, 32(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecd0
+15439878: board.processor.cores.core: T0 : 0x1df32 @ptmalloc_init.part.11+30    : c_sdsp s9, 24(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecc8
+15440544: board.processor.cores.core: T0 : 0x1df34 @ptmalloc_init.part.11+32    : c_sdsp s10, 16(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecc0
+15441210: board.processor.cores.core: T0 : 0x1df36 @ptmalloc_init.part.11+34    : c_sdsp s11, 8(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecb8
+15600051: board.processor.cores.core: T0 : 0x1df38 @ptmalloc_init.part.11+36    : addi a4, a4, 1688          : IntAlu :  D=0x000000000007a698
+15600384: board.processor.cores.core: T0 : 0x1df3c @ptmalloc_init.part.11+40    : sw zero, -1732(gp)         : MemWrite :  D=0x0000000000000000 A=0x7ba2c
+15759225: board.processor.cores.core: T0 : 0x1df40 @ptmalloc_init.part.11+44    : sd a4, 40(tp)              : MemWrite :  D=0x000000000007a698 A=0x7e728
+15759891: board.processor.cores.core: T0 : 0x1df44 @ptmalloc_init.part.11+48    : c_beqz s1, 192             : IntAlu : 
+15760557: board.processor.cores.core: T0 : 0x1df46 @ptmalloc_init.part.11+50    : lui a5, 91                 : IntAlu :  D=0x000000000005b000
+15760890: board.processor.cores.core: T0 : 0x1df4a @ptmalloc_init.part.11+54    : c_li s4, 0                 : IntAlu :  D=0x0000000000000000
+15761223: board.processor.cores.core: T0 : 0x1df4c @ptmalloc_init.part.11+56    : lui s5, 91                 : IntAlu :  D=0x000000000005b000
+15761556: board.processor.cores.core: T0 : 0x1df50 @ptmalloc_init.part.11+60    : addi s3, a5, -944          : IntAlu :  D=0x000000000005ac50
+15761889: board.processor.cores.core: T0 : 0x1df54 @ptmalloc_init.part.11+64    : lui s6, 122                : IntAlu :  D=0x000000000007a000
+15762222: board.processor.cores.core: T0 : 0x1df58 @ptmalloc_init.part.11+68    : lui s10, 92                : IntAlu :  D=0x000000000005c000
+15762555: board.processor.cores.core: T0 : 0x1df5c @ptmalloc_init.part.11+72    : lui s9, 92                 : IntAlu :  D=0x000000000005c000
+15762888: board.processor.cores.core: T0 : 0x1df60 @ptmalloc_init.part.11+76    : lui s8, 92                 : IntAlu :  D=0x000000000005c000
+15763221: board.processor.cores.core: T0 : 0x1df64 @ptmalloc_init.part.11+80    : lui s7, 92                 : IntAlu :  D=0x000000000005c000
+15763554: board.processor.cores.core: T0 : 0x1df68 @ptmalloc_init.part.11+84    : c_ld s0, 0(s1)             : MemRead :  D=0x0000000000000000 A=0x7fffffffffffff38
+15764220: board.processor.cores.core: T0 : 0x1df6a @ptmalloc_init.part.11+86    : c_beqz s0, 144             : IntAlu : 
+15923727: board.processor.cores.core: T0 : 0x1dffa @ptmalloc_init.part.11+230    : beq s4, zero, 10           : IntAlu : 
+16082235: board.processor.cores.core: T0 : 0x1e004 @ptmalloc_init.part.11+240    : c_ldsp ra, 104(sp)         : MemRead :  D=0x000000000001e1f2 A=0x7fffffffffffed18
+16082901: board.processor.cores.core: T0 : 0x1e006 @ptmalloc_init.part.11+242    : c_ldsp s0, 96(sp)          : MemRead :  D=0x0000000000000040 A=0x7fffffffffffed10
+16083567: board.processor.cores.core: T0 : 0x1e008 @ptmalloc_init.part.11+244    : c_li a5, 1                 : IntAlu :  D=0x0000000000000001
+16084233: board.processor.cores.core: T0 : 0x1e00a @ptmalloc_init.part.11+246    : sw a5, -1732(gp)           : MemWrite :  D=0x0000000000000001 A=0x7ba2c
+16084899: board.processor.cores.core: T0 : 0x1e00e @ptmalloc_init.part.11+250    : c_ldsp s1, 88(sp)          : MemRead :  D=0x7fffffffffffff28 A=0x7fffffffffffed08
+16085565: board.processor.cores.core: T0 : 0x1e010 @ptmalloc_init.part.11+252    : c_ldsp s2, 80(sp)          : MemRead :  D=0x7fffffffffffff38 A=0x7fffffffffffed00
+16086231: board.processor.cores.core: T0 : 0x1e012 @ptmalloc_init.part.11+254    : c_ldsp s3, 72(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecf8
+16086897: board.processor.cores.core: T0 : 0x1e014 @ptmalloc_init.part.11+256    : c_ldsp s4, 64(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecf0
+16087563: board.processor.cores.core: T0 : 0x1e016 @ptmalloc_init.part.11+258    : c_ldsp s5, 56(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffece8
+16088229: board.processor.cores.core: T0 : 0x1e018 @ptmalloc_init.part.11+260    : c_ldsp s6, 48(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffece0
+16088895: board.processor.cores.core: T0 : 0x1e01a @ptmalloc_init.part.11+262    : c_ldsp s7, 40(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecd8
+16089561: board.processor.cores.core: T0 : 0x1e01c @ptmalloc_init.part.11+264    : c_ldsp s8, 32(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecd0
+16090227: board.processor.cores.core: T0 : 0x1e01e @ptmalloc_init.part.11+266    : c_ldsp s9, 24(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecc8
+16090893: board.processor.cores.core: T0 : 0x1e020 @ptmalloc_init.part.11+268    : c_ldsp s10, 16(sp)         : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecc0
+16091559: board.processor.cores.core: T0 : 0x1e022 @ptmalloc_init.part.11+270    : c_ldsp s11, 8(sp)          : MemRead :  D=0x0000000000000000 A=0x7fffffffffffecb8
+16092225: board.processor.cores.core: T0 : 0x1e024 @ptmalloc_init.part.11+272    : c_addi16sp sp, 112         : IntAlu :  D=0x7fffffffffffed20
+16092558: board.processor.cores.core: T0 : 0x1e026 @ptmalloc_init.part.11+274    : c_jr ra                    : IntAlu : 
+16092891: board.processor.cores.core: T0 : 0x1e1f2 @malloc_hook_ini+26    : c_ldsp a0, 8(sp)           : MemRead :  D=0x0000000000000041 A=0x7fffffffffffed28
+16093557: board.processor.cores.core: T0 : 0x1e1f4 @malloc_hook_ini+28    : c_ldsp ra, 24(sp)          : MemRead :  D=0x000000000004257c A=0x7fffffffffffed38
+16094223: board.processor.cores.core: T0 : 0x1e1f6 @malloc_hook_ini+30    : c_addi16sp sp, 32          : IntAlu :  D=0x7fffffffffffed40
+16094556: board.processor.cores.core: T0 : 0x1e1f8 @malloc_hook_ini+32    : jal zero, -3166            : IntAlu :  D=0x000000000001e1fc
+16095222: board.processor.cores.core: T0 : 0x1d59a @__libc_malloc    : ld t1, -1696(gp)           : MemRead :  D=0x0000000000000000 A=0x7ba50
+16096221: board.processor.cores.core: T0 : 0x1d59e @__libc_malloc+4    : bne t1, zero, 218          : IntAlu : 
+16096554: board.processor.cores.core: T0 : 0x1d5a2 @__libc_malloc+8    : c_addi sp, -32             : IntAlu :  D=0x7fffffffffffed20
+16096887: board.processor.cores.core: T0 : 0x1d5a4 @__libc_malloc+10    : c_sdsp s0, 16(sp)          : MemWrite :  D=0x0000000000000040 A=0x7fffffffffffed30
+16097886: board.processor.cores.core: T0 : 0x1d5a6 @__libc_malloc+12    : ld s0, 40(tp)              : MemRead :  D=0x000000000007a698 A=0x7e728
+16098552: board.processor.cores.core: T0 : 0x1d5aa @__libc_malloc+16    : c_sdsp s1, 8(sp)           : MemWrite :  D=0x7fffffffffffff28 A=0x7fffffffffffed28
+16099218: board.processor.cores.core: T0 : 0x1d5ac @__libc_malloc+18    : c_sdsp ra, 24(sp)          : MemWrite :  D=0x000000000004257c A=0x7fffffffffffed38
+16099884: board.processor.cores.core: T0 : 0x1d5ae @__libc_malloc+20    : c_mv s1, a0                : IntAlu :  D=0x0000000000000041
+16100217: board.processor.cores.core: T0 : 0x1d5b0 @__libc_malloc+22    : c_beqz s0, 96              : IntAlu : 
+16100550: board.processor.cores.core: T0 : 0x1d5b2 @__libc_malloc+24    : c_lw a5, 4(s0)             : MemRead :  D=0x0000000000000000 A=0x7a69c
+16259391: board.processor.cores.core: T0 : 0x1d5b4 @__libc_malloc+26    : c_andi a5, 4               : IntAlu :  D=0x0000000000000000
+16259724: board.processor.cores.core: T0 : 0x1d5b6 @__libc_malloc+28    : c_bnez a5, 90              : IntAlu : 
+16260057: board.processor.cores.core: T0 : 0x1d5b8 @__libc_malloc+30    : c_li a4, 1                 : IntAlu :  D=0x0000000000000001
+16260723: board.processor.cores.core: T0 : 0x1d5ba @__libc_malloc+32    : lr_w_aq a5, (s0)          
+16260723: board.processor.cores.core: T0 : 0x1d5ba @__libc_malloc+32. 0 : lr_w a5, (s0)              : MemRead :  D=0x0000000000000000 A=0x7a698
+16261056: board.processor.cores.core: T0 : 0x1d5ba @__libc_malloc+32. 1 : 0x140427af fence           : No_OpClass : 
+16419897: board.processor.cores.core: T0 : 0x1d5be @__libc_malloc+36    : bne a5, zero, 10           : IntAlu : 
+16421229: board.processor.cores.core: T0 : 0x1d5c2 @__libc_malloc+40    : sc_w_aq a3, a4, (s0)      
+16421229: board.processor.cores.core: T0 : 0x1d5c2 @__libc_malloc+40. 0 : sc_w a3, a4, (s0)          : MemWrite :  D=0x0000000000000000 A=0x7a698
+16421562: board.processor.cores.core: T0 : 0x1d5c2 @__libc_malloc+40. 1 : 0x1ce426af fence           : No_OpClass : 
+16421895: board.processor.cores.core: T0 : 0x1d5c6 @__libc_malloc+44    : c_bnez a3, -12             : IntAlu : 
+16422228: board.processor.cores.core: T0 : 0x1d5c8 @__libc_malloc+46    : c_addiw a5, 0              : IntAlu :  D=0x0000000000000000
+16422561: board.processor.cores.core: T0 : 0x1d5ca @__libc_malloc+48    : c_bnez a5, 178             : IntAlu : 
+16422894: board.processor.cores.core: T0 : 0x1d5cc @__libc_malloc+50    : c_mv a1, s1                : IntAlu :  D=0x0000000000000041
+16423227: board.processor.cores.core: T0 : 0x1d5ce @__libc_malloc+52    : c_mv a0, s0                : IntAlu :  D=0x000000000007a698
+16423560: board.processor.cores.core: T0 : 0x1d5d0 @__libc_malloc+54    : jal ra, -5004              : IntAlu :  D=0x000000000001d5d4
+16582068: board.processor.cores.core: T0 : 0x1c244 @_int_malloc    : c_addi16sp sp, -224        : IntAlu :  D=0x7fffffffffffec40
+16583067: board.processor.cores.core: T0 : 0x1c246 @_int_malloc+2    : c_sdsp ra, 216(sp)         : MemWrite :  D=0x000000000001d5d4 A=0x7fffffffffffed18
+16583733: board.processor.cores.core: T0 : 0x1c248 @_int_malloc+4    : c_sdsp s0, 208(sp)         : MemWrite :  D=0x000000000007a698 A=0x7fffffffffffed10
+16584399: board.processor.cores.core: T0 : 0x1c24a @_int_malloc+6    : c_sdsp s1, 200(sp)         : MemWrite :  D=0x0000000000000041 A=0x7fffffffffffed08
+16585065: board.processor.cores.core: T0 : 0x1c24c @_int_malloc+8    : c_sdsp s2, 192(sp)         : MemWrite :  D=0x7fffffffffffff38 A=0x7fffffffffffed00
+16585731: board.processor.cores.core: T0 : 0x1c24e @_int_malloc+10    : c_sdsp s3, 184(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecf8
+16586397: board.processor.cores.core: T0 : 0x1c250 @_int_malloc+12    : c_sdsp s4, 176(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecf0
+16587063: board.processor.cores.core: T0 : 0x1c252 @_int_malloc+14    : c_sdsp s5, 168(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffece8
+16587729: board.processor.cores.core: T0 : 0x1c254 @_int_malloc+16    : c_sdsp s6, 160(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffece0
+16588395: board.processor.cores.core: T0 : 0x1c256 @_int_malloc+18    : c_sdsp s7, 152(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecd8
+16589061: board.processor.cores.core: T0 : 0x1c258 @_int_malloc+20    : c_sdsp s8, 144(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecd0
+16589727: board.processor.cores.core: T0 : 0x1c25a @_int_malloc+22    : c_sdsp s9, 136(sp)         : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecc8
+16590393: board.processor.cores.core: T0 : 0x1c25c @_int_malloc+24    : c_sdsp s10, 128(sp)        : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecc0
+16591059: board.processor.cores.core: T0 : 0x1c25e @_int_malloc+26    : c_sdsp s11, 120(sp)        : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffecb8
+16591725: board.processor.cores.core: T0 : 0x1c260 @_int_malloc+28    : addi a5, zero, -65         : IntAlu :  D=0xffffffffffffffbf
+16592058: board.processor.cores.core: T0 : 0x1c264 @_int_malloc+32    : bltu a5, a1, 1454          : IntAlu : 
+16592391: board.processor.cores.core: T0 : 0x1c268 @_int_malloc+36    : c_sdsp a1, 24(sp)          : MemWrite :  D=0x0000000000000041 A=0x7fffffffffffec58
+16751565: board.processor.cores.core: T0 : 0x1c26a @_int_malloc+38    : addi a7, a1, 23            : IntAlu :  D=0x0000000000000058
+16751898: board.processor.cores.core: T0 : 0x1c26e @_int_malloc+42    : c_li a5, 31                : IntAlu :  D=0x000000000000001f
+16752231: board.processor.cores.core: T0 : 0x1c270 @_int_malloc+44    : c_mv s11, a0               : IntAlu :  D=0x000000000007a698
+16752897: board.processor.cores.core: T0 : 0x1c272 @_int_malloc+46    : bgeu a5, a7, 476           : IntAlu : 
+16753563: board.processor.cores.core: T0 : 0x1c276 @_int_malloc+50    : andi s10, a7, 18446744073709551600 : IntAlu :  D=0x0000000000000050
+16754229: board.processor.cores.core: T0 : 0x1c27a @_int_malloc+54    : beq a0, zero, 1400         : IntAlu : 
+16913070: board.processor.cores.core: T0 : 0x1c27e @_int_malloc+58    : ld a4, -1200(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc40
+16914069: board.processor.cores.core: T0 : 0x1c282 @_int_malloc+62    : srliw a5, s10, 4           : IntAlu :  D=0x0000000000000005
+16914735: board.processor.cores.core: T0 : 0x1c286 @_int_malloc+66    : addiw a3, a5, 0            : IntAlu :  D=0x0000000000000005
+16915068: board.processor.cores.core: T0 : 0x1c28a @_int_malloc+70    : c_sdsp a3, 32(sp)          : MemWrite :  D=0x0000000000000005 A=0x7fffffffffffec60
+16915734: board.processor.cores.core: T0 : 0x1c28c @_int_malloc+72    : bltu a4, s10, 90           : IntAlu : 
+17075241: board.processor.cores.core: T0 : 0x1c2e6 @_int_malloc+162    : addi a5, zero, 1023        : IntAlu :  D=0x00000000000003ff
+17075907: board.processor.cores.core: T0 : 0x1c2ea @_int_malloc+166    : bgeu a5, s10, 1354         : IntAlu : 
+17234415: board.processor.cores.core: T0 : 0x1c834 @_int_malloc+1520    : c_ldsp a4, 32(sp)          : MemRead :  D=0x0000000000000005 A=0x7fffffffffffec60
+17235414: board.processor.cores.core: T0 : 0x1c836 @_int_malloc+1522    : slliw a5, a4, 1            : IntAlu :  D=0x000000000000000a
+17235747: board.processor.cores.core: T0 : 0x1c83a @_int_malloc+1526    : c_addiw a5, -2             : IntAlu :  D=0x0000000000000008
+17236080: board.processor.cores.core: T0 : 0x1c83c @_int_malloc+1528    : c_slli a5, 32              : IntAlu :  D=0x0000000800000000
+17236413: board.processor.cores.core: T0 : 0x1c83e @_int_malloc+1530    : c_srli a5, 32              : IntAlu :  D=0x0000000000000008
+17394921: board.processor.cores.core: T0 : 0x1c840 @_int_malloc+1532    : c_addi a5, 13              : IntAlu :  D=0x0000000000000015
+17395920: board.processor.cores.core: T0 : 0x1c842 @_int_malloc+1534    : c_slli a5, 3               : IntAlu :  D=0x00000000000000a8
+17396253: board.processor.cores.core: T0 : 0x1c844 @_int_malloc+1536    : c_sdsp a4, 0(sp)           : MemWrite :  D=0x0000000000000005 A=0x7fffffffffffec40
+17396919: board.processor.cores.core: T0 : 0x1c846 @_int_malloc+1538    : c_j -904                   : IntAlu : 
+17555427: board.processor.cores.core: T0 : 0x1c4be @_int_malloc+634    : c_add a5, s11              : IntAlu :  D=0x000000000007a740
+17713935: board.processor.cores.core: T0 : 0x1c4c0 @_int_malloc+636    : c_ld a3, 8(a5)             : MemRead :  D=0x0000000000000000 A=0x7a748
+17873109: board.processor.cores.core: T0 : 0x1c4c2 @_int_malloc+638    : addi a4, a5, -16           : IntAlu :  D=0x000000000007a730
+17873775: board.processor.cores.core: T0 : 0x1c4c6 @_int_malloc+642    : beq a4, a3, 756            : IntAlu : 
+17874441: board.processor.cores.core: T0 : 0x1c4ca @_int_malloc+646    : beq a3, zero, 1158         : IntAlu : 
+18032949: board.processor.cores.core: T0 : 0x1c950 @_int_malloc+1804    : srli a5, s10, 9            : IntAlu :  D=0x0000000000000000
+18033948: board.processor.cores.core: T0 : 0x1c954 @_int_malloc+1808    : srli s0, s10, 6            : IntAlu :  D=0x0000000000000001
+18034281: board.processor.cores.core: T0 : 0x1c958 @_int_malloc+1812    : c_mv a0, s11               : IntAlu :  D=0x000000000007a698
+18034614: board.processor.cores.core: T0 : 0x1c95a @_int_malloc+1814    : c_mv s1, a5                : IntAlu :  D=0x0000000000000000
+18034947: board.processor.cores.core: T0 : 0x1c95c @_int_malloc+1816    : c_sdsp a5, 56(sp)          : MemWrite :  D=0x0000000000000000 A=0x7fffffffffffec78
+18035613: board.processor.cores.core: T0 : 0x1c95e @_int_malloc+1818    : c_sdsp s0, 40(sp)          : MemWrite :  D=0x0000000000000001 A=0x7fffffffffffec68
+18036279: board.processor.cores.core: T0 : 0x1c960 @_int_malloc+1820    : jal ra, -8500              : IntAlu :  D=0x000000000001c964
+18194787: board.processor.cores.core: T0 : 0x1a82c @malloc_consolidate    : ld a5, -1200(gp)           : MemRead :  D=0x0000000000000000 A=0x7bc40
+18195453: board.processor.cores.core: T0 : 0x1a830 @malloc_consolidate+4    : beq a5, zero, 384          : IntAlu : 
+18353961: board.processor.cores.core: T0 : 0x1a9b0 @malloc_consolidate+388    : jal zero, -2320            : IntAlu :  D=0x000000000001a9b4
+18512469: board.processor.cores.core: T0 : 0x1a0a0 @malloc_init_state    : c_lui a4, 1                : IntAlu :  D=0x0000000000001000
+18513801: board.processor.cores.core: T0 : 0x1a0a2 @malloc_init_state+2    : addi a3, a0, 88            : IntAlu :  D=0x000000000007a6f0
+18514467: board.processor.cores.core: T0 : 0x1a0a6 @malloc_init_state+6    : addi a4, a4, -1976         : IntAlu :  D=0x0000000000000848
+18514800: board.processor.cores.core: T0 : 0x1a0aa @malloc_init_state+10    : c_mv a5, a3                : IntAlu :  D=0x000000000007a6f0
+18515133: board.processor.cores.core: T0 : 0x1a0ac @malloc_init_state+12    : c_add a4, a0               : IntAlu :  D=0x000000000007aee0
+18515466: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a6f0 A=0x7a708
+18674307: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a6f0 A=0x7a700
+18674973: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a700
+18675306: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18675639: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a700 A=0x7a718
+18676305: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a700 A=0x7a710
+18676971: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a710
+18677304: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18677637: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a710 A=0x7a728
+18678303: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a710 A=0x7a720
+18678969: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a720
+18679302: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18679635: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a720 A=0x7a738
+18680301: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a720 A=0x7a730
+18680967: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a730
+18681300: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18681633: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a730 A=0x7a748
+18682299: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a730 A=0x7a740
+18682965: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a740
+18683298: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18683631: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a740 A=0x7a758
+18684297: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a740 A=0x7a750
+18684963: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a750
+18685296: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18685629: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a750 A=0x7a768
+18686295: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a750 A=0x7a760
+18686961: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a760
+18687294: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18687627: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a760 A=0x7a778
+18688293: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a760 A=0x7a770
+18688959: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a770
+18689292: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18689625: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a770 A=0x7a788
+18848466: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a770 A=0x7a780
+18849132: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a780
+18849465: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18849798: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a780 A=0x7a798
+18850464: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a780 A=0x7a790
+18851130: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a790
+18851463: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18851796: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a790 A=0x7a7a8
+18852462: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a790 A=0x7a7a0
+18853128: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7a0
+18853461: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18853794: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7a0 A=0x7a7b8
+18854460: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7a0 A=0x7a7b0
+18855126: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7b0
+18855459: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+18855792: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7b0 A=0x7a7c8
+19014633: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7b0 A=0x7a7c0
+19015299: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7c0
+19015632: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19015965: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7c0 A=0x7a7d8
+19016631: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7c0 A=0x7a7d0
+19017297: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7d0
+19017630: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19017963: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7d0 A=0x7a7e8
+19018629: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7d0 A=0x7a7e0
+19019295: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7e0
+19019628: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19019961: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7e0 A=0x7a7f8
+19020627: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7e0 A=0x7a7f0
+19021293: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a7f0
+19021626: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19021959: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a7f0 A=0x7a808
+19180800: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a7f0 A=0x7a800
+19181466: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a800
+19181799: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19182132: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a800 A=0x7a818
+19182798: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a800 A=0x7a810
+19183464: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a810
+19183797: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19184130: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a810 A=0x7a828
+19184796: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a810 A=0x7a820
+19185462: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a820
+19185795: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+19186128: board.processor.cores.core: T0 : 0x1a0ae @malloc_init_state+14    : c_sd a5, 24(a5)            : MemWrite :  D=0x000000000007a820 A=0x7a838
+19186794: board.processor.cores.core: T0 : 0x1a0b0 @malloc_init_state+16    : c_sd a5, 16(a5)            : MemWrite :  D=0x000000000007a820 A=0x7a830
+19187460: board.processor.cores.core: T0 : 0x1a0b2 @malloc_init_state+18    : c_addi a5, 16              : IntAlu :  D=0x000000000007a830
+19187793: board.processor.cores.core: T0 : 0x1a0b4 @malloc_init_state+20    : bne a4, a5, -6             : IntAlu : 
+Exiting @ tick 18446744073709551615 because simulate() limit reached.

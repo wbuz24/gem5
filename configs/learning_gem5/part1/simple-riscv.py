@@ -62,11 +62,12 @@ binary = os.path.join(
     "../../../",
     "tests/test-progs/hello/bin/riscv/linux/hello",
 )
+binary = "/home/wbuziak/repos/gem5/progs/binaries/arrflip"
 
 system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
-process.cmd = [binary]
+process.cmd = [binary, "10000"]
 system.cpu.workload = process
 system.cpu.createThreads()
 

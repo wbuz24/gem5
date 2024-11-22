@@ -27,6 +27,8 @@
 
 import m5
 from m5.objects import *
+from m5.objects.Device import BasicPioDevice
+from m5.objects.VirtIOMMIO import MmioVirtIO
 from m5.util import convert
 from os import path
 

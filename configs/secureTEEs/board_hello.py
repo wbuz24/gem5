@@ -46,6 +46,7 @@ from m5.objects import *
 
 from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.components.memory import SingleChannelDDR3_1600
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.processors.cpu_types import CPUTypes
@@ -63,7 +64,7 @@ from common import SimpleOpts
 requires(isa_required=ISA.RISCV)
 
 # In this setup we don't have a cache. `NoCache` can be used for such setups.
-cache_hierarchy = NoCache()
+cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(l1i_size="32KiB", l1d_size="32KiB", l2_size="64KiB")#NoCache()
 
 # We use a single channel DDR3_1600 memory system
 memory = SecureSimpleMemory(size="1GB")

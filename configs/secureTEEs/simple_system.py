@@ -44,7 +44,7 @@ import m5
 from m5.objects import *
 
 # Add the common scripts to our path
-m5.util.addToPath("../../")
+m5.util.addToPath("../")
 
 # import the caches which we made
 from caches import *
