@@ -44,7 +44,7 @@ from gem5.components.memory.secure import SecureMemorySystem
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
-from gem5.components.cachehierarchies.classic.mysimplecache_hierarchy import MyL1CacheHierarchy
+from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
 from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
 from gem5.resources.resource import *
@@ -59,10 +59,10 @@ from common import SimpleOpts
 requires(isa_required=ISA.RISCV)
 
 # In this setup we don't have a cache. `NoCache` can be used for such setups.
-cache_hierarchy = NoCache() #PrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
+cache_hierarchy = SecurePrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
 
 # Secure memory implementation
-memory = SecureSimpleMemory(size="1GB")
+memory = SecureSimpleMemory(size="1GiB")
 
 # We use a simple Timing processor with one core.
 processor1 = SimpleProcessor(
@@ -83,7 +83,7 @@ board.set_se_binary_workload(
     BinaryResource(
         local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
     ),
-    arguments=["100000001"],
+    arguments=["10001"],
 )
 
 # Lastly we run the simulation.

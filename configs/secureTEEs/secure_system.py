@@ -57,7 +57,7 @@ system.mem_ctrl.dram = DDR3_1600_8x8()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.mee.mem_side
 
-# binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
+#binary = 'tests/test-progs/hello/bin/riscv/linux/hello'
 binary = "/home/wbuziak/repos/gem5/progs/binaries/arrflip"
 
 # for gem5 V21+

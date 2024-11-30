@@ -47,6 +47,13 @@ from typing import (
     Sequence,
     Tuple,
 )
+import m5
+from m5.objects import *
+m5.util.addToPath("../")
+from common import SimpleOpts
+
+
+from common.Caches import L1_DCache
 
 from m5.objects import (
     AddrRange,
@@ -54,6 +61,7 @@ from m5.objects import (
     Port,
     SecureMemory,
     SimpleMemory,
+    TimingEncryptionEngine,
 )
 from m5.util.convert import toMemorySize
 
@@ -74,10 +82,23 @@ class SecureMemorySystem(AbstractMemorySystem):
 
         super().__init__()
 
+
+        # Create a metadata cache
+        class MetadataCache(L1_DCache):
+          size = "32KiB"
+
+        # Does this line need to be here? Is this not effectively the RAM?
         self.module = SimpleMemory(latency=latency, bandwidth=bandwidth)
+
+        # Appropriate starting address?
+        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=0, start_addr="0x00000")
+        self.metadata_cache = MetadataCache()
+
         self._size = toMemorySize(size)
 
         self.secure_memory = SecureMemory()
+
+        # & this one? Do I need a mem_ctrl in front of it?
         self.secure_memory.mem_side = self.module.port
 
     @overrides(AbstractMemorySystem)

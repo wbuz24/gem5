@@ -67,6 +67,8 @@ PMP::pmpCheck(const RequestPtr &req, BaseMMU::Mode mode,
     if (req->hasVaddr()) {
         DPRINTF(PMP, "Checking pmp permissions for va: %#x , pa: %#x\n",
                 req->getVaddr(), req->getPaddr());
+
+        printf("\n\nUsing pmp table !! src/arch/riscv/pmp.cc\n\n");
     }
     else { // this access is corresponding to a page table walk
         DPRINTF(PMP, "Checking pmp permissions for pa: %#x\n",
