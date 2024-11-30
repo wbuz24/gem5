@@ -156,11 +156,11 @@ class SecurePrivateL1PrivateL2CacheHierarchy(
             self._connect_table_walker(i, cpu)
 
             # Connect mee to membus - mee is already connected to RAM
-            memory.mee.cpu_side = self.membus.mem_side_ports
+            board.memory.mee.cpu_side = self.membus.mem_side_ports
 
             # Connect mee to metadata cache
-            self.mee.metadata_request_port = self.metadata_cache.cpu_side
-            self.metadata_cache.mem_side = self.mee.metadata_response_port
+            board.memory.mee.metadata_request_port = board.memory.metadata_cache.cpu_side
+            board.memory.metadata_cache.mem_side = board.memory.mee.metadata_response_port
 
             if board.get_processor().get_isa() == ISA.X86:
                 int_req_port = self.membus.mem_side_ports

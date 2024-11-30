@@ -99,7 +99,7 @@ class SecureMemorySystem(AbstractMemorySystem):
         self.secure_memory = SecureMemory()
 
         # & this one? Do I need a mem_ctrl in front of it?
-        self.secure_memory.mem_side = self.module.port
+        self.mee.mem_side = self.module.port
 
     @overrides(AbstractMemorySystem)
     def incorporate_memory(self, board: AbstractBoard) -> None:
