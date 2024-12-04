@@ -397,6 +397,7 @@ TimingEncryptionEngine::calculateAddress(
 bool
 TimingEncryptionEngine::handleRequest(PacketPtr pkt)
 {
+    printf("\n\n Do we get here? \n\n");
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
@@ -405,6 +406,7 @@ TimingEncryptionEngine::handleRequest(PacketPtr pkt)
 
     auto insert = active_requests.insert(pkt);
     assert(insert.second);
+    assert(start_addr == 0);
 
     // We have a weird case where mem_ctrl re-ordering
     // can result in a the following behavior:

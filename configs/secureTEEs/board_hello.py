@@ -64,10 +64,10 @@ from common import SimpleOpts
 requires(isa_required=ISA.RISCV)
 
 # In this setup we don't have a cache. `NoCache` can be used for such setups.
-cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(l1i_size="32KiB", l1d_size="32KiB", l2_size="64KiB")#NoCache()
+cache_hierarchy = NoCache() #PrivateL1PrivateL2CacheHierarchy(l1i_size="32KiB", l1d_size="32KiB", l2_size="64KiB")
 
 # We use a single channel DDR3_1600 memory system
-memory = SecureSimpleMemory(size="1GB")
+memory = SingleChannelDDR3_1600(size="1GiB")#SecureSimpleMemory(size="1GB")
 
 # We use a simple Timing processor with one core.
 processor = SimpleProcessor(

@@ -54,6 +54,7 @@ PMP::PMP(const Params &params) :
     hasLockEntry(false)
 {
     pmpTable.resize(pmpEntries);
+    printf("\n\nUsing pmp table !! src/arch/riscv/pmp.cc\n\n");
 }
 
 Fault
@@ -68,7 +69,6 @@ PMP::pmpCheck(const RequestPtr &req, BaseMMU::Mode mode,
         DPRINTF(PMP, "Checking pmp permissions for va: %#x , pa: %#x\n",
                 req->getVaddr(), req->getPaddr());
 
-        printf("\n\nUsing pmp table !! src/arch/riscv/pmp.cc\n\n");
     }
     else { // this access is corresponding to a page table walk
         DPRINTF(PMP, "Checking pmp permissions for pa: %#x\n",

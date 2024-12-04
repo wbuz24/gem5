@@ -25,12 +25,19 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
+This gem5 configuation script creates a simple board to run an ARM
+"hello world" binary.
+
+This is setup is the close to the simplest setup possible using the gem5
+library. It does not contain any kind of caching, IO, or any non-essential
+components.
+
 Usage
 -----
 
 ```
 scons build/RISCV/gem5.opt
-GEM5_CONFIG=/path/to/resource_config.json ./build/RISCV/gem5.opt configs/secureTEEs/riscv-hello.py
+./build/RISCV/gem5.opt configs/secureTEEs/riscv-hello.py
 ```
 """
 
@@ -38,14 +45,12 @@ import m5
 from m5.objects import *
 
 from gem5.components.boards.simple_board import SimpleBoard
+from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.components.memory import SingleChannelDDR3_1600
 from gem5.components.memory.secure import SecureSimpleMemory
-from gem5.components.memory.secure import SecureMemorySystem
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
-from gem5.components.cachehierarchies.classic.no_cache import NoCache
-from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
-from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
 from gem5.resources.resource import *
 from gem5.simulate.simulator import Simulator
@@ -54,14 +59,15 @@ from gem5.utils.requires import requires
 m5.util.addToPath("../")
 from common import SimpleOpts
 
-# This check ensures the gem5 binary is compiled to the RISC-V ISA target.
+# This check ensures the gem5 binary is compiled to the RISC-V ISA target. If not,
+# an exception will be thrown.
 requires(isa_required=ISA.RISCV)
 
-# The entire cache hierarchy is set up with this class structure
-cache_hierarchy = SecurePrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
+# In this setup we don't have a cache. `NoCache` can be used for such setups.
+cache_hierarchy = NoCache() #PrivateL1PrivateL2CacheHierarchy(l1i_size="32KiB", l1d_size="32KiB", l2_size="64KiB")
 
-# Secure memory implementation
-memory = SecureSimpleMemory(size="1GiB")
+# We use a single channel DDR3_1600 memory system
+memory = SingleChannelDDR3_1600(size="1GiB")#SecureSimpleMemory(size="1GB")
 
 # We use a simple Timing processor with one core.
 processor = SimpleProcessor(
@@ -77,12 +83,13 @@ board = SimpleBoard(
     cache_hierarchy=cache_hierarchy,
 )
 
-# Call your binary here, and assign command line arguments
+# board.set_se_binary_workload(obtain_resource("arrflip", resource_directory="/home/wbuziak/repos/gem5/progs/binaries", gem5_version="24.0.0.1", clients=None))
 board.set_se_binary_workload(
     BinaryResource(
         local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
+#         "tests/test-progs/hello/bin/riscv/linux/hello"
     ),
-    arguments=["10001"],
+    arguments=["100001"],
 )
 
 # Lastly we run the simulation.

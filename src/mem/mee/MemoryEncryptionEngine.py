@@ -48,7 +48,7 @@ class BaseMemoryEncryptionEngine(SimObject):
                                 sends responses back to metadata cache")
 
     # Fields for BMT construction
-    start_addr = Param.UInt64(2, "Default starting addr in ARM")
+    start_addr = Param.UInt64(0, "Default starting addr in RISCV")
     num_gb = Param.Int(8, "Number of GB in main memory")
 
     # Fields for Far Mem
@@ -109,11 +109,11 @@ class TimingEncryptionEngine(SimObject):
                                 sends responses back to metadata cache")
 
     # Fields for BMT construction
-    start_addr = Param.UInt64(2, "Default starting addr in ARM")
+    start_addr = Param.UInt64(0, "Default starting addr in ARM")
     num_gb = Param.UInt64(8, "Number of GB in main memory")
 
     # Misc fields
-    cache_hmac = Param.Bool(True, "Should hmacs be cached?")
+    cache_hmac = Param.Bool(False, "Should hmacs be cached?")
 
 class TimingPointerEncryptionEngine(SimObject):
     type = 'TimingPointerEncryptionEngine'
@@ -141,7 +141,7 @@ class TimingPointerEncryptionEngine(SimObject):
     num_gb = Param.UInt64(8, "Number of GB in main memory")
 
     # Misc fields
-    cache_hmac = Param.Bool(True, "Should hmacs be cached?")
+    cache_hmac = Param.Bool(False, "Should hmacs be cached?")
 
 class HuffmanEncryptionEngine(TimingEncryptionEngine):
     type = 'HuffmanEncryptionEngine'

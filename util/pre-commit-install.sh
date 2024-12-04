@@ -40,4 +40,4 @@ then
     exit 1
 fi
 
-pre-commit install -t pre-commit -t commit-msg
+#pre-commit install -t pre-commit -t commit-msg

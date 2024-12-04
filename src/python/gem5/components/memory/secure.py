@@ -87,18 +87,22 @@ class SecureMemorySystem(AbstractMemorySystem):
         class MetadataCache(L1_DCache):
           size = "32KiB"
 
-        # Does this line need to be here? Is this not effectively the RAM?
+        # Sets up the RAM
         self.module = SimpleMemory(latency=latency, bandwidth=bandwidth)
 
         # Appropriate starting address?
-        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=0, start_addr="0x00000")
+        # Memory encryption engine 
+        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=False)
+        # Metadata Cache
         self.metadata_cache = MetadataCache()
 
+        # Set the size
         self._size = toMemorySize(size)
-
+        
+        # Secure memory
         self.secure_memory = SecureMemory()
 
-        # & this one? Do I need a mem_ctrl in front of it?
+        # Connect the MEE to RAM
         self.mee.mem_side = self.module.port
 
     @overrides(AbstractMemorySystem)
