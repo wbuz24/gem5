@@ -3,7 +3,7 @@
 This is the repository for the gem5 simulator. It contains the full source code
 for the simulator and all tests and regressions.
 
-This version is the updated gem5 (as of Oct 2024) with the added Secure Memory
+This is the new version of gem5 (as of Oct 2024) incorporating the Secure Memory
 code written by Sam Thomas.
 
 The gem5 simulator is a modular platform for computer-system architecture
