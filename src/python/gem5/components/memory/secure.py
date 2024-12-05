@@ -99,9 +99,6 @@ class SecureMemorySystem(AbstractMemorySystem):
         # Set the size
         self._size = toMemorySize(size)
         
-        # Secure memory
-        self.secure_memory = SecureMemory()
-
         # Connect the MEE to RAM
         self.mee.mem_side = self.module.port
 
@@ -111,7 +108,7 @@ class SecureMemorySystem(AbstractMemorySystem):
 
     @overrides(AbstractMemorySystem)
     def get_mem_ports(self) -> Sequence[Tuple[AddrRange, Port]]:
-        return [(self.module.range, self.secure_memory.cpu_side)]
+        return [(self.module.range, self.mee.cpu_side)]
 
     @overrides(AbstractMemorySystem)
     def get_memory_controllers(self) -> List[MemCtrl]:
