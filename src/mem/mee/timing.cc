@@ -397,7 +397,6 @@ TimingEncryptionEngine::calculateAddress(
 bool
 TimingEncryptionEngine::handleRequest(PacketPtr pkt)
 {
-    printf("\n\n Do we get here? \n\n");
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
@@ -678,7 +677,7 @@ TimingEncryptionEngine::CpuSidePort::sendPacket(PacketPtr pkt)
         assert(owner->active_requests.find(pkt) !=
                 owner->active_requests.end());
         owner->active_requests.erase(pkt);
-        sendRetryReq();
+        trySendRetry();
 
         owner->metadata_request_port.recvReqRetry();
     }
@@ -806,9 +805,13 @@ TimingEncryptionEngine::MemSidePort::recvReqRetry()
     PacketPtr pkt = blockedPackets.front();
 
     // Try to resend it. It's possible that it fails again.
-    if (trySendPacket(pkt)) {
-        blockedPackets.pop_front();
+    while (sendTimingReq(pkt)) {
         owner->cpu_side_port.trySendRetry();
+        blockedPackets.pop_front();
+        if (!blockedPackets.empty()) {
+          pkt = blockedPackets.front();
+        }
+        else break;
     }
 }
 

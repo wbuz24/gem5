@@ -64,7 +64,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         CpuSidePort
                 (const std::string &name, TimingEncryptionEngine *owner) :
-            ResponsePort(name, owner), owner(owner), needRetry(false)
+            ResponsePort(name), owner(owner), needRetry(false)
           {  };
 
         AddrRangeList getAddrRanges() const override;
@@ -95,7 +95,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         MemSidePort(const std::string &name,
                 TimingEncryptionEngine *owner) :
-            RequestPort(name, owner), owner(owner)
+            RequestPort(name), owner(owner)
           {  };
 
         bool isSnooping() const override { return true; }

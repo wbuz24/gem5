@@ -58,7 +58,7 @@ from common import SimpleOpts
 requires(isa_required=ISA.RISCV)
 
 # The entire cache hierarchy is set up with this class structure
-cache_hierarchy = SecurePrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
+cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
 
 # Secure memory implementation
 memory = SecureSimpleMemory(size="1GiB")

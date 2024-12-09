@@ -92,7 +92,7 @@ class SecureMemorySystem(AbstractMemorySystem):
 
         # Appropriate starting address?
         # Memory encryption engine 
-        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=False)
+        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=False, num_gb=toMemorySize(size) // (1 << 30), start_addr=0)
         # Metadata Cache
         self.metadata_cache = MetadataCache()
 
@@ -101,6 +101,10 @@ class SecureMemorySystem(AbstractMemorySystem):
         
         # Connect the MEE to RAM
         self.mee.mem_side = self.module.port
+
+        # Connect metadata cache
+        self.mee.metadata_request_port = self.metadata_cache.cpu_side
+        self.metadata_cache.mem_side = self.mee.metadata_response_port
 
     @overrides(AbstractMemorySystem)
     def incorporate_memory(self, board: AbstractBoard) -> None:
