@@ -53,8 +53,8 @@ PMP::PMP(const Params &params) :
     numRules(0),
     hasLockEntry(false)
 {
-    pmpTable.resize(pmpEntries);
-    printf("\n\nUsing pmp table !! src/arch/riscv/pmp.cc\n\n");
+pmpTable.resize(8);
+    printf("\n\nPMP size of: %ld\n\n", pmpTable.size());
 }
 
 Fault
