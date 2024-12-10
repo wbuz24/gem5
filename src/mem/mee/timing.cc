@@ -405,6 +405,7 @@ TimingEncryptionEngine::handleRequest(PacketPtr pkt)
 
     auto insert = active_requests.insert(pkt);
     assert(insert.second);
+    //if (!insert.second) return false;
     assert(start_addr == 0);
 
     // We have a weird case where mem_ctrl re-ordering
@@ -807,6 +808,12 @@ TimingEncryptionEngine::MemSidePort::recvReqRetry()
     // Try to resend it. It's possible that it fails again.
     while (sendTimingReq(pkt)) {
         owner->cpu_side_port.trySendRetry();
+        // hopefully fix issues with large arrays
+        if (!pkt->needsResponse() && !pkt->isResponse() && pkt->req->tree_level == owner->data_level) {
+          assert(owner->active_requests.find(pkt) != owner->active_requests.end());
+          owner->active_requests.erase(pkt);
+
+        }
         blockedPackets.pop_front();
         if (!blockedPackets.empty()) {
           pkt = blockedPackets.front();

@@ -82,7 +82,7 @@ board.set_se_binary_workload(
     BinaryResource(
         local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
     ),
-    arguments=["10001"],
+    arguments=["10000001"],
 )
 
 # Lastly we run the simulation.
