@@ -12,7 +12,7 @@ void main(int argc, char** argv) {
   
   if (sscanf(argv[1], "%d", &size) != 1) { printf("Invalid size, must be an integer\n"); exit(1); }
 
-  iter = size / 10;
+  iter = size - 1;
 
   arr = (int *) malloc(sizeof(int) * size); // create an array of ints the size of the input
   if (arr == NULL) { fprintf(stderr, "malloc(%d) failed.\n", size); exit(1); }

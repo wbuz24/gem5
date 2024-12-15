@@ -53,7 +53,7 @@ PMP::PMP(const Params &params) :
     numRules(0),
     hasLockEntry(false)
 {
-    pmpTable.resize(pmpEntries);
+pmpTable.resize(0);
     printf("\n\nPMP size of: %ld\n\n", pmpTable.size());
 }
 
