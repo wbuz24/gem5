@@ -70,6 +70,8 @@ from m5.util.fdthelper import *
 
 from gem5.utils.requires import requires
 
+from gem5.resources.resource import obtain_resource
+
 # Run a check to ensure the RISC-V ISA is complied into gem5.
 requires(isa_required=ISA.RISCV)
 
@@ -170,7 +172,7 @@ np = args.num_cpus
 # Default Setup
 system = System()
 mdesc = SysConfig(
-    disks=args.disk_image,
+    disks=obtain_resource(resource_id="riscv-ubuntu-20.04-img"),   #args.disk_image,
     rootdev=args.root_device,
     mem=args.mem_size,
     os_type=args.os_type,
@@ -178,18 +180,20 @@ mdesc = SysConfig(
 system.mem_mode = mem_mode
 system.mem_ranges = [AddrRange(start=0x80000000, size=mdesc.mem())]
 
+kernel=obtain_resource(resource_id="riscv-linux-6.5.5-kernel", resource_version="1.0.0")
+
 workload_args = dict()
 if args.semihosting:
     workload_args["semihosting"] = RiscvSemihosting(
         files_root_dir=args.semihosting_root,
-        cmd_line=args.kernel,
+        cmd_line=kernel,    #args.kernel,
     )
 if args.bare_metal:
     system.workload = RiscvBareMetal(**workload_args)
-    system.workload.bootloader = args.kernel
+    system.workload.bootloader = obtain_resource("riscv-ubuntu-20.04-boot", resource_version="3.0.0")     #args.kernel
 else:
     system.workload = RiscvLinux(**workload_args)
-    system.workload.object_file = args.kernel
+    system.workload.object_file = kernel    #args.kernel
 
 system.iobus = IOXBar()
 system.membus = MemBus()
