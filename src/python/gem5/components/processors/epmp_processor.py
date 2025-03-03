@@ -35,7 +35,7 @@ from .base_cpu_processor import BaseCPUProcessor
 from .cpu_types import CPUTypes
 
 
-class SimpleProcessor(BaseCPUProcessor):
+class SimpleEPMPProcessor(BaseCPUProcessor):
     """
     A SimpleProcessor contains a number of cores of SimpleCore objects of the
     same CPUType.

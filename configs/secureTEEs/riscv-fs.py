@@ -44,8 +44,10 @@ from gem5.components.cachehierarchies.classic.private_l1_private_l2_walk_cache_h
     PrivateL1PrivateL2WalkCacheHierarchy,
 )
 from gem5.components.memory import SingleChannelDDR3_1600
+from gem5.components.memory.secure import SecureSimpleMemory
+from gem5.components.memory.secure import SecureMemorySystem
 from gem5.components.processors.cpu_types import CPUTypes
-from gem5.components.processors.epmp_processor import SimpleProcessor
+from gem5.components.processors.epmp_processor import SimpleEPMPProcessor
 from gem5.isas import ISA
 from gem5.resources.resource import obtain_resource
 from gem5.simulate.simulator import Simulator
@@ -62,10 +64,10 @@ cache_hierarchy = PrivateL1PrivateL2WalkCacheHierarchy(
 )
 
 # Setup the system memory.
-memory = SingleChannelDDR3_1600()
+memory = SecureSimpleMemory(size="1GiB")#SingleChannelDDR3_1600()
 
 # Setup a single core Processor.
-processor = SimpleProcessor(
+processor = SimpleEPMPProcessor(
     cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
 )
 
