@@ -30,11 +30,11 @@ from typing import Optional
 
 from ...isas import ISA
 from ...utils.requires import requires
-from .epmp_cpu_core import BaseCPUCore
+from .epmp_cpu_core import BaseEPMPCore
 from .cpu_types import CPUTypes
 
 
-class SimpleCore(BaseCPUCore):
+class EPMPCore(BaseEPMPCore):
     """
     A `SimpleCore` instantiates a core based on the CPUType enum pass. The
     `SimpleCore` creates a single `SimObject` of that type.
@@ -43,7 +43,7 @@ class SimpleCore(BaseCPUCore):
     def __init__(self, cpu_type: CPUTypes, core_id: int, isa: ISA):
         requires(isa_required=isa)
         super().__init__(
-            core=SimpleCore.cpu_simobject_factory(
+            core=EPMPCore.cpu_simobject_factory(
                 isa=isa, cpu_type=cpu_type, core_id=core_id
             ),
             isa=isa,
@@ -139,7 +139,7 @@ class SimpleCore(BaseCPUCore):
     @classmethod
     def cpu_simobject_factory(
         cls, cpu_type: CPUTypes, isa: ISA, core_id: int
-    ) -> BaseCPUCore:
+    ) -> BaseEPMPCore:
         """
         A factory used to return the SimObject core object given the cpu type,
         and ISA target. An exception will be thrown if there is an

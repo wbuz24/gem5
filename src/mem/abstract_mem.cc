@@ -1,4 +1,5 @@
-/* Copyright (c) 2010-2012,2017-2019 ARM Limited
+/*
+ * Copyright (c) 2010-2012,2017-2019 ARM Limited
  * All rights reserved
  *
  * The license below extends only to copyright in the software and shall
@@ -35,11 +36,12 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Tutorial author: Samuel Thomas, Brown University
  */
 
 #include "mem/abstract_mem.hh"
 
-#include <cstring>
 #include <vector>
 
 #include "base/loader/memory_image.hh"
@@ -59,88 +61,17 @@ namespace memory
 AbstractMemory::AbstractMemory(const Params &p) :
     ClockedObject(p), range(p.range), pmemAddr(NULL),
     backdoor(params().range, nullptr,
-             (MemBackdoor::Flags)(MemBackdoor::Readable |
-                                  MemBackdoor::Writeable)),
+             (MemBackdoor::Flags)(
+                 MemBackdoor::Readable | MemBackdoor::Writeable )),
     confTableReported(p.conf_table_reported), inAddrMap(p.in_addr_map),
-    kvmMap(p.kvm_map), _system(NULL), is_pointer(p.is_pointer),
+    kvmMap(p.kvm_map), writeable(true), _system(NULL),
     stats(*this)
 {
     panic_if(!range.valid() || !range.size(),
              "Memory range %s must be valid with non-zero size.",
              range.to_string());
-    
-    uint64_t metadata_size;
-    uint64_t num_blocks_on_last_level;
-    if (p.secure_mem) {
-        uint64_t number_of_blocks = range.size() / 64;
-        uint64_t num_hash_blocks = number_of_blocks;
-        num_blocks_on_last_level = number_of_blocks / 64; //bonsai_ctr_arity
-        
-        // round number of blocks up to power of 8
-        uint64_t eights = 8;
-        do {
-            eights = eights * 8;
-        } while (eights < number_of_blocks);
-        number_of_blocks = eights;
-
-        // compute number of tree levels
-        uint64_t number_of_levels = 1;
-        uint64_t num = 1;
-        while (num < num_blocks_on_last_level) {
-            number_of_levels++;
-            num = num * 8; //arity
-        }
-
-        metadata_size = 0;
-        for (int i = number_of_levels; i >= 0; i--) {
-            // Number of blocks refers to the
-            // number of blocks at the previous level
-            metadata_size = metadata_size +
-                                number_of_blocks * 64; //block_size
-
-            number_of_blocks = number_of_blocks / 8; //arity
-            if (number_of_blocks == 0) {
-                number_of_blocks = 1;
-            }
-
-            if (i == 0) {
-                assert(number_of_blocks == 1);
-            }
-        }
-
-        metadata_size += num_hash_blocks * 64; // block_size
-
-        metadata_memory = (uint8_t *) malloc(sizeof(uint8_t) * metadata_size);
-
-        if (p.metadata_one) {
-            assert(p.secure_mem);
-
-            aux_huffman_tree = (uint64_t *)
-                    malloc(sizeof(uint64_t) * num_blocks_on_last_level * 2);
-        }
-
-        if (p.metadata_two) {
-            assert(p.secure_mem && p.metadata_one);
-
-            active_huffman_queue = (uint64_t *)
-                        malloc(sizeof(uint64_t) * num_blocks_on_last_level);
-        }
-
-        if (p.metadata_three) {
-            assert(p.secure_mem && p.metadata_one && p.metadata_two);
-
-            inactive_huffman_queue = (uint64_t *)
-                        malloc(sizeof(uint64_t) * num_blocks_on_last_level);
-        }
-    }
-}
-
-void
-AbstractMemory::startup()
-{
-    if (name() == "hello" && is_pointer) {
-        prefillMetadata();
-    }
+    // for tutorial :-)
+    security_metadata = (uint8_t *) malloc(sizeof(uint8_t) * 64);
 }
 
 void
@@ -354,108 +285,6 @@ AbstractMemory::trackLoadLocked(PacketPtr pkt)
 }
 
 
-// ST: prefill metadata address region with address to parent node
-void
-AbstractMemory::prefillMetadata()
-{
-    const uint64_t arity = 8;
-    const uint64_t block_size = 64;
-    const uint64_t bonsai_counter_arity = 64;
-    const uint64_t gb_in_b = 1UL << 30;
-    const uint64_t hash_len = 8;
-
-    int data_level;
-    std::vector<uint64_t> integrity_levels;
-
-    uint64_t start_addr = size() + start();
-    uint64_t number_of_blocks = size() / block_size;
-    //round to a power of eight
-    uint64_t eights = 8;
-    do {
-        eights = eights * 8;
-    } while (eights < number_of_blocks);
-    number_of_blocks = eights;
-    uint64_t num_blocks_on_last_level =
-                                number_of_blocks / bonsai_counter_arity;
-
-    integrity_levels.push_back(gb_in_b); // integrity_levels[0] is unused
-    uint64_t num = 1;
-    while (num < num_blocks_on_last_level) {
-        integrity_levels.push_back(gb_in_b); //for each level of the tree
-        num = num * arity;
-    }
-    integrity_levels.push_back(gb_in_b); //for data
-    //total levels needed for data, counters, and tree
-    uint64_t number_of_levels = integrity_levels.size();
-    data_level = number_of_levels;
-    integrity_levels.push_back(gb_in_b); //for hash
-
-    // Use tree_level to tell request type
-    integrity_levels[0] = start_addr;
-    //data
-    integrity_levels[number_of_levels] = start_addr;
-    //counters will start where HMACs end
-    uint64_t num_hash_bytes = (number_of_blocks * hash_len);
-    integrity_levels[number_of_levels - 1] = integrity_levels[0] +
-                                                    num_hash_bytes;
-    //calculate all other levels from counter - 1 to 1
-    number_of_blocks = num_blocks_on_last_level;
-    for (uint64_t i = number_of_levels - 2; i > 0; i--) {
-        // Number of blocks refers to the
-        // number of blocks at the previous level
-        integrity_levels[i] = integrity_levels[i+1] +
-                                    number_of_blocks * block_size;
-
-        number_of_blocks = number_of_blocks / arity;
-        if (number_of_blocks == 0) {
-            number_of_blocks = 1;
-        }
-
-        if (i == 1) {
-            assert(number_of_blocks == 1);
-        }
-    }
-
-    // Fill metadata_memory with addresses
-    for (uint64_t counter_num = 0; counter_num < num; counter_num++) {
-        // Treat counter level as special case
-        uint64_t c_parent_block = counter_num / bonsai_counter_arity;
-        uint64_t c_parent_addr = integrity_levels[data_level - 2]
-                + (c_parent_block * block_size);
-        uint64_t c_meta_addr = integrity_levels[data_level - 1]
-                + (counter_num * block_size);
-
-        assert(c_meta_addr < integrity_levels[1]);
-
-        uint64_t c_addr = ((uint64_t) metadata_memory
-                + c_meta_addr - start() - size());
-
-        memcpy((void *) c_addr, (void *) &c_parent_addr, 8);
-
-        uint64_t parent_block = c_parent_block;
-
-        for (int level = data_level - 2; level > 1; level--) {
-            uint64_t block_num = parent_block;
-            parent_block /= 8;
-
-            uint64_t meta_addr = integrity_levels[level]
-                    + (block_num * block_size);
-            uint64_t parent_addr = integrity_levels[level - 1]
-                    + (parent_block * block_size);
-
-            assert(meta_addr < integrity_levels[1]);
-            uint64_t addr = ((uint64_t) metadata_memory
-                    + meta_addr - start() - size());
-
-            memcpy((void *) addr, (void *) &parent_addr, 8);
-        }
-    }
-
-    // Assert that the in-memory structures exist for huffman structures
-    
-}
-
-
 // Called on *writes* only... both regular stores and
 // store-conditional operations.  Check for conventional stores which
 // conflict with locked addresses, and for success/failure of store
@@ -565,37 +394,13 @@ AbstractMemory::access(PacketPtr pkt)
       return;
     }
 
-    assert(pkt->req->is_metadata() || pkt->req->is_huffman || pkt->req->is_increment
-            || pkt->req->is_clear || pkt->getAddrRange().isSubset(range));
+    // assert(pkt->getAddrRange().isSubset(range));
 
-    uint8_t *host_addr = toHostAddr(pkt->getAddr());
-
-    if (pkt->req->is_increment) {
-        // get data block id
-        uint64_t pg_id = (pkt->getAddr() - range.start()) / 4096; // PAGE_SIZE
-        host_addr = (uint8_t *) (active_huffman_queue +
-            (sizeof(uint64_t) * pg_id));
-    } else if (pkt->req->is_sort) {
-        // we need to swap the queues if we determine that
-        // we are sorting the pq
-        if (pkt->getAddr() == 0 && pkt->isRead()) {
-            uint64_t *temp = active_huffman_queue;
-            active_huffman_queue = inactive_huffman_queue;
-            inactive_huffman_queue = temp;
-        }
-        // get the appropriate block from the inactive queue
-        host_addr = (uint8_t *) (inactive_huffman_queue + 
-            sizeof(uint64_t) * pkt->getAddr());
-    } else if (pkt->req->is_clear) {
-        host_addr = (uint8_t *) (inactive_huffman_queue +
-            (pkt->getAddr() * sizeof(uint64_t)));
-    } else if (pkt->req->is_huffman) {
-        host_addr = (uint8_t *) ((uint64_t) aux_huffman_tree) +
-            pkt->getAddr();
-    } else if (pkt->req->is_metadata()) {
-        uint64_t index = pkt->getAddr() - size() - start();
-        host_addr = (uint8_t *) &metadata_memory[index];
-        assert(host_addr < pmemAddr || host_addr > pmemAddr + range.size());
+    uint8_t *host_addr;
+    if (pkt->getAddrRange().isSubset(range)) {
+        host_addr = toHostAddr(pkt->getAddr());
+    } else {
+        host_addr = security_metadata;
     }
 
     if (pkt->cmd == MemCmd::SwapReq) {
@@ -646,7 +451,7 @@ AbstractMemory::access(PacketPtr pkt)
             // to do the LL/SC tracking here
             trackLoadLocked(pkt);
         }
-        if (pmemAddr && !pkt->req->is_prefill) {
+        if (pmemAddr) {
             pkt->setData(host_addr);
         }
         TRACE_PACKET(pkt->req->isInstFetch() ? "IFetch" : "Read");
@@ -684,12 +489,12 @@ AbstractMemory::access(PacketPtr pkt)
 void
 AbstractMemory::functionalAccess(PacketPtr pkt)
 {
-    assert(pkt->getAddrRange().isSubset(range));
+    // assert(pkt->getAddrRange().isSubset(range));
 
     uint8_t *host_addr = toHostAddr(pkt->getAddr());
 
     if (pkt->isRead()) {
-        if (pmemAddr && !pkt->req->is_prefill) {
+        if (pmemAddr) {
             pkt->setData(host_addr);
         }
         TRACE_PACKET("Read");

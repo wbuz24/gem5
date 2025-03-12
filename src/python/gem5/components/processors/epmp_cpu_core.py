@@ -45,7 +45,7 @@ from ...utils.requires import requires
 from .abstract_core import AbstractCore
 
 
-class BaseCPUCore(AbstractCore):
+class BaseEPMPCore(AbstractCore):
     """
     An stdlib AbstractCore subclass which wraps a BaseCPU SimObject type.
     """

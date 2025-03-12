@@ -1,6 +1,6 @@
 # The gem5 Simulator
 
-This is the repository for the gem5 simulator. It contains the full source code
+This is a fork of the official repository for the gem5 simulator. It contains the full source code
 for the simulator and all tests and regressions.
 
 This is the new version of gem5 (as of Oct 2024) incorporating the Secure Memory

@@ -740,7 +740,7 @@ TimingEncryptionEngine::MemSidePort::sendPacket(PacketPtr pkt)
             owner->active_requests.erase(to_send);
 
             assert(to_send->isWrite());
-            owner->cpu_side_port.sendRetryReq();
+            //owner->cpu_side_port.sendRetryReq();
         }
 
         if (!blockedPackets.empty()) {

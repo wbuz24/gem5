@@ -36,6 +36,8 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Tutorial author: Samuel Thomas, Brown University
  */
 
 /**
@@ -117,13 +119,8 @@ class AbstractMemory : public ClockedObject
     // Pointer to host memory used to implement this memory
     uint8_t* pmemAddr;
 
-    // ST: memory for metadata
-    uint8_t *metadata_memory;
-
-    // For in-memory huffman tree
-    uint64_t *active_huffman_queue = nullptr;
-    uint64_t *inactive_huffman_queue = nullptr;
-    uint64_t *aux_huffman_tree = nullptr;
+    // for tutorial :-)
+    uint8_t* security_metadata;
 
     // Backdoor to access this memory.
     MemBackdoor backdoor;
@@ -137,13 +134,11 @@ class AbstractMemory : public ClockedObject
     // Should KVM map this memory for the guest
     const bool kvmMap;
 
+    // Are writes allowed to this memory
+    const bool writeable;
+
     std::list<LockedAddr> lockedAddrList;
 
-  public:
-    // ST: prefill metadata memory with addresses to parent node
-    void prefillMetadata();
-
-  protected:
     // helper function for checkLockedAddrs(): we really want to
     // inline a quick check for an empty locked addr list (hopefully
     // the common case), and do the full list search (if necessary) in
@@ -162,8 +157,12 @@ class AbstractMemory : public ClockedObject
     // requesting execution context), 'true' otherwise.  Note that
     // this method must be called on *all* stores since even
     // non-conditional stores must clear any matching lock addresses.
-    bool writeOK(PacketPtr pkt) {
+    bool
+    writeOK(PacketPtr pkt)
+    {
         const RequestPtr &req = pkt->req;
+        if (!writeable)
+            return false;
         if (lockedAddrList.empty()) {
             // no locked addrs: nothing to check, store_conditional fails
             bool isLLSC = pkt->isLLSC();
@@ -182,8 +181,6 @@ class AbstractMemory : public ClockedObject
      * needed when registering stats
      */
     System *_system;
-
-    bool is_pointer;
 
     struct MemStats : public statistics::Group
     {
@@ -230,8 +227,6 @@ class AbstractMemory : public ClockedObject
 
     AbstractMemory(const Params &p);
     virtual ~AbstractMemory() {}
-
-    void startup();
 
     void initState() override;
 

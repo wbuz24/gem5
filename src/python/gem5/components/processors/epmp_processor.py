@@ -30,7 +30,7 @@ from typing import Optional
 from m5.util import warn
 
 from ...isas import ISA
-from ..processors.epmp_core import SimpleCore
+from ..processors.epmp_core import EPMPCore
 from .base_cpu_processor import BaseCPUProcessor
 from .cpu_types import CPUTypes
 
@@ -51,7 +51,7 @@ class SimpleEPMPProcessor(BaseCPUProcessor):
         """
         super().__init__(
             cores=[
-                SimpleCore(cpu_type=cpu_type, core_id=i, isa=isa)
+                EPMPCore(cpu_type=cpu_type, core_id=i, isa=isa)
                 for i in range(num_cores)
             ]
         )
