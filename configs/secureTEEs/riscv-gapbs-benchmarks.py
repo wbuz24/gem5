@@ -55,9 +55,11 @@ import m5
 from m5.objects import Root
 
 from gem5.coherence_protocol import CoherenceProtocol
-from gem5.components.boards.x86_board import X86Board
+from gem5.components.boards.riscv_board import RiscvBoard
 from gem5.components.memory import DualChannelDDR4_2400
+from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.processors.cpu_types import CPUTypes
+from gem5.components.processors.epmp_processor import SimpleEPMPProcessor
 from gem5.components.processors.simple_switchable_processor import (
     SimpleSwitchableProcessor,
 )
@@ -66,10 +68,19 @@ from gem5.resources.resource import obtain_resource
 from gem5.simulate.exit_event import ExitEvent
 from gem5.simulate.simulator import Simulator
 from gem5.utils.requires import requires
+#from gem5.components.cachehierarchies.ruby.mesi_two_level_cache_hierarchy import (
+#    MESITwoLevelCacheHierarchy,
+#)
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_walk_cache_hierarchy import (
+  PrivateL1PrivateL2WalkCacheHierarchy,
+)
+from gem5.components.cachehierarchies.classic.private_l1_shared_l2_cache_hierarchy import (
+  PrivateL1SharedL2CacheHierarchy,
+)
 
 requires(
-    isa_required=ISA.X86,
-    coherence_protocol_required=CoherenceProtocol.MESI_TWO_LEVEL,
+    isa_required=ISA.RISCV,
+#    coherence_protocol_required=CoherenceProtocol.MESI_TWO_LEVEL,
     kvm_required=True,
 )
 
@@ -93,27 +104,28 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-
 # Setting up all the fixed system parameters here
 # Caches: MESI Two Level Cache Hierarchy
 
-from gem5.components.cachehierarchies.ruby.mesi_two_level_cache_hierarchy import (
-    MESITwoLevelCacheHierarchy,
+#cache_hierarchy = MESITwoLevelCacheHierarchy(
+#    l1d_size="32kB",
+#    l1d_assoc=8,
+#    l1i_size="32kB",
+#    l1i_assoc=8,
+#    l2_size="256kB",
+#    l2_assoc=16,
+#    num_l2_banks=2,
+#)
+
+cache_hierarchy = PrivateL1SharedL2CacheHierarchy (
+  l1d_size="32KiB", l1i_size="32KiB", l2_size="512KiB"
 )
 
-cache_hierarchy = MESITwoLevelCacheHierarchy(
-    l1d_size="32kB",
-    l1d_assoc=8,
-    l1i_size="32kB",
-    l1i_assoc=8,
-    l2_size="256kB",
-    l2_assoc=16,
-    num_l2_banks=2,
-)
 # Memory: Dual Channel DDR4 2400 DRAM device.
 # The X86 board only supports 3 GB of main memory.
 
-memory = DualChannelDDR4_2400(size="3GB")
+# memory = DualChannelDDR4_2400(size="3GB")
+memory = SecureSimpleMemory(size="3GiB")
 
 # Here we setup the processor. This is a special switchable processor in which
 # a starting core type and a switch core type must be specified. Once a
@@ -122,16 +134,15 @@ memory = DualChannelDDR4_2400(size="3GB")
 # we start with KVM cores to simulate the OS boot, then switch to the Timing
 # cores for the command we wish to run after boot.
 
+#processor = SimpleEPMPProcessor(cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1)
 processor = SimpleSwitchableProcessor(
-    starting_core_type=CPUTypes.KVM,
+    starting_core_type=CPUTypes.ATOMIC,
     switch_core_type=CPUTypes.TIMING,
-    isa=ISA.X86,
+    isa=ISA.RISCV,
     num_cores=2,
 )
 
-# Here we setup the board. The X86Board allows for Full-System X86 simulations
-
-board = X86Board(
+board = RiscvBoard(
     clk_freq="3GHz",
     processor=processor,
     memory=memory,
@@ -148,7 +159,6 @@ board = X86Board(
 # executing the rest of the benchmark.
 
 board.set_workload(obtain_resource(args.benchmark))
-
 
 def handle_workbegin():
     print("Done booting Linux")

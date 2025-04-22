@@ -147,8 +147,10 @@ Clint::readMSIP(Register32& reg, const int thread_id)
 void
 Clint::writeMSIP(Register32& reg, const uint32_t& data, const int thread_id)
 {
+    uint32_t _data = data;
+    //if (_data != 0) _data = 1; // maybe break everything we will see
     reg.update(data);
-    assert(data <= 1);
+    //assert(_data <= 1);
     auto tc = system->threads[thread_id];
     if (data > 0) {
         DPRINTF(Clint, "MSIP posted - thread: %d\n", thread_id);

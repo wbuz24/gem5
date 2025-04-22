@@ -68,7 +68,7 @@ memory = SecureSimpleMemory(size="1GiB")#SingleChannelDDR3_1600()
 
 # Setup a single core Processor.
 processor = SimpleEPMPProcessor(
-    cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
+    cpu_type=CPUTypes.ATOMIC, isa=ISA.RISCV, num_cores=1
 )
 
 # Setup the board.
