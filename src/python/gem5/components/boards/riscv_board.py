@@ -495,7 +495,7 @@ class RiscvBoard(AbstractSystemBoard, KernelDiskWorkload):
 
     @overrides(KernelDiskWorkload)
     def get_disk_device(self):
-        return "/dev/vda"
+        return "/dev/vda1"
 
     @overrides(AbstractSystemBoard)
     def _pre_instantiate(self):

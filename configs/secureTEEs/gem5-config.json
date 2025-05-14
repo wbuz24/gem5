@@ -1,8 +1,0 @@
-{
-    "sources": {
-        "my-json-data-source": {
-            "url": "/home/wbuziak/repos/gem5/configs/secureTEEs/my-resource.json",
-            "isMongo": false
-        }
-    }
-}

@@ -25,72 +25,72 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-This example runs a simple linux boot. It uses the 'riscv-disk-img' resource.
-It is built with the sources in `src/riscv-fs` in [gem5 resources](
-https://github.com/gem5/gem5-resources).
+Usage
+-----
 
-Characteristics
----------------
-
-* Runs exclusively on the RISC-V ISA with the classic caches
-* Assumes that the kernel is compiled into the bootloader
-* Automatically generates the DTB file
-* Will boot but requires a user to login using `m5term` (username: `root`,
-  password: `root`)
+```
+scons build/RISCV/gem5.opt
+GEM5_CONFIG=/path/to/resource_config.json ./build/RISCV/gem5.opt configs/secureTEEs/riscv-hello.py
+```
 """
 
-from gem5.components.boards.riscv_board import RiscvBoard
-from gem5.components.cachehierarchies.classic.private_l1_private_l2_walk_cache_hierarchy import (
-    PrivateL1PrivateL2WalkCacheHierarchy,
-)
+import m5
+from m5.objects import *
+
+from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.memory import SingleChannelDDR3_1600
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.memory.secure import SecureMemorySystem
 from gem5.components.processors.cpu_types import CPUTypes
-from gem5.components.processors.epmp_processor import SimpleEPMPProcessor
+from gem5.components.processors.simple_processor import SimpleProcessor
+from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
-from gem5.resources.resource import obtain_resource
+from gem5.resources.resource import *
 from gem5.simulate.simulator import Simulator
 from gem5.utils.requires import requires
 
-# Run a check to ensure the right version of gem5 is being used.
+m5.util.addToPath("../")
+from common import SimpleOpts
+
+# This check ensures the gem5 binary is compiled to the RISC-V ISA target.
 requires(isa_required=ISA.RISCV)
 
-# Setup the cache hierarchy.
-# For classic, PrivateL1PrivateL2 and NoCache have been tested.
-# For Ruby, MESI_Two_Level and MI_example have been tested.
-cache_hierarchy = PrivateL1PrivateL2WalkCacheHierarchy(
-    l1d_size="32KiB", l1i_size="32KiB", l2_size="512KiB"
+# The entire cache hierarchy is set up with this class structure
+cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
+
+# Secure memory implementation
+memory = SecureSimpleMemory(size="1GiB")
+
+# We use a simple Timing processor with one core.
+processor = SimpleProcessor(
+    cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
 )
 
-# Setup the system memory.
-memory = SecureSimpleMemory(size="1GiB")#SingleChannelDDR3_1600()
-
-# Setup a single core Processor.
-processor = SimpleEPMPProcessor(
-    cpu_type=CPUTypes.ATOMIC, isa=ISA.RISCV, num_cores=1
-)
-
-# Setup the board.
-board = RiscvBoard(
-    clk_freq="1GHz",
+# The gem5 library simble board which can be used to run simple SE-mode
+# simulations.
+board = SimpleBoard(
+    clk_freq="3GHz",
     processor=processor,
     memory=memory,
     cache_hierarchy=cache_hierarchy,
 )
 
-# Set the Full System workload.
-board.set_kernel_disk_workload(
-    kernel=obtain_resource(
-        "riscv-bootloader-vmlinux-5.10", resource_version="1.0.0"
+# Call your binary here, and assign command line arguments
+board.set_se_binary_workload(
+    BinaryResource(
+        local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
     ),
-    disk_image=obtain_resource("riscv-disk-img", resource_version="1.0.0"),
+    arguments=["10001"],
 )
 
+# Lastly we run the simulation.
 simulator = Simulator(board=board)
-print("Beginning simulation!")
-# Note: This simulation will never stop. You can access the terminal upon boot
-# using m5term (`./util/term`): `./m5term localhost <port>`. Note the `<port>`
-# value is obtained from the gem5 terminal stdout. Look out for
-# "system.platform.terminal: Listening for connections on port <port>".
 simulator.run()
+
+print(
+    "Exiting @ tick {} because {}.".format(
+        simulator.get_current_tick(), simulator.get_last_exit_event_cause()
+    )
+)

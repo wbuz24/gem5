@@ -25,72 +25,89 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
+This script shows an example of running a full system RISCV Ubuntu boot
+simulation using the gem5 library. This simulation boots Ubuntu 20.04 using
+2 TIMING CPU cores. The simulation ends when the startup is completed
+successfully.
+
 Usage
 -----
 
 ```
 scons build/RISCV/gem5.opt
-GEM5_CONFIG=/path/to/resource_config.json ./build/RISCV/gem5.opt configs/secureTEEs/riscv-hello.py
+./build/RISCV/gem5.opt \
+    configs/example/gem5_library/riscv-ubuntu-run.py
 ```
 """
 
 import m5
-from m5.objects import *
+from m5.objects import Root
 
-from gem5.components.boards.simple_board import SimpleBoard
-from gem5.components.memory import SingleChannelDDR3_1600
+import argparse
+
+from gem5.components.boards.riscv_board import RiscvBoard
+from gem5.components.memory import DualChannelDDR4_2400
+from gem5.components.processors.cpu_types import CPUTypes
+from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.memory.secure import SecureMemorySystem
-from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
 from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
-from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
-from gem5.resources.resource import *
+from gem5.resources.resource import obtain_resource
+from gem5.resources.resource import KernelResource
+from gem5.resources.resource import DiskImageResource
+from gem5.resources.resource import BootloaderResource
 from gem5.simulate.simulator import Simulator
 from gem5.utils.requires import requires
 
-m5.util.addToPath("../")
-from common import SimpleOpts
-
-# This check ensures the gem5 binary is compiled to the RISC-V ISA target.
-requires(isa_required=ISA.RISCV)
-
-# The entire cache hierarchy is set up with this class structure
-cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(l1d_size="32KiB", l1i_size="32KiB", l2_size="64KiB")
-
-# Secure memory implementation
-memory = SecureSimpleMemory(size="1GiB")
-
-# We use a simple Timing processor with one core.
-processor = SimpleProcessor(
-    cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=1
+# args
+parser = argparse.ArgumentParser()
+parser.add_argument(
+  "--disk-image",
+  type=str,
+  required=False,
+  help="Input disk image",
 )
 
-# The gem5 library simble board which can be used to run simple SE-mode
+args = parser.parse_args()
+
+# This runs a check to ensure the gem5 binary is compiled for RISCV.
+
+requires(isa_required=ISA.RISCV)
+
+# Here we setup the parameters of the l1 and l2 caches.
+cache_hierarchy = SecurePrivateL1PrivateL2CacheHierarchy(
+    l1d_size="16kB", l1i_size="16kB", l2_size="256kB"
+)
+
+# Memory: Dual Channel DDR4 2400 DRAM device.
+memory = SecureSimpleMemory(size="3GB")
+
+# Here we setup the processor. We use a simple processor.
+processor = SimpleProcessor(
+    cpu_type=CPUTypes.ATOMIC, isa=ISA.RISCV, num_cores=1
+)
+
+# Here we setup the board. The RiscvBoard allows for Full-System RISCV
 # simulations.
-board = SimpleBoard(
+board = RiscvBoard(
     clk_freq="3GHz",
     processor=processor,
     memory=memory,
     cache_hierarchy=cache_hierarchy,
 )
 
-# Call your binary here, and assign command line arguments
-board.set_se_binary_workload(
-    BinaryResource(
-        local_path="/home/wbuziak/repos/gem5/progs/binaries/arrflip"
-    ),
-    arguments=["100000001"],
+# Here we a full system workload: "riscv-ubuntu-20.04-boot" which boots
+# Ubuntu 20.04. Once the system successfully boots it encounters an `m5_exit`
+# instruction which stops the simulation. When the simulation has ended you may
+# inspect `m5out/system.pc.com_1.device` to see the stdout.
+board.set_kernel_disk_workload(
+    bootloader = BootloaderResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/riscv-bootloader-opensbi-1.3.1-20231129'),
+    kernel=KernelResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/linux-kernel-6.5.5'),
+    disk_image=DiskImageResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/riscv-ubuntu-22.04-img')
 )
 
-# Lastly we run the simulation.
 simulator = Simulator(board=board)
 simulator.run()
-
-print(
-    "Exiting @ tick {} because {}.".format(
-        simulator.get_current_tick(), simulator.get_last_exit_event_cause()
-    )
-)
