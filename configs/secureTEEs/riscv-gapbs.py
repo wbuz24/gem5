@@ -51,8 +51,8 @@ from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.memory.secure import SecureMemorySystem
-from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.private_l1_shared_l2_cache_hierarchy import PrivateL1SharedL2CacheHierarchy
 from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
 from gem5.isas import ISA
 from gem5.resources.resource import obtain_resource
@@ -78,7 +78,7 @@ args = parser.parse_args()
 requires(isa_required=ISA.RISCV)
 
 # Here we setup the parameters of the l1 and l2 caches.
-cache_hierarchy = SecurePrivateL1PrivateL2CacheHierarchy(
+cache_hierarchy = PrivateL1SharedL2CacheHierarchy(
     l1d_size="16kB", l1i_size="16kB", l2_size="256kB"
 )
 
@@ -103,10 +103,19 @@ board = RiscvBoard(
 # Ubuntu 20.04. Once the system successfully boots it encounters an `m5_exit`
 # instruction which stops the simulation. When the simulation has ended you may
 # inspect `m5out/system.pc.com_1.device` to see the stdout.
+
+command = (
+    f"cd repos/gapbs\n" \
+    + f"echo '\n\nRunning Benchmark\n\n'\n" \
+    + f"./bfs -g 10 -n 1\n" \
+    + "m5 exit\n" \
+)
+
 board.set_kernel_disk_workload(
-    bootloader = BootloaderResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/riscv-bootloader-opensbi-1.3.1-20231129'),
-    kernel=KernelResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/linux-kernel-6.5.5'),
-    disk_image=DiskImageResource(local_path='/home/wbuziak/repos/base-gem5/resources/binaries/riscv-ubuntu-22.04-img')
+    bootloader = BootloaderResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/riscv-bootloader-opensbi-1.3.1-20231129'),
+    kernel=KernelResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/linux-kernel-6.5.5'),
+    disk_image=DiskImageResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/riscv-ubuntu-22.04-img'),
+    readfile_contents=command,
 )
 
 simulator = Simulator(board=board)
