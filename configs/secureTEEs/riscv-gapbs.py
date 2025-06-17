@@ -105,10 +105,11 @@ board = RiscvBoard(
 # inspect `m5out/system.pc.com_1.device` to see the stdout.
 
 command = (
-    f"cd repos/gapbs\n" \
+    f"pwd" 
+    + f"cd repos/gapbs" \
     + f"echo '\n\nRunning Benchmark\n\n'\n" \
-    + f"./bfs -g 10 -n 1\n" \
-    + "m5 exit\n" \
+    + f"./bfs -g 10 -n 1" \
+    + "m5 exit" \
 )
 
 board.set_kernel_disk_workload(
