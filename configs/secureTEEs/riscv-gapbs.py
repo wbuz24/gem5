@@ -105,17 +105,16 @@ board = RiscvBoard(
 # inspect `m5out/system.pc.com_1.device` to see the stdout.
 
 command = (
-    f"pwd" 
-    + f"cd repos/gapbs" \
-    + f"echo '\n\nRunning Benchmark\n\n'\n" \
-    + f"./bfs -g 10 -n 1" \
-    + "m5 exit" \
+    f"pwd;" 
+    + f"cd repos/gapbs;" \
+    + f"./bfs -g 10 -n 1;" \
+    + "m5 exit;" \
 )
 
 board.set_kernel_disk_workload(
     bootloader = BootloaderResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/riscv-bootloader-opensbi-1.3.1-20231129'),
     kernel=KernelResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/linux-kernel-6.5.5'),
-    disk_image=DiskImageResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/riscv-ubuntu-22.04-img'),
+    disk_image=DiskImageResource(local_path='/home/wbuziak/repos/gem5/resources/binaries/riscv-ubuntu-22.04'),
     readfile_contents=command,
 )
 
