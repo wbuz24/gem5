@@ -99,10 +99,12 @@ board = RiscvBoard(
     cache_hierarchy=cache_hierarchy,
 )
 
-# Here we a full system workload: "riscv-ubuntu-20.04-boot" which boots
-# Ubuntu 20.04. Once the system successfully boots it encounters an `m5_exit`
-# instruction which stops the simulation. When the simulation has ended you may
-# inspect `m5out/system.pc.com_1.device` to see the stdout.
+# Here we have a full system workload disk image: "riscv-ubuntu-22.04" which boots
+# Ubuntu 22.04. It holds the gapbs benchmark and is loaded by the opnsbi bootloader 
+# and linux-kernel-6.5.5 kernel binary found on the gem5 resources website. 
+# Once the system successfully boots it runs the benchmark, the output of which can 
+# be seen through a serial terminal. When the benchmark has ended, an m5_exit signal is sent
+# which ends the simulation. Outputs can be found in the m5out/ folder.
 
 command = (
     f"pwd;" 

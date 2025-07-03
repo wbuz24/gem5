@@ -1205,6 +1205,34 @@ TimingSimpleCPU::DcachePort::recvReqRetry()
     }
 }
 
+// These implement the logic for the MEE-CPU CPU-side port
+TimingSimpleCPU::MEERequestPort::recvTimingResp(PacketPtr pkt)
+{
+  // Currently, these do not implement anything
+  return;
+};
+
+TimingSimpleCPU::MEERequestPort::recvReqRetry()
+{
+  return;
+};
+
+TimingSimpleCPU::MEERequestPort::sendPacket(PacketPtr pkt)
+{
+  return;
+};
+
+TimingSimpleCPU::MEERequestPort::recvRangeChange()
+{
+  return;
+};
+TimingSimpleCPU::MEERequestPort::trySendPacket(PacketPtr pkt)
+{
+  return;
+};
+
+// ------
+
 TimingSimpleCPU::IprEvent::IprEvent(Packet *_pkt, TimingSimpleCPU *_cpu,
     Tick t)
     : pkt(_pkt), cpu(_cpu)

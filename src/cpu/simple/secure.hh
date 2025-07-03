@@ -262,7 +262,7 @@ namespace gem5
         and services ePMP-PMP metadata updates. This is the CPU's request port
         which interfaces with the MEE response port.
     */
-      class MEERequestPort : public MemSidePort
+      class MEERequestPort : public TimingCPUPort 
     {
       private:
         TimingSimpleCPU* cpu;
@@ -270,7 +270,7 @@ namespace gem5
       public:
         MEERequestPort(const std::string &name,
             TimingSimpleCPU *cpu) :
-          MemSidePort(name, owner), owner(owner) {  };
+          MemSidePort(name, owner), owner(owner) {  printf("\n\nMEE request port\n\n"); };
 
         // All these methods are artifacts from Sam's implementation - must address
         bool recvTimingResp(PacketPtr pkt) override;
