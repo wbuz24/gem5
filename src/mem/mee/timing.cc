@@ -952,6 +952,55 @@ TimingEncryptionEngine::MEEStats::MEEStats(TimingEncryptionEngine &timing) :
 {
 }
 
+ 
+////////////////////////////////////////////////////
+///////// MEE RESPONSE PORT FUNCTIONS /////////
+////////////////////////////////////////////////////
+
+bool
+TimingEncryptionEngine::MEEResponsePort::recvTimingReq(PacketPtr pkt)
+{
+/*    if (!(pkt->isRead() || pkt->isWrite())) {
+        if (pkt->needsResponse()) {
+            assert(pkt->isInvalidate());
+
+            owner->scheduleInvalidate();
+            owner->invalidateQueue.push_back(pkt);
+
+            return true;
+        }
+
+        return true;
+    } else if (pkt->isRead()) {
+        assert(owner->pending_metadata_reads.find(pkt->getAddr()) !=
+                owner->pending_metadata_reads.end());
+        owner->pending_metadata_reads[pkt->getAddr()]->req->
+                metadata_cache_miss = true;
+    } else if (!pkt->isEviction()) {
+        assert(pkt->isWrite());
+        assert(owner->pending_metadata_writes.find(pkt->getAddr()) !=
+                owner->pending_metadata_writes.end());
+        owner->pending_metadata_writes[pkt->getAddr()]->req->
+                metadata_cache_miss = true;
+    } else {
+        pkt->req->req_type = Request::RequestType::MetadataWrite;
+    }
+
+    owner->mem_side_port.sendPacket(pkt);
+*/
+    return true;
+}
+
+
+
+void
+TimingEncryptionEngine::MEEResponsePort::sendPacket(PacketPtr pkt)
+{
+    if (!sendTimingResp(pkt)) {
+        blockedPackets.push_back(pkt);
+    }
+}
+
 void
 TimingEncryptionEngine::MEEStats::regStats()
 {

@@ -158,6 +158,20 @@ class TimingEncryptionEngine : public SimObject
         void sendPacket(PacketPtr pkt);
     };
 
+    class MEEResponsePort : public CpuSidePort
+    {
+      private:
+        TimingEncryptionEngine *owner;
+
+      public:
+        MEEResponsePort(const std::string &name,
+                                  TimingEncryptionEngine *owner) :
+          CpuSidePort(name, owner), owner(owner) { };
+
+        bool recvTimingReq(PacketPtr pkt) override;
+        void sendPacket(PacketPtr pkt);
+    };
+
   public:
     CpuSidePort cpu_side_port;
     MemSidePort mem_side_port;
@@ -171,6 +185,9 @@ class TimingEncryptionEngine : public SimObject
     // cache
     MetadataResponsePort metadata_response_port;
 
+    // Connects to the CPU, completely bypassing the other components, 
+    // services PMP update requests
+    MEEResponsePort mee_response_port;
 
     ////////////////////////////////////////
     /////// Encryption Engine fields ///////
