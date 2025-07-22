@@ -64,7 +64,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         CpuSidePort
                 (const std::string &name, TimingEncryptionEngine *owner) :
-            ResponsePort(name), owner(owner), needRetry(false)
+            ResponsePort(name), needRetry(false)
           {  };
 
         AddrRangeList getAddrRanges() const override;
@@ -133,7 +133,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         MetadataRequestPort(const std::string &name,
                                   TimingEncryptionEngine *owner) :
-          MemSidePort(name, owner), owner(owner) {  };
+          MemSidePort(name, owner) {  };
 
         bool recvTimingResp(PacketPtr pkt) override;
         void recvTimingSnoopReq(PacketPtr pkt) override { return; }
@@ -152,7 +152,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         MetadataResponsePort(const std::string &name,
                                   TimingEncryptionEngine *owner) :
-          CpuSidePort(name, owner), owner(owner) {  };
+          CpuSidePort(name, owner) {  };
 
         bool recvTimingReq(PacketPtr pkt) override;
         void sendPacket(PacketPtr pkt);
@@ -166,7 +166,7 @@ class TimingEncryptionEngine : public SimObject
       public:
         MEEResponsePort(const std::string &name,
                                   TimingEncryptionEngine *owner) :
-          CpuSidePort(name, owner), owner(owner) { };
+          CpuSidePort(name, owner) { };
 
         bool recvTimingReq(PacketPtr pkt) override;
         void sendPacket(PacketPtr pkt);
