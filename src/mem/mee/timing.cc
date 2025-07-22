@@ -40,6 +40,7 @@ TimingEncryptionEngine::TimingEncryptionEngine
     mem_side_port(p->name + ".mem_side", this),
     metadata_request_port(p->name + ".metadata_request_port", this),
     metadata_response_port(p->name + ".metadata_response_port", this),
+    mee_response_port(p->name + ".mee_response_port", this),
     memory_size(p->num_gb << 30), start_addr(p->start_addr << 30),
     cache_hmacs(p->cache_hmac),
     cipherEvent([this] { processCipherEvent(); }, name()),
