@@ -46,7 +46,7 @@
 #include "cpu/simple/exec_context.hh"
 #include "cpu/translation.hh"
 #include "params/BaseTimingSimpleCPU.hh"
-#include "mem/mee/timing.hh"
+//#include "mem/mee/timing.hh"
 
 namespace gem5
 {
@@ -60,7 +60,7 @@ class TimingSimpleCPU : public BaseSimpleCPU
 
     void init() override;
 
-    TimingEncryptionEngine *mee = (TimingEncryptionEngine *) SimObject::find("mee");
+  //  TimingEncryptionEngine *mee = (TimingEncryptionEngine *) SimObject::find("mee");
 
   private:
 

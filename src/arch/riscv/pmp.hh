@@ -37,6 +37,7 @@
 #include "mem/packet.hh"
 #include "params/PMP.hh"
 #include "sim/sim_object.hh"
+#include "mem/mee/timing.hh"
 
 /**
  * @file
@@ -114,6 +115,10 @@ class PMP : public SimObject
 
     /** a table of pmp entries */
     std::vector<PmpEntry> pmpTable;
+
+    /** a pointer to a memory encryption engine in order to access ePMP data **/
+
+    TimingEncryptionEngine *mee = (TimingEncryptionEngine *) SimObject::find("mee");
 
   public:
     /**
