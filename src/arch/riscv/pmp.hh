@@ -61,6 +61,10 @@ class PMP : public SimObject
     PARAMS(PMP);
     PMP(const Params &params);
 
+    /** a pointer to a memory encryption engine in order to access ePMP data **/
+
+    TimingEncryptionEngine *mee;
+
   private:
     /** maximum number of entries in the pmp table */
     int pmpEntries;
@@ -116,10 +120,6 @@ class PMP : public SimObject
     /** a table of pmp entries */
     std::vector<PmpEntry> pmpTable;
 
-    /** a pointer to a memory encryption engine in order to access ePMP data **/
-
-    TimingEncryptionEngine *mee = (TimingEncryptionEngine *) SimObject::find("mee");
-
   public:
     /**
      * pmpCheck checks if a particular memory access
@@ -155,6 +155,13 @@ class PMP : public SimObject
      * @returns true if update pmpaddri success
      */
     bool pmpUpdateAddr(uint32_t pmp_index, Addr this_addr);
+
+    /**
+     * Check the CSR if you need to send to the MEC
+     * (Memory Encryption Engine/Controller) or straight
+     * to the external memory controller
+    **/
+    bool ifEncrypt(uint8_t this_cfg);
 
     /**
      * pmpReset reset when reset signal in trigger from

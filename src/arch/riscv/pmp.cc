@@ -55,6 +55,8 @@ PMP::PMP(const Params &params) :
 {
     pmpTable.resize(pmpEntries);
     //printf("\n\nPMP size of: %ld\n\n", pmpTable.size());
+    mee = (TimingEncryptionEngine *) SimObject::find("board.memory.mee");
+    if (mee == NULL) { printf("\n\nMEE pointer is NULL\n\n"); }
 }
 
 Fault
@@ -149,6 +151,12 @@ PMP::pmpGetAField(uint8_t cfg)
     return a & 0x03;
 }
 
+bool
+PMP::ifEncrypt(uint8_t this_cfg)
+{
+    // Check the 5th bit of pmpcfg register 
+    return 1 && (this_cfg >> 5);
+}
 
 bool
 PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
@@ -169,6 +177,18 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     }
     pmpTable[pmp_index].pmpCfg = this_cfg;
     pmpUpdateRule(pmp_index);
+
+    // Check for encryption
+    if (ifEncrypt(this_cfg)) {
+      // Send to memory encryption engine
+      printf("pmpcfg: %u -> encrypt bit set\n Send to Encryption\n", this_cfg);
+    }
+    else {
+      // Send to external memory controller
+      printf("pmpcfg: %u -> encrypt bit is not set\n Send through to Memory Controller\n", this_cfg);
+      // printf("\n\nSanity Check - MEE->max_active_requests: %d\n\n", mee->max_active_requests);
+    }
+
     return true;
 }
 
