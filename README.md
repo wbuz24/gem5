@@ -18,6 +18,12 @@ more information about building the simulator and getting started
 please see <http://www.gem5.org/documentation> and
 <http://www.gem5.org/documentation/learning_gem5/introduction>.
 
+Note: Since gem5 is an ever-expanding open-source project, much of the documentation
+will be aimed either towards the newest gem5 version, or even perhaps out-dated beyond
+the version in this repository (version 24.0.0.1) and as such, the official
+documentation may, on occassion, be incorrect / unhelpful. Where applicable, relevant
+documentation is provided within README.md for the specified tool.
+
 ## Building gem5
 
 To build gem5, you will need the following software: g++ or clang,
