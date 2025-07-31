@@ -3,8 +3,8 @@
 This is a fork of the official repository for the gem5 simulator. It contains the full source code
 for the simulator and all tests and regressions.
 
-This is the new version of gem5 (as of Oct 2024) incorporating the Secure Memory
-code written by Sam Thomas.
+This is the a fork of gem5 version 24.0.0.1, incorporating the Secure Memory
+code written by Sam Thomas and extended by Will Buziak.
 
 The gem5 simulator is a modular platform for computer-system architecture
 research, encompassing system-level architecture as well as processor
