@@ -62,7 +62,7 @@ class BaseMemoryEncryptionEngine : public SimObject
       public:
         CpuSidePort
                 (const std::string &name, BaseMemoryEncryptionEngine *owner) :
-            ResponsePort(name, owner), owner(owner), needRetry(false)
+            ResponsePort(name, id), owner(owner), needRetry(false)
           {  };
 
         AddrRangeList getAddrRanges() const override;
@@ -93,7 +93,7 @@ class BaseMemoryEncryptionEngine : public SimObject
       public:
         MemSidePort(const std::string &name,
                 BaseMemoryEncryptionEngine *owner) :
-            RequestPort(name, owner), owner(owner)
+            RequestPort(name, id), owner(owner)
           {  };
 
         bool isSnooping() const override { return true; }
