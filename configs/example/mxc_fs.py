@@ -62,6 +62,7 @@ from common import MCXMemConfig as MemConfig
 from common import ObjectList
 from common.Caches import *
 from common import Options
+from gem5.components.memory.secure import TimingEncryptionEngine 
 
 def cmd_line_template():
     if args.command_line and args.command_line_file:
@@ -76,6 +77,7 @@ def cmd_line_template():
 
 def build_test_system(np):
     cmdline = cmd_line_template()
+    buildEnv['TARGET_ISA'] = "riscv"
     if buildEnv['TARGET_ISA'] == "mips":
         test_sys = makeLinuxMipsSystem(test_mem_mode, bm[0], cmdline=cmdline)
     elif buildEnv['TARGET_ISA'] == "sparc":
@@ -294,7 +296,7 @@ parser.add_argument("--l3-filter", type=str, default="DEFAULT", help="packet fil
 parser.add_argument("--mem-filter", type=str, default="DEFAULT", help="packet filter for metadata coming from main memory")
 Options.addCommonOptions(parser)
 Options.addFSOptions(parser)
-Options.addSecurityOptions(parser)
+# Options.addSecurityOptions(parser)
 
 # Add the ruby specific and protocol specific args
 if '--ruby' in sys.argv:
