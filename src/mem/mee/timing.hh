@@ -182,9 +182,9 @@ namespace gem5 {
       // cache
       MetadataResponsePort metadata_response_port;
 
-      // ePMP table - stores copies of PMP entries of each core and performs
-      // secure memory when necessary
-      std::vector<PmpEntry> ePMPTable;
+      // ePMP table - stores pointers to PMP entries of each core 
+      // and performs secure memory when necessary
+      std::vector<PmpEntry> epmpTable;
 
       ////////////////////////////////////////
       /////// Encryption Engine fields ///////
