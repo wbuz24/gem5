@@ -54,11 +54,9 @@ PMP::PMP(const Params &params) :
     hasLockEntry(false)
 {
     pmpTable.resize(pmpEntries);
-    //printf("\n\nPMP size of: %ld\n\n", pmpTable.size());
     mee = (TimingEncryptionEngine *) SimObject::find("board.memory.mee");
     if (mee == NULL) { printf("\n\nMEE pointer is NULL\n\n"); }
     mee->epmpTable.resize(pmpEntries);
-    
 }
 
 Fault
@@ -148,16 +146,17 @@ PMP::createAddrfault(Addr vaddr, BaseMMU::Mode mode)
 inline uint8_t
 PMP::pmpGetAField(uint8_t cfg)
 {
-    // to get a field from pmpcfg register
+    // to get the A field from pmpcfg register
     uint8_t a = cfg >> 3;
     return a & 0x03;
 }
 
-bool
-PMP::ifEncrypt(uint8_t this_cfg)
+inline uint8_t
+PMP::pmpGetOField(uint8_t cfg)
 {
     // Check the 5th bit of pmpcfg register 
-    return 1 && (this_cfg >> 5);
+    uint8_t o = cfg >> 5;
+    return o & 0x05;
 }
 
 bool
@@ -170,6 +169,21 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
         return false;
     }
 
+    // currently, epmp encrypt bit will never be set
+
+    // artifically trigger epmp updates
+    if (this_cfg < 32) { this_cfg = 32; } // all the time
+
+    // Check for encryption
+    if (pmpGetOField(this_cfg)) {
+      // Send to memory encryption engine - sanity check
+      printf(" pmpCfg: %u -> encrypt bit set\n  Updating ePMP entry config & all address ranges\n", this_cfg);
+
+      // add pmpCfg within the ePMPTable
+      mee->epmpTable[pmp_index].pmpCfg = this_cfg; 
+    }
+
+
     DPRINTF(PMP, "Update pmp config with %u for pmp entry: %u \n",
                                     (unsigned)this_cfg, pmp_index);
     if (pmpTable[pmp_index].pmpCfg & PMP_LOCK) {
@@ -180,18 +194,6 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     pmpTable[pmp_index].pmpCfg = this_cfg;
     pmpUpdateRule(pmp_index);
 
-    // Check for encryption
-    if (ifEncrypt(this_cfg+1)) {
-      // Send to memory encryption engine - sanity check
-      printf(" pmpcfg: %u -> encrypt bit set\n  Send to Encryption\n", this_cfg);
-
-      // add pmpCfg within the ePMPTable
-      mee->epmpTable[pmp_index].pmpCfg = this_cfg; 
-    }
-    else {
-      // Send to external memory controller
-    }
-
     return true;
 }
 
@@ -200,7 +202,7 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
 {
     // In qemu, the rule is updated whenever
     // pmpaddr/pmpcfg is written
-
+    uint8_t this_cfg = pmpTable[pmp_index].pmpCfg;
     numRules = 0;
     hasLockEntry = false;
     Addr prevAddr = 0;
@@ -210,7 +212,6 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
     }
 
     Addr this_addr = pmpTable[pmp_index].rawAddr;
-    uint8_t this_cfg = pmpTable[pmp_index].pmpCfg;
     AddrRange this_range;
 
     switch (pmpGetAField(this_cfg)) {
@@ -235,7 +236,14 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
         this_range = AddrRange(0,0);
     }
 
+    // set/update address range
     pmpTable[pmp_index].pmpAddr = this_range;
+
+    // update address within epmpTable
+    // Send to MEC - encrypt bit is set
+    if (pmpGetOField(this_cfg)){
+      mee->epmpTable[pmp_index].rawAddr = this_addr;
+    } 
 
     for (int i = 0; i < pmpEntries; i++) {
         const uint8_t a_field = pmpGetAField(pmpTable[i].pmpCfg);
@@ -247,12 +255,6 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
 
     if (hasLockEntry) {
         DPRINTF(PMP, "Find lock entry\n");
-    }
-
-    // update epmpTable
-    if (ifEncrypt(pmpTable[pmp_index].pmpCfg)) {
-      // Send to MEC - encrypt bit is set
-      mee->epmpTable[pmp_index].rawAddr = this_addr;
     }
 }
 
@@ -290,6 +292,9 @@ PMP::pmpUpdateAddr(uint32_t pmp_index, Addr this_addr)
                 pmp_index, pmp_index+1);
         return false;
     }
+
+    // This runs through every pmp entry and calls UpdateRule
+    // i.e. every cfg update propagates to update every address
 
     // just writing the raw addr in the pmp table
     // will convert it into a range, once cfg

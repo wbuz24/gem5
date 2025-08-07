@@ -157,13 +157,6 @@ class PMP : public SimObject
     bool pmpUpdateAddr(uint32_t pmp_index, Addr this_addr);
 
     /**
-     * Check the CSR if you need to send to the MEC
-     * (Memory Encryption Engine/Controller) or straight
-     * to the external memory controller
-    **/
-    bool ifEncrypt(uint8_t this_cfg);
-
-    /**
      * pmpReset reset when reset signal in trigger from
      * CPU.
      */
@@ -207,6 +200,13 @@ class PMP : public SimObject
      * @return The A field.
      */
     inline uint8_t pmpGetAField(uint8_t cfg);
+
+    /**
+     * Check the CSR if you need to send to the MEC
+     * (Memory Encryption Engine/Controller) or straight
+     * to the external memory controller
+    **/
+    inline uint8_t pmpGetOField(uint8_t cfg);
 
     /**
      * This function decodes a pmpaddr register value
