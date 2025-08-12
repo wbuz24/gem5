@@ -92,7 +92,7 @@ class SecureMemorySystem(AbstractMemorySystem):
 
         # Appropriate starting address?
         # Memory encryption engine 
-        self.mee = m5.objects.TimingEncryptionEngine(cache_hmac=False, num_gb=toMemorySize(size) // (1 << 30), start_addr=0)
+        self.mee = m5.objects.SecureEncryptionEngine(cache_hmac=False, num_gb=toMemorySize(size) // (1 << 30), start_addr=0)
         # Metadata Cache
         self.metadata_cache = MetadataCache()
 

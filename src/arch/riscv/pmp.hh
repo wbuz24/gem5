@@ -37,7 +37,7 @@
 #include "mem/packet.hh"
 #include "params/PMP.hh"
 #include "sim/sim_object.hh"
-#include "mem/mee/timing.hh"
+#include "mem/mee/secure.hh"
 
 /**
  * @file
@@ -63,7 +63,7 @@ class PMP : public SimObject
 
     /** a pointer to a memory encryption engine in order to access ePMP data **/
 
-    TimingEncryptionEngine *mee;
+    SecureEncryptionEngine *mee;
 
   private:
     /** maximum number of entries in the pmp table */

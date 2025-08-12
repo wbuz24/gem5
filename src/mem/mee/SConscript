@@ -34,7 +34,8 @@ SimObject('MemoryEncryptionEngine.py', sim_objects=[
     "BaobabEncryptionEngine", "TimingEncryptionEngine",
     "LeafMemoryEncryptionEngine", "StrictMemoryEncryptionEngine",
     "AMNT", "Anubis", "BMF",
-    "BasePtrMemoryEncryptionEngine", "HuffmanEncryptionEngine"]) #,
+    "BasePtrMemoryEncryptionEngine", "HuffmanEncryptionEngine",
+    "SecureEncryptionEngine"]) #,
     # "TimingPointerEncryptionEngine", "HuffmanV2EncryptionEngine"])
 
 Source("base.cc")
@@ -47,6 +48,7 @@ Source("anubis.cc")
 Source("bmf.cc")
 Source("baobab.cc")
 Source("timing.cc")
+Source("secure.cc")
 Source("huffman.cc")
 # Source("timing_pointer.cc")
 # Source("huffman_v2.cc")

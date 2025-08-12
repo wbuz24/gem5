@@ -115,6 +115,33 @@ class TimingEncryptionEngine(SimObject):
     # Misc fields
     cache_hmac = Param.Bool(False, "Should hmacs be cached?")
 
+class SecureEncryptionEngine(SimObject):
+    type = 'SecureEncryptionEngine'
+    cxx_header = 'mem/mee/secure.hh'
+    cxx_class = 'gem5::SecureEncryptionEngine'
+
+    # Built off of the TimingEncryption Engine 
+
+    # Connects to membus
+    cpu_side = ResponsePort("CPU side port, receives requests from LLC")
+
+    # Connects to the MemCtrl
+    mem_side = RequestPort("Mem side port, sends requests for data")
+
+    # Connects to MetadataCache (from top)
+    metadata_request_port = RequestPort("Mem side port, \
+                                sends requests for metadata")
+    # Connects to MetadataCache (from bottom)
+    metadata_response_port = ResponsePort("CPU side port, \
+                                sends responses back to metadata cache")
+
+    # Fields for BMT construction
+    start_addr = Param.UInt64(0, "Default starting addr in ARM")
+    num_gb = Param.UInt64(8, "Number of GB in main memory")
+
+    # Misc fields
+    cache_hmac = Param.Bool(False, "Should hmacs be cached?")
+
 class TimingPointerEncryptionEngine(SimObject):
     type = 'TimingPointerEncryptionEngine'
     cxx_header = 'mem/mee/timing_pointer.hh'

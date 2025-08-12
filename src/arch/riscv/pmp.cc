@@ -54,7 +54,7 @@ PMP::PMP(const Params &params) :
     hasLockEntry(false)
 {
     pmpTable.resize(pmpEntries);
-    mee = (TimingEncryptionEngine *) SimObject::find("board.memory.mee");
+    mee = (SecureEncryptionEngine *) SimObject::find("board.memory.mee");
     if (mee == NULL) { printf("\n\nMEE pointer is NULL\n\n"); }
     mee->epmpTable.resize(pmpEntries);
 }

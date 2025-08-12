@@ -50,20 +50,31 @@
 
 namespace gem5 {
 
-  struct TimingEncryptionEngineParams;
+  struct SecureEncryptionEngineParams;
 
-  class TimingEncryptionEngine : public SimObject
+  /** single pmp entry struct*/
+  struct PmpEntry
+  {
+    /** addr range corresponding to a single pmp entry */
+    AddrRange pmpAddr = AddrRange(0, 0);
+    /** raw addr in pmpaddr register for a pmp entry */
+    Addr rawAddr;
+    /** pmpcfg reg value for a pmp entry */
+    uint8_t pmpCfg = 0;
+  };
+
+  class SecureEncryptionEngine : public SimObject
   {
     private:
       class CpuSidePort : public ResponsePort
     {
       private:
-        TimingEncryptionEngine *owner;
+        SecureEncryptionEngine *owner;
         bool needRetry;
 
       public:
         CpuSidePort
-          (const std::string &name, TimingEncryptionEngine *owner) :
+          (const std::string &name, SecureEncryptionEngine *owner) :
             ResponsePort(name), owner(owner), needRetry(false)
       {  };
 
@@ -90,11 +101,11 @@ namespace gem5 {
       class MemSidePort : public RequestPort
     {
       private:
-        TimingEncryptionEngine *owner;
+        SecureEncryptionEngine *owner;
 
       public:
         MemSidePort(const std::string &name,
-            TimingEncryptionEngine *owner) :
+            SecureEncryptionEngine *owner) :
           RequestPort(name), owner(owner)
       {  };
 
@@ -128,11 +139,11 @@ namespace gem5 {
       class MetadataRequestPort : public MemSidePort
     {
       private:
-        TimingEncryptionEngine *owner;
+        SecureEncryptionEngine *owner;
 
       public:
         MetadataRequestPort(const std::string &name,
-            TimingEncryptionEngine *owner) :
+            SecureEncryptionEngine *owner) :
           MemSidePort(name, owner), owner(owner) {  };
 
         bool recvTimingResp(PacketPtr pkt) override;
@@ -147,11 +158,11 @@ namespace gem5 {
       class MetadataResponsePort : public CpuSidePort
     {
       private:
-        TimingEncryptionEngine *owner;
+        SecureEncryptionEngine *owner;
 
       public:
         MetadataResponsePort(const std::string &name,
-            TimingEncryptionEngine *owner) :
+            SecureEncryptionEngine *owner) :
           CpuSidePort(name, owner), owner(owner) {  };
 
         bool recvTimingReq(PacketPtr pkt) override;
@@ -170,6 +181,10 @@ namespace gem5 {
       // metadata cache and misses send the responses from memory back to the
       // cache
       MetadataResponsePort metadata_response_port;
+
+      // ePMP table - stores pointers to PMP entries of each core 
+      // and performs secure memory when necessary
+      std::vector<PmpEntry> epmpTable;
 
       ////////////////////////////////////////
       /////// Encryption Engine fields ///////
@@ -272,7 +287,7 @@ namespace gem5 {
       /////// Encryption Engine Functions ////////
       ////////////////////////////////////////////
 
-      TimingEncryptionEngine(const TimingEncryptionEngineParams *p);
+      SecureEncryptionEngine(const SecureEncryptionEngineParams *p);
 
       Port &getPort(const std::string &if_name, PortID idx);
 
@@ -336,10 +351,10 @@ namespace gem5 {
 
       struct MEEStats : public statistics::Group
     {
-      MEEStats(TimingEncryptionEngine &m);
+      MEEStats(SecureEncryptionEngine &m);
       void regStats() override;
 
-      const TimingEncryptionEngine &m;
+      const SecureEncryptionEngine &m;
 
       /** Number of data accesses */
       statistics::Scalar data_accesses;
