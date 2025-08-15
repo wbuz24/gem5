@@ -172,15 +172,12 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     // currently, epmp encrypt bit will never be set
 
     // artifically trigger epmp updates
-    if (this_cfg < 32) { this_cfg = 32; } // all the time
+    if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
 
     // Check for encryption
     if (pmpGetOField(this_cfg)) {
-      // Send to memory encryption engine - sanity check
-      printf(" pmpCfg: %u -> encrypt bit set\n  Updating ePMP entry config & all address ranges\n", this_cfg);
-
-      // add pmpCfg within the ePMPTable
-      mee->epmpTable[pmp_index].pmpCfg = this_cfg; 
+      // Send to memory encryption engine
+      mee->updateEpmp(pmp_index, this_cfg);
     }
 
 
@@ -193,7 +190,6 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     }
     pmpTable[pmp_index].pmpCfg = this_cfg;
     pmpUpdateRule(pmp_index);
-
     return true;
 }
 

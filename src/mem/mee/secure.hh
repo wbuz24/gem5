@@ -314,6 +314,9 @@ namespace gem5 {
       uint64_t calculateAddress(uint64_t addr, int tree_level, bool counter);
       uint64_t calcHashAddr(PacketPtr pkt);
 
+      // Update the ePMP table on PMP updates
+      bool updateEpmp(uint32_t pmp_index, uint8_t this_cfg);
+
       // Handle incoming data - all data (R/W) should
       // have a request created for a counter read and
       // an HMAC read/write (depending on request type)
@@ -365,6 +368,9 @@ namespace gem5 {
 
       /** Number of metadata reads */
       statistics::Scalar metadata_reads;
+
+      /** Number of pmp table accesses **/
+      statistics::Scalar pmp_accesses;
     };
 
       MEEStats stats;

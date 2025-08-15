@@ -399,11 +399,24 @@ SecureEncryptionEngine::calculateAddress(
 }
 
 bool
+SecureEncryptionEngine::updateEpmp(uint32_t pmp_index, uint8_t this_cfg)
+{
+    // add pmpCfg within the ePMPTable
+    stats.pmp_accesses++;
+    epmpTable[pmp_index].pmpCfg = this_cfg;
+    return 1;
+}
+
+bool
 SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 {
+
+    printf("Sanity Check"); 
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
+
+    printf("PacketPtr->Addr: %ld\n\n", pkt->getAddr());
 
     stats.data_accesses++;
 
@@ -952,7 +965,9 @@ SecureEncryptionEngine::MEEStats::MEEStats(SecureEncryptionEngine &secure) :
     ADD_STAT(data_accesses, statistics::units::Count::get(),
              "number of times we make a data request to memory"),
     ADD_STAT(metadata_reads, statistics::units::Count::get(),
-             "number of times we make a metadata read req")
+             "number of times we make a metadata read req"),
+    ADD_STAT(pmp_accesses, statistics::units::Count::get(),
+             "number of times we make a pmp update")
 {
 }
 
