@@ -32,8 +32,9 @@
  */
 
 #include "mem/mee/secure.hh"
-
 #include "params/SecureEncryptionEngine.hh"
+#include <random>
+using namespace std;
 
 namespace gem5 {
 
@@ -57,6 +58,10 @@ SecureEncryptionEngine::SecureEncryptionEngine
     uint64_t number_of_blocks = total_size / BLOCK_SIZE;
     //round to a power of eight
     uint64_t eights = 8;
+
+    // Generate random keys from a uniform distribution
+    generateKeys();
+
     do {
         eights = eights * 8;
     } while (eights < number_of_blocks);
@@ -646,6 +651,24 @@ SecureEncryptionEngine::handleResponse(PacketPtr pkt)
     }
 
     return true;
+}
+
+void
+SecureEncryptionEngine::generateKeys()
+{
+  // use a uniform distribution to generate keys
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_real_distribution<> dis(0, 65535); // max value for uint16_t
+
+  // Kenc, Kmac
+  Kenc = dis(gen);
+  Kmac = dis(gen);
+
+  // Khash is 512 bits
+  uniform_real_distribution<> uni(0, ULLONG_MAX);
+  Khash = uni(gen);
+  printf("\n\n%u %u %lu\n\n", Kenc, Kmac, Khash);
 }
 
 ///////////////////////////////////////////

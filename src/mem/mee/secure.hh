@@ -251,6 +251,10 @@ namespace gem5 {
 
       std::vector<uint64_t> integrity_levels;
 
+      // Random keys for MAC
+      uint16_t Kenc;
+      uint16_t Kmac;
+      uint64_t Khash;
 
       //////////////////
       ///// Events /////
@@ -352,6 +356,12 @@ namespace gem5 {
       void scheduleRetrySendMetadata() {
         schedule(retrySendMetadataEvent, curTick());
       }
+
+      // A function to generate random keys
+      //   - Based on SGX implementation
+      //   - Details can be found in Shay Gueron paper
+      //   - Modifies the Kenc, Kmac & Khash members
+      void generateKeys();
 
       struct MEEStats : public statistics::Group
     {
