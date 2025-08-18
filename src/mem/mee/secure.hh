@@ -315,7 +315,7 @@ namespace gem5 {
       uint64_t calcHashAddr(PacketPtr pkt);
 
       // Update the ePMP table on PMP updates
-      bool updateEpmp(uint32_t pmp_index, uint8_t this_cfg);
+      bool updateEpmp(uint32_t pmp_index, uint8_t this_cfg, Addr this_addr);
 
       // Handle incoming data - all data (R/W) should
       // have a request created for a counter read and

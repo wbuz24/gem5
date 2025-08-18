@@ -56,7 +56,7 @@ PMP::PMP(const Params &params) :
     pmpTable.resize(pmpEntries);
     mee = (SecureEncryptionEngine *) SimObject::find("board.memory.mee");
     if (mee == NULL) { printf("\n\nMEE pointer is NULL\n\n"); }
-    mee->epmpTable.resize(pmpEntries);
+    mee->epmpTable.resize(pmpEntries); // setup pmp table
 }
 
 Fault
@@ -174,13 +174,6 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     // artifically trigger epmp updates
     if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
 
-    // Check for encryption
-    if (pmpGetOField(this_cfg)) {
-      // Send to memory encryption engine
-      mee->updateEpmp(pmp_index, this_cfg);
-    }
-
-
     DPRINTF(PMP, "Update pmp config with %u for pmp entry: %u \n",
                                     (unsigned)this_cfg, pmp_index);
     if (pmpTable[pmp_index].pmpCfg & PMP_LOCK) {
@@ -235,12 +228,12 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
     // set/update address range
     pmpTable[pmp_index].pmpAddr = this_range;
 
-    // update address within epmpTable
-    // Send to MEC - encrypt bit is set
+/*    // update address within epmpTable
     if (pmpGetOField(this_cfg)){
-      mee->epmpTable[pmp_index].rawAddr = this_addr;
+      // Send to MEC - encrypt bit is set
+      mee->updateEpmp(pmp_index, this_cfg, this_addr);
     } 
-
+*/
     for (int i = 0; i < pmpEntries; i++) {
         const uint8_t a_field = pmpGetAField(pmpTable[i].pmpCfg);
       if (PMP_OFF != a_field) {

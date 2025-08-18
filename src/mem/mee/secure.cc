@@ -399,11 +399,14 @@ SecureEncryptionEngine::calculateAddress(
 }
 
 bool
-SecureEncryptionEngine::updateEpmp(uint32_t pmp_index, uint8_t this_cfg)
+SecureEncryptionEngine::updateEpmp(uint32_t pmp_index, uint8_t this_cfg, Addr this_addr)
 {
     // add pmpCfg within the ePMPTable
     stats.pmp_accesses++;
     epmpTable[pmp_index].pmpCfg = this_cfg;
+    epmpTable[pmp_index].rawAddr = this_addr;
+
+    printf("Is this printing?\n");
     return 1;
 }
 

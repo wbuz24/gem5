@@ -50,7 +50,6 @@ from gem5.components.memory import DualChannelDDR4_2400
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
 from gem5.components.memory.secure import SecureSimpleMemory
-from gem5.components.memory.secure import SecureMemorySystem
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
 from gem5.components.cachehierarchies.classic.private_l1_shared_l2_cache_hierarchy import PrivateL1SharedL2CacheHierarchy
 from gem5.components.cachehierarchies.classic.secure_cache_hierarchy import SecurePrivateL1PrivateL2CacheHierarchy
@@ -106,8 +105,9 @@ board = RiscvBoard(
 
 command = (
     f"pwd;" 
-    + f"cd repos/gapbs;" \
-    + f"./bfs -g 10 -n 1;" \
+    + f"./repos/grad-research/resources/progs/bin/arrflip 20000" \
+   # + f"cd repos/gapbs;" \
+   # + f"./bfs -g 10 -n 1;" \
     + "m5 exit;" \
 )
 

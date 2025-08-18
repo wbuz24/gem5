@@ -61,7 +61,7 @@ from m5.objects import (
     Port,
     SecureMemory,
     SimpleMemory,
-    TimingEncryptionEngine,
+    SecureEncryptionEngine,
 )
 from m5.util.convert import toMemorySize
 
