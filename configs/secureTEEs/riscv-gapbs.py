@@ -104,10 +104,9 @@ board = RiscvBoard(
 # inspect `m5out/system.pc.com_1.device` to see the stdout.
 
 command = (
-    f"pwd;" 
-    + f"./repos/grad-research/resources/progs/bin/arrflip 20000" \
-   # + f"cd repos/gapbs;" \
-   # + f"./bfs -g 10 -n 1;" \
+    f"echo '\nBeginning Benchmark\n\n';" 
+    + f"./repos/grad-research/resources/progs/bin/arrflip 2000000000;" \
+    + f"./repos/gapbs/bfs -g 20 -n 1;" \
     + "m5 exit;" \
 )
 
