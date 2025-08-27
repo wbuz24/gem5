@@ -78,11 +78,11 @@ requires(isa_required=ISA.RISCV)
 
 # Here we setup the parameters of the l1 and l2 caches.
 cache_hierarchy = PrivateL1SharedL2CacheHierarchy(
-    l1d_size="16kB", l1i_size="16kB", l2_size="256kB"
+    l1d_size="2kB", l1i_size="2kB", l2_size="4kB"
 )
 
 # Memory: Dual Channel DDR4 2400 DRAM device.
-memory = SecureSimpleMemory(size="3GB")
+memory = SecureSimpleMemory(size="128GB")
 
 # Here we setup the processor. We use a simple processor.
 processor = SimpleProcessor(
@@ -105,8 +105,9 @@ board = RiscvBoard(
 
 command = (
     f"echo '\nBeginning Benchmark\n\n';" 
-    + f"./repos/grad-research/resources/progs/bin/arrflip 2000000000;" \
-    + f"./repos/gapbs/bfs -g 20 -n 1;" \
+    #+ f"./repos/grad-research/resources/progs/bin/arrflip 400000000;" \
+    + f"./repos/grad-research/resources/progs/bin/sam-bench 200000000 200000000;" \
+    #+ f"./repos/gapbs/bfs -g 15 -n 1;" \
     + "m5 exit;" \
 )
 

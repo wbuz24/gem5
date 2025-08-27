@@ -714,6 +714,7 @@ SecureEncryptionEngine::CpuSidePort::recvFunctional(PacketPtr pkt)
 bool
 SecureEncryptionEngine::CpuSidePort::recvTimingReq(PacketPtr pkt)
 {
+    printf("\n\nrecvTimingReq\n\n");
     return owner->handleRequest(pkt);
 }
 
