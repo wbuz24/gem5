@@ -3,7 +3,7 @@
  * Copyright (c) 2025 Colorado School of Mines 
  * All rights reserved.
  *
- * Based on the work by:
+ * Built on the work by:
  * Author: Samuel Thomas
  * Copyright (c) 2022 Brown University
  *
@@ -406,7 +406,6 @@ SecureEncryptionEngine::updateEpmp(uint32_t pmp_index, uint8_t this_cfg, Addr th
     epmpTable[pmp_index].pmpCfg = this_cfg;
     epmpTable[pmp_index].rawAddr = this_addr;
 
-    printf("Is this printing?\n");
     return 1;
 }
 
@@ -414,7 +413,7 @@ bool
 SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 {
 
-    printf("Sanity Check"); 
+    printf("\n\nSanity Check\n\n"); 
     if (active_requests.size() >= max_active_requests) {
         return false;
     }

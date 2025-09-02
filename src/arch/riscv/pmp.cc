@@ -172,7 +172,7 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     // currently, epmp encrypt bit will never be set
 
     // artifically trigger epmp updates
-    //if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
+    if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
 
     DPRINTF(PMP, "Update pmp config with %u for pmp entry: %u \n",
                                     (unsigned)this_cfg, pmp_index);
@@ -228,12 +228,9 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
     // set/update address range
     pmpTable[pmp_index].pmpAddr = this_range;
 
-/*    // update address within epmpTable
-    if (pmpGetOField(this_cfg)){
-      // Send to MEC - encrypt bit is set
-      mee->updateEpmp(pmp_index, this_cfg, this_addr);
-    } 
-*/
+    // set/update within epmpTable
+    mee->updateEpmp(pmp_index, this_cfg, this_addr);
+
     for (int i = 0; i < pmpEntries; i++) {
         const uint8_t a_field = pmpGetAField(pmpTable[i].pmpCfg);
       if (PMP_OFF != a_field) {

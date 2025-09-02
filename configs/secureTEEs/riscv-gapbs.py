@@ -49,6 +49,7 @@ from gem5.components.boards.riscv_board import RiscvBoard
 from gem5.components.memory import DualChannelDDR4_2400
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
+from gem5.components.processors.simple_switchable_processor import SimpleSwitchableProcessor
 from gem5.components.memory.secure import SecureSimpleMemory
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
 from gem5.components.cachehierarchies.classic.private_l1_shared_l2_cache_hierarchy import PrivateL1SharedL2CacheHierarchy
@@ -58,6 +59,7 @@ from gem5.resources.resource import obtain_resource
 from gem5.resources.resource import KernelResource
 from gem5.resources.resource import DiskImageResource
 from gem5.resources.resource import BootloaderResource
+from gem5.simulate.exit_event import ExitEvent
 from gem5.simulate.simulator import Simulator
 from gem5.utils.requires import requires
 
@@ -84,9 +86,12 @@ cache_hierarchy = PrivateL1SharedL2CacheHierarchy(
 # Memory: Dual Channel DDR4 2400 DRAM device.
 memory = SecureSimpleMemory(size="128GB")
 
-# Here we setup the processor. We use a simple processor.
-processor = SimpleProcessor(
-    cpu_type=CPUTypes.ATOMIC, isa=ISA.RISCV, num_cores=1
+# Here we setup the processor. We use a switchable processor.
+processor = SimpleSwitchableProcessor(
+    starting_core_type=CPUTypes.ATOMIC,
+    switch_core_type=CPUTypes.TIMING,
+    isa=ISA.RISCV, 
+    num_cores=1,
 )
 
 # Here we setup the board. The RiscvBoard allows for Full-System RISCV
@@ -105,8 +110,8 @@ board = RiscvBoard(
 
 command = (
     f"echo '\nBeginning Benchmark\n\n';" 
-    #+ f"./repos/grad-research/resources/progs/bin/arrflip 400000000;" \
-    + f"./repos/grad-research/resources/progs/bin/sam-bench 200000000 200000000;" \
+    + f"./repos/grad-research/resources/progs/bin/arrflip 20000000 20000000;" \
+    #+ f"./repos/grad-research/resources/progs/bin/sam-bench 200000000 200000000;" \
     #+ f"./repos/gapbs/bfs -g 15 -n 1;" \
     + "m5 exit;" \
 )
@@ -118,5 +123,19 @@ board.set_kernel_disk_workload(
     readfile_contents=command,
 )
 
-simulator = Simulator(board=board)
+def handle_exit():
+    print("Done booting Linux!")
+    m5.stats.reset()
+    processor.switch()
+    yield False
+    print("Dump Stats")
+    m5.stats.dump()
+    yield True
+
+simulator = Simulator(
+    board=board,
+    on_exit_event={
+        ExitEvent.EXIT: handle_exit(),
+    }
+)
 simulator.run()
