@@ -84,7 +84,7 @@ cache_hierarchy = PrivateL1SharedL2CacheHierarchy(
 )
 
 # Memory: Dual Channel DDR4 2400 DRAM device.
-memory = SecureSimpleMemory(size="128GB")
+memory = SecureSimpleMemory(size="64GB")
 
 # Here we setup the processor. We use a switchable processor.
 processor = SimpleSwitchableProcessor(
@@ -110,9 +110,9 @@ board = RiscvBoard(
 
 command = (
     f"echo '\nBeginning Benchmark\n\n';" 
-    + f"./repos/grad-research/resources/progs/bin/arrflip 20000000 20000000;" \
+    #+ f"./repos/grad-research/resources/progs/bin/arrflip 20000000 20000000;" \
     #+ f"./repos/grad-research/resources/progs/bin/sam-bench 200000000 200000000;" \
-    #+ f"./repos/gapbs/bfs -g 15 -n 1;" \
+    + f"./repos/gapbs/bfs -g 15 -n 1;" \
     + "m5 exit;" \
 )
 
@@ -125,7 +125,6 @@ board.set_kernel_disk_workload(
 
 def handle_exit():
     print("Done booting Linux!")
-    m5.stats.reset()
     processor.switch()
     yield False
     print("Dump Stats")

@@ -399,12 +399,14 @@ SecureEncryptionEngine::calculateAddress(
 }
 
 bool
-SecureEncryptionEngine::updateEpmp(uint32_t pmp_index, uint8_t this_cfg, Addr this_addr)
+SecureEncryptionEngine::updateEpmp(Addr this_addr, PmpEntry this_entry)
 {
     // add pmpCfg within the ePMPTable
     stats.pmp_accesses++;
-    epmpTable[pmp_index].pmpCfg = this_cfg;
-    epmpTable[pmp_index].rawAddr = this_addr;
+
+    // Create a key-value pair with 
+    // address as key & pmp entry as value
+    epmpTable.insert(std::make_pair(this_addr, this_entry));
 
     return 1;
 }
@@ -413,13 +415,11 @@ bool
 SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 {
 
-    printf("\n\nSanity Check\n\n"); 
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
 
-    printf("PacketPtr->Addr: %ld\n\n", pkt->getAddr());
-
+    //printf("PacketPtr->Addr: %ld\n\n", pkt->getAddr());
     stats.data_accesses++;
 
     auto insert = active_requests.insert(pkt);
@@ -713,7 +713,6 @@ SecureEncryptionEngine::CpuSidePort::recvFunctional(PacketPtr pkt)
 bool
 SecureEncryptionEngine::CpuSidePort::recvTimingReq(PacketPtr pkt)
 {
-    printf("\n\nrecvTimingReq\n\n");
     return owner->handleRequest(pkt);
 }
 

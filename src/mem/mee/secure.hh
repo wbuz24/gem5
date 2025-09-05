@@ -47,6 +47,7 @@
 #define HASH_LEN 8
 
 #include <set>
+#include <unordered_map>
 
 #include "base/statistics.hh"
 #include "mem/port.hh"
@@ -188,7 +189,8 @@ namespace gem5 {
 
       // ePMP table - stores pointers to PMP entries of each core 
       // and performs secure memory when necessary
-      std::vector<PmpEntry> epmpTable;
+      PmpEntry epmpEntry;
+      std::unordered_map<Addr, PmpEntry> epmpTable;
 
       ////////////////////////////////////////
       /////// Encryption Engine fields ///////
@@ -205,7 +207,7 @@ namespace gem5 {
       const int mem_read_latency = 305000; // Izraelevitz, et. al
       const int mem_write_latency = 391000; // Hirofuchi, et. al
 
-      // Central batching indices (addr, PktPtr)
+
       // the protocols for determining whether
       // a value belongs in these indices is
       // as follows:
@@ -315,7 +317,7 @@ namespace gem5 {
       uint64_t calcHashAddr(PacketPtr pkt);
 
       // Update the ePMP table on PMP updates
-      bool updateEpmp(uint32_t pmp_index, uint8_t this_cfg, Addr this_addr);
+      bool updateEpmp(Addr this_addr, PmpEntry this_entry);
 
       // Handle incoming data - all data (R/W) should
       // have a request created for a counter read and
