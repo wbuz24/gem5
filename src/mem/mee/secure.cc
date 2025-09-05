@@ -413,12 +413,11 @@ bool
 SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 {
 
-    printf("\n\nSanity Check\n\n"); 
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
 
-    printf("PacketPtr->Addr: %ld\n\n", pkt->getAddr());
+    printf("PacketPtr->Addr: %lX\n\n", pkt->getAddr());
 
     stats.data_accesses++;
 
@@ -713,7 +712,6 @@ SecureEncryptionEngine::CpuSidePort::recvFunctional(PacketPtr pkt)
 bool
 SecureEncryptionEngine::CpuSidePort::recvTimingReq(PacketPtr pkt)
 {
-    printf("\n\nrecvTimingReq\n\n");
     return owner->handleRequest(pkt);
 }
 

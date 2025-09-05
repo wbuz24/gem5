@@ -172,7 +172,7 @@ PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
     // currently, epmp encrypt bit will never be set
 
     // artifically trigger epmp updates
-    if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
+  //  if (this_cfg < 32) { this_cfg = this_cfg | (1 << 5); } // all the time
 
     DPRINTF(PMP, "Update pmp config with %u for pmp entry: %u \n",
                                     (unsigned)this_cfg, pmp_index);
