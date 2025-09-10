@@ -229,7 +229,7 @@ PMP::pmpUpdateRule(uint32_t pmp_index)
     pmpTable[pmp_index].pmpAddr = this_range;
 
     // set/update within epmpTable
-    mee->updateEpmp(pmp_index, this_cfg, this_addr);
+    //mee->updateEpmp(pmp_index, this_cfg, this_addr);
 
     for (int i = 0; i < pmpEntries; i++) {
         const uint8_t a_field = pmpGetAField(pmpTable[i].pmpCfg);
