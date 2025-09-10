@@ -402,13 +402,21 @@ bool
 SecureEncryptionEngine::updateEpmp(Addr this_addr, PmpEntry this_entry)
 {
     // add pmpCfg within the ePMPTable
-    stats.pmp_accesses++;
+    stats.pmp_updates++;
 
     // Create a key-value pair with 
     // address as key & pmp entry as value
     epmpTable.insert(std::make_pair(this_addr, this_entry));
 
     return 1;
+}
+
+uint8_t
+SecureEncryptionEngine::pmpGetOField(uint8_t cfg)
+{
+    // Check the 5th bit of pmpcfg register 
+    uint8_t o = cfg >> 5;
+    return o & 0x05;
 }
 
 bool
@@ -419,7 +427,6 @@ SecureEncryptionEngine::handleRequest(PacketPtr pkt)
         return false;
     }
 
-    //printf("PacketPtr->Addr: %ld\n\n", pkt->getAddr());
     stats.data_accesses++;
 
     auto insert = active_requests.insert(pkt);
@@ -464,8 +471,15 @@ SecureEncryptionEngine::handleRequest(PacketPtr pkt)
     pkt->req->hash_addr = hmac_addr;
 
     if (pkt->isRead()) {
-        // Get HMAC for data
-        createMetadata(hmac_addr, hmac_level, pkt->isRead(), pkt);
+        // Check if pkt->address is in the ePMP table
+        if (epmpTable.find(pkt->getAddr()) == epmpTable.end()) {
+          printf("Pkt at: %lx found in the ePMP\n", pkt->getAddr()); 
+          if (pmpGetOField(epmpTable.at(pkt->getAddr()).pmpCfg)) { 
+            printf("        Encrypt bit is set\n\n");
+          }
+          // Get HMAC for data
+          createMetadata(hmac_addr, hmac_level, pkt->isRead(), pkt);
+        }
 
         mem_side_port.sendPacket(pkt);
     } else {
@@ -968,7 +982,7 @@ SecureEncryptionEngine::MEEStats::MEEStats(SecureEncryptionEngine &secure) :
              "number of times we make a data request to memory"),
     ADD_STAT(metadata_reads, statistics::units::Count::get(),
              "number of times we make a metadata read req"),
-    ADD_STAT(pmp_accesses, statistics::units::Count::get(),
+    ADD_STAT(pmp_updates, statistics::units::Count::get(),
              "number of times we make a pmp update")
 {
 }

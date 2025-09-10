@@ -319,6 +319,13 @@ namespace gem5 {
       // Update the ePMP table on PMP updates
       bool updateEpmp(Addr this_addr, PmpEntry this_entry);
 
+      /**
+      * Check the CSR if you need to send to the MEC
+      * (Memory Encryption Engine/Controller) or straight
+      * to the external memory controller
+      **/
+      uint8_t pmpGetOField(uint8_t cfg);
+
       // Handle incoming data - all data (R/W) should
       // have a request created for a counter read and
       // an HMAC read/write (depending on request type)
@@ -372,7 +379,7 @@ namespace gem5 {
       statistics::Scalar metadata_reads;
 
       /** Number of pmp table accesses **/
-      statistics::Scalar pmp_accesses;
+      statistics::Scalar pmp_updates;
     };
 
       MEEStats stats;

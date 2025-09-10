@@ -150,14 +150,6 @@ PMP::pmpGetAField(uint8_t cfg)
     return a & 0x03;
 }
 
-inline uint8_t
-PMP::pmpGetOField(uint8_t cfg)
-{
-    // Check the 5th bit of pmpcfg register 
-    uint8_t o = cfg >> 5;
-    return o & 0x05;
-}
-
 bool
 PMP::pmpUpdateCfg(uint32_t pmp_index, uint8_t this_cfg)
 {

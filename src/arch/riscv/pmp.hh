@@ -202,13 +202,6 @@ class PMP : public SimObject
     inline uint8_t pmpGetAField(uint8_t cfg);
 
     /**
-     * Check the CSR if you need to send to the MEC
-     * (Memory Encryption Engine/Controller) or straight
-     * to the external memory controller
-    **/
-    inline uint8_t pmpGetOField(uint8_t cfg);
-
-    /**
      * This function decodes a pmpaddr register value
      * into an address range when A field of pmpcfg
      * register is set to NAPOT mode (naturally aligned

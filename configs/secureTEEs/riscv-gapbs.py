@@ -110,9 +110,9 @@ board = RiscvBoard(
 
 command = (
     f"echo '\nBeginning Benchmark\n\n';" 
-    #+ f"./repos/grad-research/resources/progs/bin/arrflip 20000000 20000000;" \
+    + f"./repos/grad-research/resources/progs/bin/arrflip 20000 200000;" \
     #+ f"./repos/grad-research/resources/progs/bin/sam-bench 200000000 200000000;" \
-    + f"./repos/gapbs/bfs -g 15 -n 1;" \
+    #+ f"./repos/gapbs/bfs -g 15 -n 1;" \
     + "m5 exit;" \
 )
 
