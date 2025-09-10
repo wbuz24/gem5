@@ -472,7 +472,7 @@ SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 
     if (pkt->isRead()) {
         // Check if pkt->address is in the ePMP table
-        if (epmpTable.find(pkt->getAddr()) == epmpTable.end()) {
+        if (epmpTable.find(pkt->getAddr()) != epmpTable.end()) {
           printf("Pkt at: %lx found in the ePMP\n", pkt->getAddr()); 
           if (pmpGetOField(epmpTable.at(pkt->getAddr()).pmpCfg)) { 
             printf("        Encrypt bit is set\n\n");
