@@ -123,18 +123,22 @@ board.set_kernel_disk_workload(
     readfile_contents=command,
 )
 
-def handle_exit():
+def handle_begin():
     print("Done booting Linux!")
     processor.switch()
     yield False
-    print("Dump Stats")
-    m5.stats.dump()
-    yield True
+
+def handle_end():
+    print("Dump stats")
+    m5.stats.dump
+    yield True # Stop the simulation
 
 simulator = Simulator(
     board=board,
     on_exit_event={
-        ExitEvent.EXIT: handle_exit(),
+        ExitEvent.WORKBEGIN: handle_begin(),
+        ExitEvent.WORKEND: handle_end(),
     }
 )
+
 simulator.run()
