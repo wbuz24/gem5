@@ -80,7 +80,7 @@ requires(isa_required=ISA.RISCV)
 
 # Here we setup the parameters of the l1 and l2 caches.
 cache_hierarchy = PrivateL1SharedL2CacheHierarchy(
-    l1d_size="2kB", l1i_size="2kB", l2_size="4kB"
+    l1d_size="32kB", l1i_size="64kB", l2_size="256kB"
 )
 
 # Memory: Dual Channel DDR4 2400 DRAM device.
@@ -123,21 +123,22 @@ board.set_kernel_disk_workload(
     readfile_contents=command,
 )
 
-def handle_begin():
-    print("Done booting Linux!")
+def handle_switch():
+    print("Done booting Linux!\n Switching Processors")
     processor.switch()
+    print("Processors switched\n")
     yield False
 
 def handle_end():
     print("Dump stats")
-    m5.stats.dump
-    yield True # Stop the simulation
+    m5.stats.dump()
+    return True # Stop the simulation
+
 
 simulator = Simulator(
     board=board,
     on_exit_event={
-        ExitEvent.WORKBEGIN: handle_begin(),
-        ExitEvent.WORKEND: handle_end(),
+      ExitEvent.EXIT: handle_switch()
     }
 )
 

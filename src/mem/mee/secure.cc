@@ -423,6 +423,7 @@ bool
 SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 {
 
+    printf("\n\nHANDLE REQUEST\n\n");
     if (active_requests.size() >= max_active_requests) {
         return false;
     }
@@ -472,13 +473,16 @@ SecureEncryptionEngine::handleRequest(PacketPtr pkt)
 
     if (pkt->isRead()) {
         // Check if pkt->address is in the ePMP table
-        if (epmpTable.find(pkt->getAddr()) != epmpTable.end()) {
-          printf("Pkt at: %lx found in the ePMP\n", pkt->getAddr()); 
-          if (pmpGetOField(epmpTable.at(pkt->getAddr()).pmpCfg)) { 
+        mit = epmpTable.find(pkt->getAddr());
+        if (mit != epmpTable.end()) {
+          assert(mit != epmpTable.end());
+          stats.epmp_matches++;
+          printf("Pkt at: %lx found in the ePMP\n", mit->first); 
+          if (pmpGetOField(mit->second.pmpCfg)) { 
             printf("        Encrypt bit is set\n\n");
+            // Get HMAC for data
+            createMetadata(hmac_addr, hmac_level, pkt->isRead(), pkt);
           }
-          // Get HMAC for data
-          createMetadata(hmac_addr, hmac_level, pkt->isRead(), pkt);
         }
 
         mem_side_port.sendPacket(pkt);
@@ -983,7 +987,9 @@ SecureEncryptionEngine::MEEStats::MEEStats(SecureEncryptionEngine &secure) :
     ADD_STAT(metadata_reads, statistics::units::Count::get(),
              "number of times we make a metadata read req"),
     ADD_STAT(pmp_updates, statistics::units::Count::get(),
-             "number of times we make a pmp update")
+             "number of times we make a pmp update"),
+    ADD_STAT(epmp_matches, statistics::units::Count::get(),
+             "number of times an address is found in the epmpTable")
 {
 }
 

@@ -191,6 +191,7 @@ namespace gem5 {
       // and performs secure memory when necessary
       PmpEntry epmpEntry;
       std::unordered_map<Addr, PmpEntry> epmpTable;
+      std::unordered_map<Addr, PmpEntry>::iterator mit;
 
       ////////////////////////////////////////
       /////// Encryption Engine fields ///////
@@ -380,6 +381,9 @@ namespace gem5 {
 
       /** Number of pmp table accesses **/
       statistics::Scalar pmp_updates;
+
+      /** Number of times an address is found in the ePMP **/
+      statistics::Scalar epmp_matches;
     };
 
       MEEStats stats;
