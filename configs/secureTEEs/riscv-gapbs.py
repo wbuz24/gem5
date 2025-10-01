@@ -42,6 +42,10 @@ scons build/RISCV/gem5.opt
 
 import m5
 from m5.objects import Root
+from m5.simulate import (
+    scheduleTickExitAbsolute,
+    scheduleTickExitFromCurrent,
+)
 
 import argparse
 
@@ -59,9 +63,10 @@ from gem5.resources.resource import obtain_resource
 from gem5.resources.resource import KernelResource
 from gem5.resources.resource import DiskImageResource
 from gem5.resources.resource import BootloaderResource
-from gem5.simulate.exit_event import ExitEvent
 from gem5.simulate.simulator import Simulator
+from gem5.simulate.exit_handler import AfterBootExitHandler
 from gem5.utils.requires import requires
+from gem5.utils.override import overrides
 
 # args
 parser = argparse.ArgumentParser()
@@ -123,23 +128,22 @@ board.set_kernel_disk_workload(
     readfile_contents=command,
 )
 
-def handle_switch():
-    print("Done booting Linux!\n Switching Processors")
-    processor.switch()
-    print("Processors switched\n")
-    yield False
+class SwitchProcessorsExitHandler(AfterBootExitHandler):
+    def _process(self, simulator):
+        super()._process(simulator)
+        simulator.switch_processor()
 
-def handle_end():
-    print("Dump stats")
-    m5.stats.dump()
-    return True # Stop the simulation
+    def _exit_simulation(self):
+        return False
 
+# Create the Simulator and set the the exit event handler for type ID 4.
+simulator = Simulator(board=board)
 
-simulator = Simulator(
-    board=board,
-    on_exit_event={
-      ExitEvent.EXIT: handle_switch()
-    }
-)
-
+# Run the simulation.
 simulator.run()
+
+print(
+    "Exiting @ tick {} because {}.".format(
+        simulator.get_current_tick(), simulator.get_last_exit_event_cause()
+    )
+)
