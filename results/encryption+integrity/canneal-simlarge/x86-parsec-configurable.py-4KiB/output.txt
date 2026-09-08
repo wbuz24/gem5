@@ -14,8 +14,8 @@ gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 version 24.1.0.2
 gem5 compiled Sep  2 2026 19:47:21
-gem5 started Sep  4 2026 15:55:14
-gem5 executing on iris-arm-server-5, pid 732605
+gem5 started Sep  6 2026 18:20:50
+gem5 executing on iris-arm-server-5, pid 815600
 command line: /home/wbuziak/repos/gem5/build/X86/gem5.opt -d /home/wbuziak/repos/gem5/results/encryption+integrity/canneal-simlarge/x86-parsec-configurable.py-4KiB /home/wbuziak/repos/gem5/configs/example/gem5_library/x86-parsec-configurable.py --benchmark canneal --size simlarge --metadata_cache_size 4KiB --memory encryption+integrity --l3_size 256KiB --mcx_policy never
 
 
